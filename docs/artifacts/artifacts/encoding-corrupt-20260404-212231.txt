@@ -1,6 +1,0 @@
-﻿C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\pages\UserCreatePage.jsx
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\pages\UserDetailPage.jsx
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\store\ingresos.store.js
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\store\negocios.store.js
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\store\properties.store.js
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\store\units.store.js

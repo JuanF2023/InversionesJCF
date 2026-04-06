@@ -1,7 +1,0 @@
-﻿C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\timefmt.js
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\components\PanelTransacciones.jsx
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\pages\IndicadoresComparativosPage.jsx
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\components\detalles\DetallesDatosProp.jsx
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\components\detalles\DetallesLayout.jsx
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\components\unidades\UnidadesForm.jsx
-C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\pages\PropiedadesReportes.jsx
