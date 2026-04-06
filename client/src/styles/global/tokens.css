@@ -1,0 +1,306 @@
+﻿/* client/src/styles/tokens.css */
+
+/* ================================
+   TOKENS GLOBAL JCF
+   - Tipograf铆a
+   - Colores base
+   - Espaciados
+   - Componentes base (inputs, selects, botones)
+   ================================ */
+
+:root {
+    /* Tipograf铆a base */
+    --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    --font-size-root: 14px;
+    --line-height-root: 1.5;
+
+    /* Colores base (modo claro) */
+    --bg: #05050a;
+    --panel: #0b0f17;
+    --card: #101623;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #f7f9ff;
+    --muted: rgba(247, 249, 255, 0.7);
+
+    --accent: #4f46e5;
+    --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+    --accent-strong: #6366f1;
+
+    --danger: #ef4444;
+    --danger-soft: color-mix(in srgb, var(--danger) 14%, transparent);
+
+    /* Radios y sombras */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-pill: 999px;
+
+    --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.35);
+    --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.22);
+
+    /* Inputs & botones */
+    --control-height: 2.5rem;
+    --control-padding-x: 0.9rem;
+    --control-radius: 999px;
+    --control-bg: color-mix(in srgb, var(--panel) 92%, var(--bg) 8%);
+    --control-bg-hover: color-mix(in srgb, var(--panel) 88%, var(--accent) 12%);
+    --control-border: var(--border);
+    --control-border-strong: color-mix(in srgb,
+            var(--border) 40%,
+            var(--accent) 60%);
+}
+
+/* Modo claro (por si lo activas despu茅s) */
+[data-theme="light"] {
+    --bg: #f5f5fb;
+    --panel: #ffffff;
+    --card: #f9fafb;
+    --border: rgba(15, 23, 42, 0.08);
+    --text: #0f172a;
+    --muted: rgba(15, 23, 42, 0.7);
+
+    --accent: #4f46e5;
+    --accent-soft: color-mix(in srgb, var(--accent) 8%, transparent);
+    --accent-strong: #4338ca;
+
+    --danger: #dc2626;
+    --danger-soft: color-mix(in srgb, var(--danger) 12%, transparent);
+
+    --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+    --shadow-subtle: 0 10px 28px rgba(15, 23, 42, 0.08);
+
+    --control-bg: #f9fafb;
+    --control-bg-hover: #eef2ff;
+}
+
+/* ================================
+     BASE GLOBAL
+     ================================ */
+
+html {
+    font-size: var(--font-size-root);
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family-sans);
+    line-height: var(--line-height-root);
+    background: radial-gradient(circle at top, #020617 0, #020617 36%, #000 100%);
+    color: var(--text);
+}
+
+/* Tipograf铆a base de formularios y p谩ginas */
+.form-page,
+form {
+    font-family: var(--font-family-sans);
+    font-size: 0.93rem;
+}
+
+/* Labels est谩ndar (incluye los que ya usas) */
+label,
+.form-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+/* Texto auxiliar */
+.form-hint {
+    font-size: 0.7rem;
+    color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+
+/* ================================
+     CONTROLES DE FORMULARIO
+     (neo-input, neo-select, neo-textarea)
+     ================================ */
+
+.neo-input,
+.neo-select,
+.neo-textarea {
+    width: 100%;
+    border-radius: var(--control-radius);
+    border: 1px solid var(--control-border);
+    background: var(--control-bg);
+    color: var(--text);
+    padding: 0 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    outline: none;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.05s ease;
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+}
+
+/* Altura para input / select */
+.neo-input,
+.neo-select {
+    height: var(--control-height);
+    padding-inline: var(--control-padding-x);
+}
+
+/* Textarea */
+.neo-textarea,
+textarea.neo-input {
+    border-radius: var(--radius-md);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    min-height: 5.5rem;
+    resize: vertical;
+}
+
+/* Hover / focus */
+.neo-input:hover,
+.neo-select:hover,
+.neo-textarea:hover {
+    background: var(--control-bg-hover);
+    border-color: color-mix(in srgb, var(--border) 55%, var(--accent) 45%);
+}
+
+.neo-input:focus,
+.neo-select:focus,
+.neo-textarea:focus {
+    border-color: var(--control-border-strong);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 65%, transparent);
+}
+
+/* Disabled */
+.neo-input:disabled,
+.neo-select:disabled,
+.neo-textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ================================
+     BOTONES
+     (btn-primary, btn-ghost, btn-danger)
+     ================================ */
+
+.btn-base,
+.btn-primary,
+.btn-ghost,
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-radius: var(--radius-pill);
+    padding: 0 1.2rem;
+    min-height: 2.4rem;
+    font-size: 0.86rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.05s ease;
+    white-space: nowrap;
+}
+
+/* Primario */
+.btn-primary {
+    background: radial-gradient(circle at top left, var(--accent-strong), var(--accent));
+    border-color: color-mix(in srgb, var(--accent-strong) 80%, transparent);
+    color: #f9fafb;
+    box-shadow: var(--shadow-subtle);
+}
+
+.btn-primary:hover {
+    background: radial-gradient(circle at top left, var(--accent-strong), #3730a3);
+    transform: translateY(-0.5px);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:active {
+    transform: translateY(0.5px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.45);
+}
+
+/* Ghost */
+.btn-ghost {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--border) 70%, transparent);
+    color: color-mix(in srgb, var(--text) 86%, transparent);
+}
+
+.btn-ghost:hover {
+    background: color-mix(in srgb, var(--panel) 80%, var(--accent-soft) 20%);
+    border-color: color-mix(in srgb, var(--border) 60%, var(--accent) 40%);
+}
+
+/* Danger */
+.btn-danger {
+    background: radial-gradient(circle at top left, #b91c1c, var(--danger));
+    border-color: color-mix(in srgb, var(--danger) 80%, transparent);
+    color: #fef2f2;
+    box-shadow: var(--shadow-subtle);
+}
+
+.btn-danger:hover {
+    background: radial-gradient(circle at top left, #dc2626, #7f1d1d);
+    transform: translateY(-0.5px);
+}
+
+/* Disabled generic */
+.btn-base:disabled,
+.btn-primary:disabled,
+.btn-ghost:disabled,
+.btn-danger:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ================================
+     CARDS / PLATES (neo-plate)
+     ================================ */
+/* Chips */
+.neo-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding-inline: 0.6rem;
+    min-height: 1.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    color: color-mix(in srgb, var(--text) 80%, transparent);
+    background: color-mix(in srgb, var(--panel) 75%, transparent);
+}
+
+.neo-chip--icon {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 999px;
+}
+
+/* ================================
+     TOASTS
+     (ya est谩s usando .neo-toast en Toaster)
+     ================================ */
+
+.neo-toast {
+    border-radius: var(--radius-lg) !important;
+    border: 1px solid var(--border) !important;
+    background: radial-gradient(circle at top left, #020617, var(--panel)) !important;
+    color: var(--text) !important;
+    box-shadow: var(--shadow-soft) !important;
+    font-size: 0.86rem !important;
+}

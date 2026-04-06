@@ -1,0 +1,24 @@
+﻿==================================================
+ARBOL ACTUAL CORE
+Fecha: 2026-03-28 23:11:15
+Ruta: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core
+==================================================
+
+core
++-- api
+|   \-- HttpClient.js
++-- config
++-- hooks
++-- http
++-- security
+|   +-- ProtectedRoute.jsx
+|   \-- SessionWatcher.jsx
++-- store
++-- ui
+|   +-- feedback
+|   +-- layout
+|   \-- modals
+\-- utils
+    +-- authSession.js
+    +-- idleLogout.js
+    \-- timefmt.js

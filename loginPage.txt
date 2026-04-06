@@ -1,0 +1,792 @@
+// client/src/features/auth/pages/LoginPage.jsx
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Trash2, ArrowRight, LogIn, Coffee, LogOut, Building2, CheckCircle2 } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { formatDurationSince, formatTimeLeft } from "@/core/utils/timefmt";
+import { loadSession, clearSession, isTokenValid, resolveHomePath } from "@/core/utils/authSession";
+
+import { useAuthStore } from "@/features/auth/store/auth.store.js";
+import { startBreak, stopBreak } from "@/features/corporativo/api/auth.api.js";
+
+import { ConfirmModal } from "@/shared/ui/modals/ConfirmModal";
+import { getLoginModalOverride } from "@/styles/modals/loginModalStyles";
+
+
+const ALLOWED_PIN_LENGTHS = [4, 6];
+const MAX_PIN = 6;
+
+const LAST_TENANT_KEY = "jcf_last_tenant_id";
+
+function safeStr(v) {
+  return String(v ?? "").trim();
+}
+
+function normalizeTenantOptions(list) {
+  const arr = Array.isArray(list) ? list : [];
+  return arr
+    .map((t) => ({
+      tenantId: safeStr(t.tenantId || t._id),
+      key: safeStr(t.key),
+      name: safeStr(t.name),
+      type: safeStr(t.type),
+      slug: safeStr(t.slug),
+    }))
+    .filter((t) => t.tenantId);
+}
+
+function getLastTenantId() {
+  try {
+    return safeStr(window.localStorage.getItem(LAST_TENANT_KEY)) || null;
+  } catch {
+    return null;
+  }
+}
+
+function setLastTenantId(tenantId) {
+  try {
+    const v = safeStr(tenantId);
+    if (!v) return;
+    window.localStorage.setItem(LAST_TENANT_KEY, v);
+  } catch {
+    // ignore
+  }
+}
+
+function TenantPickerModal({ open, title, tenants, selectedTenantId, onSelect, onCancel }) {
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60" onClick={onCancel} />
+
+      <div className="relative w-[720px] max-w-[95vw] rounded-2xl border border-white/10 bg-slate-900 shadow-2xl">
+        <div className="p-5 md:p-6 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center">
+              <Building2 className="text-emerald-300" size={20} />
+            </div>
+            <div className="min-w-0">
+              <div className="text-lg font-bold">{title}</div>
+              <div className="text-sm text-slate-300 mt-0.5">
+                Selecciona el tenant con el que deseas iniciar sesión. La sesión quedará asociada a ese tenant.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-5 md:p-6">
+          <div className="grid gap-3">
+            {tenants.map((t) => {
+              const active = t.tenantId === selectedTenantId;
+              return (
+                <button
+                  key={t.tenantId}
+                  onClick={() => onSelect(t.tenantId)}
+                  className={[
+                    "w-full text-left rounded-2xl border px-4 py-4 flex items-center justify-between gap-4",
+                    "transition-all",
+                    active
+                      ? "border-emerald-500/40 bg-emerald-500/10"
+                      : "border-white/10 bg-white/5 hover:bg-white/8 hover:border-white/20",
+                  ].join(" ")}
+                >
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <div className="font-semibold truncate">{t.name || t.key || "Tenant"}</div>
+                      {t.type ? (
+                        <span className="text-[11px] px-2 py-[2px] rounded-full bg-white/10 text-slate-200/90 border border-white/10">
+                          {t.type}
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <div className="text-xs text-slate-300 mt-1">
+                      {t.key ? <span className="opacity-90">Key: {t.key}</span> : null}
+                      {t.slug ? (
+                        <span className="opacity-70">
+                          {" "}
+                          {t.key ? " - " : ""} {t.slug}
+                        </span>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  {active ? (
+                    <div className="shrink-0 flex items-center gap-2 text-emerald-300 font-semibold">
+                      <CheckCircle2 size={18} />
+                      Seleccionado
+                    </div>
+                  ) : (
+                    <div className="shrink-0 text-xs text-slate-300">Elegir</div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 flex items-center justify-end gap-3">
+            <button
+              className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-semibold"
+              onClick={onCancel}
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function LoginPage() {
+  const [pin, setPin] = useState("");
+  const [loadingUi, setLoadingUi] = useState(false);
+  const [onBreak, setOnBreak] = useState(false);
+
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  const [logoutLoading, setLogoutLoading] = useState(false);
+
+  // ===== Tenant selection (enterprise) =====
+  const [tenantModalOpen, setTenantModalOpen] = useState(false);
+  const [tenantOptions, setTenantOptions] = useState([]);
+  const [selectedTenantId, setSelectedTenantId] = useState(getLastTenantId());
+  const [pendingLogin, setPendingLogin] = useState(null); // { pin, intent }
+
+  // Evita loops de auto-retry
+  const autoTriedRef = useRef(new Set()); // key = `${pin}:${intent}`
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/corporativo";
+
+  const login = useAuthStore((s) => s.login);
+  const verify = useAuthStore((s) => s.verify);
+  const logout = useAuthStore((s) => s.logout);
+  const refreshActiveSessions = useAuthStore((s) => s.refreshActiveSessions);
+  const active = useAuthStore((s) => s.active);
+
+  const pushDigit = (d) => !loadingUi && pin.length < MAX_PIN && setPin((p) => p + String(d));
+  const handleClear = () => !loadingUi && setPin("");
+  const handleBackspace = () => !loadingUi && setPin((p) => p.slice(0, -1));
+
+  const canAttempt = ALLOWED_PIN_LENGTHS.includes(pin.length);
+
+  const showAlert = useCallback((msg, ok = true, { duration = 4500, sticky = false } = {}) => {
+    try {
+      const container = document.getElementById("toast-container");
+      if (!container) return;
+
+      const toastEl = document.createElement("div");
+      toastEl.className = `
+        px-4 py-3 rounded-lg shadow-lg text-white font-semibold
+        flex items-center gap-3
+        transform transition-all duration-300
+        ${ok ? "bg-green-600" : "bg-red-600"}
+      `;
+      toastEl.style.minWidth = "260px";
+      toastEl.style.maxWidth = "360px";
+      toastEl.style.boxSizing = "border-box";
+      toastEl.style.whiteSpace = "pre-line";
+      toastEl.style.opacity = "0";
+      toastEl.style.transform = "translateX(20px)";
+      toastEl.style.pointerEvents = "auto";
+      toastEl.textContent = msg;
+
+      container.appendChild(toastEl);
+
+      requestAnimationFrame(() => {
+        toastEl.style.opacity = "1";
+        toastEl.style.transform = "translateX(0)";
+      });
+
+      toastEl.addEventListener("click", () => {
+        toastEl.style.opacity = "0";
+        toastEl.style.transform = "translateX(20px)";
+        setTimeout(() => toastEl.remove(), 300);
+      });
+
+      if (!sticky) {
+        setTimeout(() => {
+          toastEl.style.opacity = "0";
+          toastEl.style.transform = "translateX(20px)";
+          setTimeout(() => toastEl.remove(), 300);
+        }, duration);
+      }
+    } catch (err) {
+      console.error("showAlert error:", err, msg);
+    }
+  }, []);
+
+  const getLocalSession = useCallback(() => {
+    const session = loadSession() || {};
+    const { token, user } = session;
+    const valid = token && user && isTokenValid(token);
+    return { ...session, valid: !!valid };
+  }, []);
+
+  const getPreferredTenantId = useCallback(() => {
+    const t = safeStr(selectedTenantId);
+    return t ? t : null;
+  }, [selectedTenantId]);
+
+  const syncBreakState = useCallback(async () => {
+    const { token } = loadSession() || {};
+    if (!token || !isTokenValid(token)) {
+      setOnBreak(false);
+      return;
+    }
+    try {
+      const out = await verify();
+      const state = out?.data?.state || out?.data?.data?.state || out?.data?.session?.state || out?.data?.state;
+      setOnBreak(String(state || "").toLowerCase() === "break");
+    } catch {
+      setOnBreak(false);
+    }
+  }, [verify]);
+
+  useEffect(() => {
+    syncBreakState();
+  }, [syncBreakState]);
+
+  const attemptLogin = useCallback(
+    async ({ pinValue, intent, tenantId = null }) => {
+      try {
+        const out = await login(pinValue, intent, tenantId);
+
+        const tId =
+          out?.tenantId ||
+          out?.session?.tenantId ||
+          out?.raw?.tenantId ||
+          out?.raw?.session?.tenantId ||
+          tenantId ||
+          null;
+
+        if (tId) {
+          setLastTenantId(tId);
+          setSelectedTenantId(tId);
+        }
+
+        const home = out?.homePath || resolveHomePath(out?.session?.user) || from;
+        navigate(home, { replace: true });
+        return { ok: true };
+      } catch (e) {
+        const status = e?.status || e?.response?.status;
+        const server = e?.serverData || e?.response?.data || {};
+        const code = server?.code || server?.errorCode || null;
+
+        if (status === 409 && code === "TENANT_AMBIGUOUS") {
+          const options = normalizeTenantOptions(server?.data?.tenants || server?.tenants || []);
+          if (!options.length) {
+            showAlert("No se recibieron tenants para seleccionar.", false, { duration: 6500 });
+            return { ok: false };
+          }
+
+          setTenantOptions(options);
+          setPendingLogin({ pin: pinValue, intent });
+
+          const last = getLastTenantId();
+          const lastIsValid = last && options.some((t) => t.tenantId === last);
+
+          if (lastIsValid) setSelectedTenantId(last);
+
+          const key = `${safeStr(pinValue)}:${safeStr(intent)}`;
+          const alreadyAutoTried = autoTriedRef.current.has(key);
+
+          if (lastIsValid && !alreadyAutoTried) {
+            autoTriedRef.current.add(key);
+            try {
+              await login(pinValue, intent, last);
+              setLastTenantId(last);
+              setSelectedTenantId(last);
+
+              const home = resolveHomePath(loadSession()?.user) || from;
+              navigate(home, { replace: true });
+              return { ok: true };
+            } catch (e2) {
+              console.error("Auto-tenant retry failed:", e2);
+            }
+          }
+
+          setTenantModalOpen(true);
+          showAlert("Selecciona un tenant para continuar.", false, { duration: 5500 });
+          return { ok: false, needsTenant: true };
+        }
+
+        if (status === 409 && code === "SESSION_EXISTS") {
+          showAlert(
+            'Ya existe una sesión activa para este usuario.\n\nUsa el botón "Continuar" para entrar a esa sesión.',
+            false,
+            { duration: 8000 }
+          );
+          return { ok: false };
+        }
+
+        if (status === 409 && code === "SESSION_TENANT_MISMATCH") {
+          showAlert("Ya existe una sesión activa en otro tenant.\nCierra esa sesión o usa el mismo tenant.", false, {
+            duration: 8000,
+          });
+          return { ok: false };
+        }
+
+        showAlert(e?.message || "No se pudo iniciar sesión.", false, { duration: 6500, sticky: true });
+        return { ok: false };
+      }
+    },
+    [login, navigate, from, showAlert]
+  );
+
+  const closeTenantModal = useCallback(() => {
+    setTenantModalOpen(false);
+    setTenantOptions([]);
+    setPendingLogin(null);
+  }, []);
+
+  const onPickTenant = useCallback(
+    async (tenantId) => {
+      const tId = safeStr(tenantId);
+      if (!tId) return;
+
+      setSelectedTenantId(tId);
+
+      const pending = pendingLogin;
+      if (!pending?.pin || !pending?.intent) {
+        closeTenantModal();
+        showAlert("No hay intento pendiente para continuar.", false);
+        return;
+      }
+
+      setLoadingUi(true);
+      try {
+        closeTenantModal();
+        setLastTenantId(tId);
+        await attemptLogin({ pinValue: pending.pin, intent: pending.intent, tenantId: tId });
+      } finally {
+        setLoadingUi(false);
+      }
+    },
+    [pendingLogin, attemptLogin, closeTenantModal, showAlert]
+  );
+
+  const handleEntrar = useCallback(async () => {
+    if (onBreak) {
+      showAlert("No puedes entrar mientras estás en receso. Finaliza el receso primero.", false);
+      return;
+    }
+    if (!canAttempt) {
+      showAlert(`El PIN debe tener ${ALLOWED_PIN_LENGTHS.join(" o ")} dígitos.`, false);
+      return;
+    }
+
+    const { valid } = getLocalSession();
+    if (valid) {
+      showAlert('Ya tienes una sesión activa en este dispositivo. Usa el botón "Continuar".', false, {
+        duration: 5000,
+      });
+      return;
+    }
+
+    setLoadingUi(true);
+    try {
+      // Enterprise: no auto-inyectar tenant en "enter".
+      // Si hay múltiples tenants, el backend debe responder TENANT_AMBIGUOUS y abrimos modal.
+      await attemptLogin({ pinValue: pin, intent: "enter", tenantId: null });
+    } finally {
+      setLoadingUi(false);
+    }
+  }, [pin, canAttempt, onBreak, showAlert, attemptLogin, getLocalSession, getPreferredTenantId]);
+
+  const handleContinue = useCallback(async () => {
+    if (loadingUi) return;
+
+    const { valid: hasLocal } = getLocalSession();
+
+    const hasAnyActiveSessions =
+      Array.isArray(active.items) &&
+      active.items.length > 0 &&
+      active.status !== "loading" &&
+      active.status !== "offline" &&
+      active.status !== "error";
+
+    if (!hasLocal) {
+      if (!canAttempt) {
+        showAlert(`El PIN debe tener ${ALLOWED_PIN_LENGTHS.join(" o ")} dígitos.`, false);
+        return;
+      }
+      if (!hasAnyActiveSessions) {
+        showAlert('No hay sesión abierta. Presione "Entrar" para iniciar sesión.', false, { duration: 6500 });
+        return;
+      }
+    }
+
+    setLoadingUi(true);
+    try {
+      // Enterprise: continuar tampoco debe inventar tenant.
+      // Si hay sesión activa, el backend debe resolverlo; si es ambiguo, que pida selección.
+      await attemptLogin({ pinValue: pin, intent: "continue", tenantId: null });
+    } finally {
+      setLoadingUi(false);
+    }
+  }, [pin, canAttempt, loadingUi, active, showAlert, attemptLogin, getLocalSession, getPreferredTenantId]);
+
+  const isNonCorporateEmployee = useCallback(() => {
+    const { user } = loadSession() || {};
+    if (!user) return false;
+
+    const roleSlugs = (user.roles || []).map((r) => String(r.slug || "").toLowerCase()).filter(Boolean);
+    const corporateRoles = ["owner", "legal_representative", "corporate_manager"];
+    return !roleSlugs.some((r) => corporateRoles.includes(r));
+  }, []);
+
+  const handleReceso = useCallback(async () => {
+    const { token, user } = loadSession() || {};
+    if (!token || !user) {
+      showAlert("Inicie sesión antes de usar receso.", false);
+      return;
+    }
+
+    if (!isNonCorporateEmployee()) {
+      showAlert("El receso sólo aplica para empleados operativos, no para usuarios corporativos.", false);
+      return;
+    }
+
+    try {
+      if (!onBreak) {
+        await startBreak();
+        setOnBreak(true);
+        showAlert("Receso iniciado.");
+      } else {
+        await stopBreak();
+        setOnBreak(false);
+        showAlert("Receso finalizado.");
+      }
+    } catch {
+      showAlert("No se pudo registrar el receso.", false);
+    }
+  }, [onBreak, showAlert, isNonCorporateEmployee]);
+
+  const performLogout = useCallback(async () => {
+    setLogoutLoading(true);
+    try {
+      await logout({ callBackend: true });
+    } finally {
+      clearSession();
+      window.__user = null;
+      setOnBreak(false);
+      showAlert("Sesión cerrada.");
+      navigate("/login", { replace: true });
+      setLogoutLoading(false);
+    }
+  }, [logout, showAlert, navigate]);
+
+  useEffect(() => {
+    let timerId = null;
+    let alive = true;
+
+    const load = async () => {
+      try {
+        await refreshActiveSessions();
+      } catch (e) {
+        if (!alive) return;
+        console.error("refreshActiveSessions error:", e);
+      }
+    };
+
+    load();
+    timerId = setInterval(load, 20000);
+
+    return () => {
+      alive = false;
+      if (timerId) clearInterval(timerId);
+    };
+  }, [refreshActiveSessions]);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (onBreak) {
+        if (e.key === "Enter" || (e.key.length === 1 && /\d/.test(e.key))) {
+          e.preventDefault();
+          showAlert("Estás en receso. Finalízalo para continuar.", false);
+        }
+        return;
+      }
+
+      const isDigitKey =
+        (e.key?.length === 1 && /\d/.test(e.key)) ||
+        /^Digit[0-9]$/.test(e.code || "") ||
+        /^Numpad[0-9]$/.test(e.code || "");
+
+      if (isDigitKey) {
+        e.preventDefault();
+        if (!loadingUi && pin.length < MAX_PIN) {
+          const d = e.key && /\d/.test(e.key) ? e.key : (e.code || "").replace(/[^\d]/g, "");
+          if (d) setPin((p) => p + String(d).slice(-1));
+        }
+        return;
+      }
+
+      if (e.key === "Backspace") {
+        e.preventDefault();
+        if (!loadingUi) setPin((p) => p.slice(0, -1));
+        return;
+      }
+
+      if (e.key === "Delete" || e.key === "Escape") {
+        e.preventDefault();
+        if (!loadingUi) setPin("");
+        return;
+      }
+
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (ALLOWED_PIN_LENGTHS.includes(pin.length)) {
+          handleEntrar();
+        } else {
+          showAlert(`El PIN debe tener ${ALLOWED_PIN_LENGTHS.join(" o ")} dígitos.`, false);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [pin, onBreak, loadingUi, handleEntrar, showAlert]);
+
+  const dt = new Date();
+  const monthShort = dt.toLocaleString("es-ES", { month: "short" });
+  const todayText = `${dt.getDate()} ${monthShort.charAt(0).toUpperCase() + monthShort.slice(1)} ${dt.getFullYear()}`;
+
+  const local = getLocalSession();
+  const hasLocalSession = !!local.valid;
+
+  const hasAnyActiveSessions =
+    Array.isArray(active.items) &&
+    active.items.length > 0 &&
+    active.status !== "loading" &&
+    active.status !== "offline" &&
+    active.status !== "error";
+
+  const canContinue = !onBreak && !loadingUi && (hasLocalSession || (hasAnyActiveSessions && canAttempt));
+
+  const cardWidth = "w-[1000px] max-w-[95vw]";
+
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-slate-900 to-gray-800 flex items-center justify-center text-white">
+      <div
+        className={`p-8 md:p-10 bg-slate-800 grid gap-10 md:gap-12 ${cardWidth}
+      md:grid-cols-[minmax(0,1fr)_420px] items-start`}
+      >
+        {/* IZQUIERDA */}
+        <div className="flex-1">
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-3xl font-bold">Inversiones JCF</h1>
+              <div className="text-sm text-gray-300 mt-1">{todayText}</div>
+            </div>
+          </div>
+
+          {onBreak && (
+            <div className="mt-4 mb-2 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 px-4 py-2 text-sm font-semibold">
+              Estás en <b>receso</b>. Finalízalo para poder continuar o entrar.
+            </div>
+          )}
+
+          <div className="flex justify-center gap-3 mt-6 mb-3 md:mb-4 min-h-5">
+            {Array.from({ length: MAX_PIN }).map((_, idx) => (
+              <span
+                key={idx}
+                className={`inline-block w-12 h-4 rounded-full ${idx < pin.length ? "bg-green-400" : "bg-gray-500"
+                  } transition-all`}
+              />
+            ))}
+          </div>
+
+          <div className="text-center text-xs text-gray-300 -mt-2 mb-3">
+            PIN de {ALLOWED_PIN_LENGTHS.join(" o ")} dígitos
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 mt-3 mb-6 w-full max-w-[420px] mx-auto">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+              <button
+                key={n}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-2xl rounded-lg py-4 shadow disabled:opacity-60"
+                onClick={() => pushDigit(n)}
+                disabled={loadingUi}
+              >
+                {n}
+              </button>
+            ))}
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg py-4 flex items-center justify-center gap-2 shadow disabled:opacity-60"
+              onClick={handleClear}
+              disabled={loadingUi}
+            >
+              <Trash2 size={22} /> Limpiar
+            </button>
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-2xl rounded-lg py-4 shadow disabled:opacity-60"
+              onClick={() => pushDigit(0)}
+              disabled={loadingUi}
+            >
+              0
+            </button>
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-2xl rounded-lg py-4 flex items-center justify-center shadow disabled:opacity-60"
+              onClick={handleBackspace}
+              disabled={loadingUi}
+            >
+              ⌫
+            </button>
+          </div>
+
+          <button
+            className="w-full bg-green-600 hover:bg-green-700 transition-colors text-white font-bold rounded-lg text-lg py-4 flex items-center justify-center gap-2 shadow disabled:opacity-60"
+            onClick={handleContinue}
+            disabled={!canContinue}
+          >
+            <ArrowRight size={24} /> {loadingUi ? "Verificando..." : "Continuar"}
+          </button>
+        </div>
+
+        {/* DERECHA */}
+        <div className="flex flex-col gap-8">
+          <div className="w-full">
+            <div className="flex items-baseline justify-between">
+              <div className="font-bold text-lg">Usuarios activos</div>
+              <div className="text-[11px] opacity-60">
+                {active.refreshedAt ? new Date(active.refreshedAt).toLocaleTimeString() : " - "}
+              </div>
+            </div>
+            <div className="mt-1 border-t border-white/10" />
+
+            <div className="mt-3 space-y-[6px] text-[13px] text-slate-200/90 w-full max-w-sm max-h-56 overflow-auto pr-1">
+              {active.status === "loading" && <div className="opacity-70">Cargando...</div>}
+
+              {(active.status === "online" || active.status === "orphan" || active.status === "empty") &&
+                Array.isArray(active.items) &&
+                active.items.map((u, i) => {
+                  const displayName = String(u?.nombre || "").trim() || "Usuario";
+                  const rol = String(u?.rol || "").trim();
+
+                  const TWELVE_HOURS_MS = 12 * 60 * 60 * 1000;
+
+                  const startedAtMs =
+                    typeof u?.startedAt === "number"
+                      ? u.startedAt
+                      : u?.startedAt
+                        ? new Date(u.startedAt).getTime()
+                        : null;
+
+                  const expiresAtMsRaw =
+                    typeof u?.expiresAt === "number"
+                      ? u.expiresAt
+                      : u?.expiresAt
+                        ? new Date(u.expiresAt).getTime()
+                        : null;
+
+                  const effectiveExpiresAtMs = Number.isFinite(expiresAtMsRaw)
+                    ? expiresAtMsRaw
+                    : startedAtMs
+                      ? startedAtMs + TWELVE_HOURS_MS
+                      : null;
+
+                  const tiempoActiva = startedAtMs ? formatDurationSince(startedAtMs) : " - "
+                  const tiempoRestante = effectiveExpiresAtMs ? formatTimeLeft(effectiveExpiresAtMs) : " - "
+
+                  const getStateInfo = () => {
+                    if (u?.orphan) return { label: "Huérfano", class: "bg-amber-500/20 text-amber-300" };
+                    const s = String(u?.state || "").toUpperCase();
+                    if (s === "BREAK") return { label: "Receso", class: "bg-yellow-500/20 text-yellow-300" };
+                    if (s === "ACTIVE") return { label: "Activo", class: "bg-emerald-500/20 text-emerald-300" };
+                    return { label: "Cerró", class: "bg-slate-500/20 text-slate-300" };
+                  };
+
+                  const stateInfo = getStateInfo();
+
+                  return (
+                    <div
+                      key={`${u?.userId || "u"}-${i}`}
+                      className="flex items-center justify-between text-[13px] leading-tight"
+                    >
+                      <div className="flex-1 truncate">
+                        <span className="font-semibold">{displayName}</span>
+                        {rol ? (
+                          <>
+                            <span className="mx-1 opacity-60"> - </span>
+                            <span className="opacity-80 text-[12px]">{rol}</span>
+                          </>
+                        ) : null}
+                        <span className="mx-1 opacity-60"> - </span>
+                        <span className="opacity-80 text-[12px]">Activo {tiempoActiva}</span>
+                        <span className="mx-1 opacity-60"> - </span>
+                        <span className="opacity-80 text-[12px]">Vence en {tiempoRestante}</span>
+                      </div>
+
+                      <span
+                        className={`shrink-0 ml-2 px-2 py-[2px] rounded-full text-[11px] font-semibold ${stateInfo.class}`}
+                      >
+                        {stateInfo.label}
+                      </span>
+                    </div>
+                  );
+                })}
+            </div>
+
+            <div className="text-xs text-gray-300 mt-2">Ingrese su PIN para acceder</div>
+          </div>
+
+          <div className="flex flex-col gap-4 mt-2 items-center">
+            <button
+              className="w-[50%] bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-lg shadow disabled:opacity-60"
+              onClick={handleEntrar}
+              disabled={loadingUi || !canAttempt || onBreak}
+            >
+              <LogIn size={22} /> Entrar
+            </button>
+
+            <button
+              className={`w-[50%] ${onBreak ? "bg-amber-500 hover:bg-amber-600 text-black" : "bg-yellow-400 hover:bg-yellow-500 text-black"
+                } font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-lg shadow disabled:opacity-60`}
+              onClick={handleReceso}
+              disabled={loadingUi}
+            >
+              <Coffee size={22} /> {onBreak ? "Terminar receso" : "Receso"}
+            </button>
+
+            <button
+              className="w-[50%] bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-lg shadow disabled:opacity-60"
+              onClick={() => setLogoutModalOpen(true)}
+              disabled={loadingUi}
+            >
+              <LogOut size={22} /> Salir
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <TenantPickerModal
+        open={tenantModalOpen}
+        title="Selecciona un tenant"
+        tenants={tenantOptions}
+        selectedTenantId={selectedTenantId}
+        onSelect={onPickTenant}
+        onCancel={closeTenantModal}
+      />
+
+      <ConfirmModal
+        open={logoutModalOpen}
+        title="Cerrar sesión"
+        message="¿Seguro que deseas cerrar la sesión actual? Tendrás que ingresar tu PIN nuevamente para volver a entrar."
+        confirmText="Sí, cerrar sesión"
+        cancelText="Cancelar"
+        tone="danger"
+        loading={logoutLoading}
+        onCancel={() => setLogoutModalOpen(false)}
+        onConfirm={async () => {
+          await performLogout();
+          setLogoutModalOpen(false);
+        }}
+        {...getLoginModalOverride()}
+      />
+    </div>
+  );
+}

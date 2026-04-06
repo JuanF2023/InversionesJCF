@@ -1,0 +1,318 @@
+﻿==================================================
+AUDITORIA ACTUAL - MODULOS CORPORATIVO
+Fecha: 2026-03-28 23:35:39
+Ruta: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo
+==================================================
+
+
+--------------------------------------------------
+MODULO: access
+--------------------------------------------------
++-- api
+|   +-- memberships.api.js
+|   +-- permissions.api.js
+|   +-- roles.api.js
+|   +-- sessions.api.js
+|   \-- users.api.js
++-- components
+|   +-- forms
+|   |   +-- ChangePinForm.jsx
+|   |   +-- MembershipForm.jsx
+|   |   +-- RoleForm.jsx
+|   |   \-- UserForm.jsx
+|   +-- layout
+|   |   +-- AccessHeader.jsx
+|   |   +-- AccessLayout.jsx
+|   |   \-- AccessStats.jsx
+|   +-- modals
+|   |   +-- ChangePinModal.jsx
+|   |   +-- DeleteUserModal.jsx
+|   |   +-- MembershipModal.jsx
+|   |   \-- UserStatusModal.jsx
+|   +-- permissions
+|   |   +-- PermissionCard.jsx
+|   |   +-- PermissionsFilters.jsx
+|   |   \-- PermissionsGrid.jsx
+|   \-- roles
+|       +-- RoleCard.jsx
+|       +-- RolesGrid.jsx
+|       \-- RoleStatsCard.jsx
++-- constants
+|   +-- accessTabs.constants.js
+|   +-- roleOptions.constants.js
+|   \-- userStatus.constants.js
++-- hooks
+|   +-- useMembershipActions.js
+|   +-- useSelectedUser.js
+|   \-- useUsersFilters.js
++-- pages
+|   +-- PermissionsPage.jsx
+|   +-- RolesPage.jsx
+|   \-- UsersPage.jsx
++-- permissions
++-- roles
++-- store
+|   +-- accessMemberships.store.js
+|   +-- accessPermissions.store.js
+|   +-- accessRoles.store.js
+|   +-- accessSessions.store.js
+|   \-- accessUsers.store.js
++-- users
+|   +-- components
+|   |   +-- CompleteAccessModal.jsx
+|   |   \-- UsersTable.jsx
+|   \-- pages
+|       +-- UserCreatePage.jsx
+|       +-- UserDetailPage.jsx
+|       \-- UserEditPage.jsx
++-- utils
+|   +-- accessFormatters.js
+|   +-- accessMappers.js
+|   \-- accessValidators.js
+\-- index.js
+
+Resumen:
+  - Archivos JS/JSX: 45
+  - Carpetas: 17
+
+
+--------------------------------------------------
+MODULO: catalogos
+--------------------------------------------------
++-- api
+|   +-- countries.api.js
+|   \-- paises.api.js
++-- components
+|   \-- ClasificacionCards.jsx
+\-- store
+    \-- paises.store.js
+
+Resumen:
+  - Archivos JS/JSX: 4
+  - Carpetas: 3
+
+
+--------------------------------------------------
+MODULO: dashboards
+--------------------------------------------------
++-- components
+|   +-- PanelIndicadores.jsx
+|   +-- PanelInformes.jsx
+|   +-- PanelNegocios.jsx
+|   +-- PanelPropiedades.jsx
+|   +-- PanelProyectos.jsx
+|   \-- PanelTransacciones.jsx
++-- pages
+|   +-- AcercaDePage.jsx
+|   +-- FilosofiaDeDarPage.jsx
+|   +-- GeneralesPage.jsx
+|   +-- PanelNegociosPage.jsx
+|   \-- PorHacerPage.jsx
+\-- DashboardsLayout.jsx
+
+Resumen:
+  - Archivos JS/JSX: 12
+  - Carpetas: 2
+
+
+--------------------------------------------------
+MODULO: finanzas
+--------------------------------------------------
+\-- components
+    \-- modals
+        \-- DepositoModal.jsx
+
+Resumen:
+  - Archivos JS/JSX: 1
+  - Carpetas: 2
+
+
+--------------------------------------------------
+MODULO: ideas
+--------------------------------------------------
++-- api
+|   \-- ideas.api.js
+\-- components
+    \-- modals
+        \-- IdeasModal.jsx
+
+Resumen:
+  - Archivos JS/JSX: 2
+  - Carpetas: 3
+
+
+--------------------------------------------------
+MODULO: indicadores
+--------------------------------------------------
++-- api
+|   +-- ingresos.api.js
+|   \-- monthlyProduction.api.js
++-- hooks
+|   \-- useIndicadoresData.js
++-- pages
+|   +-- IndicadoresComparativosPage.jsx
+|   +-- IndicadoresLayout.jsx
+|   +-- IndicadoresPanelPage.jsx
+|   \-- IndicadoresProyeccionesPage.jsx
+\-- store
+    \-- ingresos.store.js
+
+Resumen:
+  - Archivos JS/JSX: 8
+  - Carpetas: 4
+
+
+--------------------------------------------------
+MODULO: informes
+--------------------------------------------------
++-- hooks
+|   \-- useInformesData.js
+\-- pages
+    +-- InformesExportarPage.jsx
+    +-- InformesLayout.jsx
+    +-- InformesResumenPage.jsx
+    \-- InformesTablasPage.jsx
+
+Resumen:
+  - Archivos JS/JSX: 5
+  - Carpetas: 2
+
+
+--------------------------------------------------
+MODULO: layout
+--------------------------------------------------
+\-- CorporativoLayout.jsx
+
+Resumen:
+  - Archivos JS/JSX: 1
+  - Carpetas: 0
+
+
+--------------------------------------------------
+MODULO: negocios
+--------------------------------------------------
++-- api
+|   +-- businessCategories.api.js
+|   +-- businesses.api.js
+|   +-- businessesSummary.api.js
+|   +-- businessesTypes.api.js
+|   +-- businessTypes.api.js
+|   +-- catalogoNegocios.api.js
+|   \-- negocios.api.js
++-- components
+|   +-- business-detail
+|   |   +-- BusinessLayout.jsx
+|   |   \-- BusinessOverview.jsx
+|   +-- kpi
+|   |   \-- KPIStripGlobal.jsx
+|   +-- BusinessFormPage.jsx
+|   +-- BusinessMultiPicker.jsx
+|   +-- BusinessSelectBar.jsx
+|   +-- BusinessUnitsAssignModal.jsx
+|   \-- NegociosLayout.jsx
++-- hooks
++-- pages
+|   +-- NegociosConfiguracionPage.jsx
+|   +-- NegociosFinanzasPage.jsx
+|   +-- NegociosOperacionPage.jsx
+|   +-- NegociosResumenPage.jsx
+|   \-- NegociosUnidadesPage.jsx
+\-- store
+    \-- negocios.store.js
+
+Resumen:
+  - Archivos JS/JSX: 21
+  - Carpetas: 7
+
+
+--------------------------------------------------
+MODULO: propiedades
+--------------------------------------------------
++-- api
+|   +-- properties.api.js
+|   \-- units.api.js
++-- components
+|   +-- detalles
+|   |   +-- DetallesDatosProp.jsx
+|   |   +-- DetallesHistorialProp.jsx
+|   |   +-- DetallesIngresosProp.jsx
+|   |   +-- DetallesLayout.jsx
+|   |   +-- DetallesNegociosProp.jsx
+|   |   +-- DetallesProyectosProp.jsx
+|   |   \-- DetallesUnidadesProp.jsx
+|   \-- unidades
+|       +-- UnidadesForm.jsx
+|       +-- UnidadesLayout.jsx
+|       +-- UnidadesListPage.jsx
+|       +-- UnidadesMapaPage.jsx
+|       \-- UnidadesOcupacionPage.jsx
++-- pages
+|   +-- PropiedadesFormPage.jsx
+|   +-- PropiedadesIndex.jsx
+|   +-- PropiedadesIngresos.jsx
+|   +-- PropiedadesLayout.jsx
+|   +-- PropiedadesPanel.jsx
+|   \-- PropiedadesReportes.jsx
+\-- store
+    +-- properties.store.js
+    \-- units.store.js
+
+Resumen:
+  - Archivos JS/JSX: 22
+  - Carpetas: 6
+
+
+--------------------------------------------------
+MODULO: proyectos
+--------------------------------------------------
++-- api
+|   \-- projects.api.js
+\-- pages
+    +-- Proyectos.jsx
+    +-- ProyectosDetailsPage.jsx
+    +-- ProyectosFormPage.jsx
+    +-- ProyectosLayout.jsx
+    \-- ProyectosListPage.jsx
+
+Resumen:
+  - Archivos JS/JSX: 6
+  - Carpetas: 2
+
+
+--------------------------------------------------
+MODULO: transacciones
+--------------------------------------------------
++-- api
+|   +-- banks.api.js
+|   +-- categories.api.js
+|   +-- fields.api.js
+|   +-- movements.api.js
+|   \-- transactions.api.js
++-- components
+|   +-- TransactionsFilters.jsx
+|   +-- TransactionsTable.jsx
+|   +-- TransactionsToolbar.jsx
+|   \-- TransactionsTypeSelector.jsx
+\-- pages
+    +-- TransaccionesFormPage.jsx
+    +-- TransaccionesLayout.jsx
+    +-- TransaccionesListPage.jsx
+    \-- TransaccionesReportesPage.jsx
+
+Resumen:
+  - Archivos JS/JSX: 13
+  - Carpetas: 3
+
+
+--------------------------------------------------
+MODULO: ui
+--------------------------------------------------
++-- navigation
+|   \-- RouteTabs.jsx
+\-- primitives
+    \-- AddAction.jsx
+
+Resumen:
+  - Archivos JS/JSX: 2
+  - Carpetas: 2
+

@@ -1,0 +1,76 @@
+/* client/src/styles/global/scrollbar.css */
+/* Enterprise Scrollbar - 100% alineado a sistema neo-* */
+
+/* ================================
+   DEFAULTS (fallback)
+   ================================ */
+:root {
+    --scrollbar-track: rgba(120, 120, 120, 0.12);
+    --scrollbar-thumb: rgba(120, 120, 120, 0.45);
+    --scrollbar-thumb-hover: rgba(120, 120, 120, 0.65);
+    --scrollbar-ring: rgba(0, 0, 0, 0.10);
+}
+
+/* ================================
+   TEMAS CLAROS
+   ================================ */
+
+html[data-theme="neo-ice"],
+html[data-theme="neo-mint"],
+html[data-theme="neo-dawn"],
+html[data-theme="neo-stone"] {
+    --scrollbar-track: color-mix(in srgb, var(--panel) 82%, transparent);
+    --scrollbar-thumb: color-mix(in srgb, var(--text) 22%, transparent);
+    --scrollbar-thumb-hover: color-mix(in srgb, var(--text) 36%, transparent);
+    --scrollbar-ring: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+/* ================================
+   TEMAS OSCUROS
+   ================================ */
+
+html[data-theme="neo-ocean"],
+html[data-theme="neo-plum"],
+html[data-theme="neo-dusk"],
+html[data-theme="neo-graphite"],
+html[data-theme="neo-dark"] {
+    --scrollbar-track: color-mix(in srgb, var(--panel) 65%, transparent);
+    --scrollbar-thumb: color-mix(in srgb, var(--accent) 40%, transparent);
+    --scrollbar-thumb-hover: color-mix(in srgb, var(--accent) 65%, transparent);
+    --scrollbar-ring: color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+/* ================================
+   CLASE UTILITARIA
+   ================================ */
+
+.neo-scroll {
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* WebKit */
+.neo-scroll::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.neo-scroll::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 999px;
+}
+
+.neo-scroll::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 999px;
+    border: 2px solid var(--scrollbar-ring);
+}
+
+.neo-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+.neo-scroll::-webkit-scrollbar-corner {
+    background: transparent;
+}

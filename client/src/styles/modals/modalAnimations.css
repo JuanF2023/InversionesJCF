@@ -1,0 +1,20 @@
+/* client/src/styles/modals/modalAnimations.css */
+
+/* Animación suave: aparece ligeramente desde abajo, sin blur ni rebote fuerte */
+@keyframes modalSoftIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Esta clase ya la usa el componente ConfirmModal */
+.modal-anim-in {
+    animation: modalSoftIn 170ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+}

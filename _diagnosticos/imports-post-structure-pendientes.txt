@@ -1,0 +1,57 @@
+﻿FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\components\PanelProyectos.jsx
+MATCH: proyectos/ProyectosListPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\components\PanelTransacciones.jsx
+MATCH: transacciones/TransaccionesListPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\pages\IndicadoresComparativosPage.jsx
+MATCH: indicadores/IndicadoresComparativosPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\pages\IndicadoresLayout.jsx
+MATCH: indicadores/IndicadoresLayout
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\pages\IndicadoresPanelPage.jsx
+MATCH: indicadores/IndicadoresPanelPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\pages\IndicadoresProyeccionesPage.jsx
+MATCH: indicadores/IndicadoresProyeccionesPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\pages\InformesExportarPage.jsx
+MATCH: informes/InformesExportarPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\pages\InformesLayout.jsx
+MATCH: informes/InformesLayout
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\pages\InformesResumenPage.jsx
+MATCH: informes/InformesResumenPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\pages\InformesTablasPage.jsx
+MATCH: informes/InformesTablasPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\NegociosLayout.jsx
+MATCH: negocios/NegociosLayout
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\pages\PropiedadesFormPage.jsx
+MATCH: propiedades/PropiedadesFormPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\pages\PropiedadesLayout.jsx
+MATCH: propiedades/PropiedadesLayout
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\pages\PropiedadesPanel.jsx
+MATCH: propiedades/PropiedadesPanel
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\pages\PropiedadesReportes.jsx
+MATCH: propiedades/PropiedadesReportes
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\pages\ProyectosFormPage.jsx
+MATCH: proyectos/ProyectosFormPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\pages\TransaccionesFormPage.jsx
+MATCH: transacciones/TransaccionesFormPage
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\pages\TransaccionesLayout.jsx
+MATCH: transacciones/TransaccionesLayout
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\pages\TransaccionesReportesPage.jsx
+MATCH: transacciones/TransaccionesReportesPage
+

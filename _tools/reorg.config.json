@@ -1,0 +1,13 @@
+﻿{
+  "moves": [
+    { "from": "client/src/pages/Corporativo", "to": "client/src/features/corporativo" },
+    { "from": "client/src/components/layouts/CorporativoLayout.jsx", "to": "client/src/features/corporativo/layout/CorporativoLayout.jsx" },
+    { "from": "client/src/pages/LoginPage.jsx", "to": "client/src/features/auth/pages/LoginPage.jsx" }
+  ],
+  "rewrite": [
+    { "from": "@/pages/Corporativo/", "to": "@/features/corporativo/" },
+    { "from": "@/components/layouts/CorporativoLayout", "to": "@/features/corporativo/layout/CorporativoLayout" },
+    { "from": "@/pages/LoginPage", "to": "@/features/auth/pages/LoginPage" }
+  ],
+  "exts": [".js",".jsx",".ts",".tsx"]
+}

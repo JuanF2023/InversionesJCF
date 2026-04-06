@@ -1,0 +1,3 @@
+﻿import * as mod from "#modules/auth/application/services/auth.service.js";
+export default mod.default ?? mod;
+export * from "#modules/auth/application/services/auth.service.js";

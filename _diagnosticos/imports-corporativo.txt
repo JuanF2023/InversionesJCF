@@ -1,0 +1,867 @@
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\hooks\useLoginFlow.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\GeneralesPage.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\PanelNegociosPage.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\finanzas\components\modals\DepositoModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\business-detail\pages\NegociosOperacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\business-detail\pages\NegociosResumenPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\kpi\KPIStripGlobal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\BusinessFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\BusinessMultiPicker.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\BusinessUnitsAssignModal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesDatosProp.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesIngresosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesLayout.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesNegociosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesProyectosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesUnidadesProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesForm.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesListPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesMapaPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesOcupacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesIngresos.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesPanel.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesReportes.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\ProyectosFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\auth.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\businessCategories.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\businesses.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\catalogoNegocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\index.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\ingresos.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\monthlyProduction.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\negocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\paises.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\api\units.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\components\modals\AddBusinessModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\components\modals\BusinessTypePicker.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\finanzas\components\modals\DepositoModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\negocios\business-detail\pages\NegociosOperacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\negocios\business-detail\pages\NegociosResumenPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\negocios\components\kpi\KPIStripGlobal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\negocios\components\BusinessFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\negocios\components\BusinessMultiPicker.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\negocios\components\BusinessUnitsAssignModal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\detalles\DetallesDatosProp.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\detalles\DetallesIngresosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\detalles\DetallesLayout.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\detalles\DetallesNegociosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\detalles\DetallesProyectosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\detalles\DetallesUnidadesProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\unidades\UnidadesForm.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\unidades\UnidadesListPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\unidades\UnidadesMapaPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\unidades\UnidadesOcupacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\PropiedadesFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\PropiedadesIngresos.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\PropiedadesPanel.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\propiedades\PropiedadesReportes.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\proyectos\ProyectosFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\bancos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\ideas.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\ingresos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\paises.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\properties.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\auth.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\businessCategories.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\businesses.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\catalogoNegocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\index.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\ingresos.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\monthlyProduction.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\negocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\paises.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\api\units.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\components\modals\AddBusinessModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\components\modals\BusinessTypePicker.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\finanzas\components\modals\DepositoModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\negocios\business-detail\pages\NegociosOperacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\negocios\business-detail\pages\NegociosResumenPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\negocios\components\kpi\KPIStripGlobal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessMultiPicker.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessUnitsAssignModal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesDatosProp.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesIngresosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesLayout.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesNegociosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesProyectosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesUnidadesProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesForm.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesListPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesMapaPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesOcupacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIngresos.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesPanel.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesReportes.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\proyectos\ProyectosFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\bancos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\ideas.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\ingresos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\paises.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\properties.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\auth.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\businessCategories.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\businesses.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\catalogoNegocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\index.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\ingresos.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\monthlyProduction.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\negocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\paises.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\units.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\components\modals\AddBusinessModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\components\modals\BusinessTypePicker.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\finanzas\components\modals\DepositoModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\business-detail\pages\NegociosOperacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\business-detail\pages\NegociosResumenPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\kpi\KPIStripGlobal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessMultiPicker.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessUnitsAssignModal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesDatosProp.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesIngresosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesLayout.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesNegociosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesProyectosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesUnidadesProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesForm.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesListPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesMapaPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesOcupacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIngresos.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesPanel.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesReportes.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\proyectos\ProyectosFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\bancos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ideas.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ingresos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\paises.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\properties.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\auth.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\businessCategories.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\businesses.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\catalogoNegocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\index.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\ingresos.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\monthlyProduction.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\negocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\paises.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\units.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\components\modals\AddBusinessModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\components\modals\BusinessTypePicker.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\finanzas\components\modals\DepositoModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\business-detail\pages\NegociosOperacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\business-detail\pages\NegociosResumenPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\kpi\KPIStripGlobal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessMultiPicker.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessUnitsAssignModal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesDatosProp.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesIngresosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesLayout.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesNegociosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesProyectosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesUnidadesProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesForm.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesListPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesMapaPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesOcupacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIngresos.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesPanel.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesReportes.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\proyectos\ProyectosFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\bancos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ideas.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ingresos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\paises.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\properties.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\auth.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\businessCategories.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\businesses.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\catalogoNegocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\index.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\ingresos.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\monthlyProduction.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\negocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\paises.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\units.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\components\modals\AddBusinessModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\components\modals\BusinessTypePicker.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\finanzas\components\modals\DepositoModal.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\kpi\KPIStripGlobal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessMultiPicker.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\negocios\components\BusinessUnitsAssignModal.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesDatosProp.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesIngresosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesLayout.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesNegociosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesProyectosProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\detalles\DetallesUnidadesProp.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesForm.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesListPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesMapaPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\unidades\UnidadesOcupacionPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIndex.jsx
+MATCH: features/corporativo/components/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesIngresos.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesPanel.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\propiedades\PropiedadesReportes.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\proyectos\ProyectosFormPage.jsx
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\bancos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\catalogoNegocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ideas.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ingresos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\paises.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\properties.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\auth.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\businesses.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\catalogoNegocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\index.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\ingresos.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\negocios.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\paises.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\api\units.api.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\bancos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ideas.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\ingresos.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\negocios.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\paises.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\properties.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\store\unidades.store.js
+MATCH: features/corporativo/store/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\Generales.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\PanelNegocios.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\Generales.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\PanelNegocios.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\Generales.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\PanelNegocios.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\Generales.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\_backup_20260328214001\PanelNegocios.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\Generales.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\_backup_20260328214001\PanelNegocios.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\Generales.jsx
+MATCH: features/corporativo/api/
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\_backup_20260328214001\PanelNegocios.jsx
+MATCH: features/corporativo/api/
+

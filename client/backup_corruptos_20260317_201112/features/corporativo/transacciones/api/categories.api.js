@@ -1,0 +1,64 @@
+import http from " @ /services/api/HttpClient.js" ;
+/ * * * Auto descubre el endpoint real de categor ?as probando varias rutas comunes . * Cachea el resultado en memoria para evitar m閻?ltiples intentos. * / let CACHED_PATH = null;
+const CANDIDATES = [ " /api/business categories" , " /api/catalog /categories" , " /api/catalogos/categorias" , " /api/negocios/categorias" , " /api/business/types/categories" , ] ;
+async function discoverPath( )
+{
+if (CACHED_PATH)
+return CACHED_PATH;
+// Permite forzar por ENV si la tienes definida (opcional)
+const forced = (import.meta? .env? .VITE_CATEGORIES_PATH | | " " )
+.trim( )
+.replace ( / \ / + $ / , " " )
+;
+if (forced)
+{
+CACHED_PATH = forced;
+return CACHED_PATH;
+}
+// Prueba GET en las rutas candidatas for (const path of CANDIDATES)
+{
+try {
+const res = await http(path, {
+method: "GET" }
+)
+;
+if (res)
+{
+CACHED_PATH = path;
+return CACHED_PATH;
+}
+}
+catch {
+// ignora y prueba la siguiente }
+}
+// Si ninguna existe, deja la primera para evitar romper imports y lanza error al usarla. CACHED_PATH = CANDIDATES[ 0 ] ;
+return CACHED_PATH;
+}
+export async function listCategories ( )
+{
+const path = await discoverPath( )
+;
+try {
+const r = await http(path)
+;
+return r? .data ? ? r ? ? [ ] ;
+}
+catch (err)
+{
+console .error( "No se pudo listar categor ?as: " , err)
+;
+return [ ] ;
+// no reventar la UI }
+}
+export async function createBusinessCategory(nombre)
+{
+const path = await discoverPath( )
+;
+const r = await http(path, {
+method: "POST" , body: {
+nombre }
+, }
+)
+;
+return r? .data ? ? r;
+}

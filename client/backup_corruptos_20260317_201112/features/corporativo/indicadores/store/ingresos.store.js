@@ -1,0 +1,159 @@
+// client/src/features/corporativo/indicadores/store/ingresos.store.js import {
+create }
+from "zustand " ;
+import {
+getIngresos, getIngresoById , createIngreso, updateIngreso, deleteIngreso }
+from " . . /api/ingresos.api.js" ;
+export const useIngresosStore = create( (set, get)
+= > ( {
+items: [ ] , total: 0 , loading : false, error: null, selectedIngreso: null, async loadIngresos(params = {
+}
+)
+{
+set( {
+loading : true, error: null }
+)
+;
+try {
+const data = await getIngresos(params)
+;
+set( {
+items: data.items | | [ ] , total: data.total | | 0 , loading : false }
+)
+;
+return data;
+}
+catch (error)
+{
+set( {
+loading : false, error: error? .message | | "Error cargando ingresos" }
+)
+;
+throw error;
+}
+}
+, async loadIngresoById(id)
+{
+set( {
+loading : true, error: null }
+)
+;
+try {
+const data = await getIngresoById (id)
+;
+set( {
+selectedIngreso: data.item | | data, loading : false }
+)
+;
+return data;
+}
+catch (error)
+{
+set( {
+loading : false, error: error? .message | | "Error cargando ingreso " }
+)
+;
+throw error;
+}
+}
+, async createIngreso(payload )
+{
+set( {
+loading : true, error: null }
+)
+;
+try {
+const data = await createIngreso(payload )
+;
+await get( )
+.loadIngresos( )
+;
+set( {
+loading : false }
+)
+;
+return data;
+}
+catch (error)
+{
+set( {
+loading : false, error: error? .message | | "Error creando ingreso " }
+)
+;
+throw error;
+}
+}
+, async updateIngreso(id, payload )
+{
+set( {
+loading : true, error: null }
+)
+;
+try {
+const data = await updateIngreso(id, payload )
+;
+await get( )
+.loadIngresos( )
+;
+set( {
+loading : false }
+)
+;
+return data;
+}
+catch (error)
+{
+set( {
+loading : false, error: error? .message | | "Error actualizando ingreso " }
+)
+;
+throw error;
+}
+}
+, async deleteIngreso(id)
+{
+set( {
+loading : true, error: null }
+)
+;
+try {
+await deleteIngreso(id)
+;
+await get( )
+.loadIngresos( )
+;
+set( {
+loading : false }
+)
+;
+return {
+success : true }
+;
+}
+catch (error)
+{
+set( {
+loading : false, error: error? .message | | "Error eliminando ingreso " }
+)
+;
+throw error;
+}
+}
+, clearSelected( )
+{
+set( {
+selectedIngreso: null }
+)
+;
+}
+, clearError( )
+{
+set( {
+error: null }
+)
+;
+}
+}
+)
+)
+;

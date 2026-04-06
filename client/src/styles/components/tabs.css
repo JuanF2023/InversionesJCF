@@ -1,0 +1,80 @@
+/* =========================
+   Tabs estilo línea inferior
+   ========================= */
+
+/* Contenedor opcional para dar separación/linea base del grupo */
+.tabbar {
+    display: flex;
+    align-items: flex-end;
+    gap: .5rem;
+    border-bottom: 1px solid var(--border, rgba(0, 0, 0, .08));
+    padding-bottom: .25rem;
+}
+
+/* Link base */
+.tabline {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 0;
+    color: color-mix(in srgb, var(--text) 88%, transparent);
+    text-decoration: none;
+    transition: color .15s ease;
+    outline: none;
+}
+
+/* Indicador (subrayado) */
+.tabline::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: -2px;
+    height: 2px;
+    background: transparent;
+    border-radius: 999px;
+    transition: background-color .15s ease, opacity .15s ease, width .15s ease;
+}
+
+/* Hover */
+.tabline:hover {
+    color: var(--text);
+}
+
+.tabline:hover::after {
+    background: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+/* ACTIVO (dos variantes por compatibilidad)
+     - React Router añade aria-current="page" cuando está activo
+     - Además añadimos la clase .active desde 
+  */
+.tabline.active,
+a[aria-current="page"].tabline {
+    color: var(--text);
+}
+
+.tabline.active::after,
+a[aria-current="page"].tabline::after {
+    background: var(--accent);
+}
+
+/* Muted cuando NO está activo */
+.tabline--muted {
+    color: color-mix(in srgb, var(--text) 75%, transparent);
+}
+
+/* Accesibilidad: focus visible en el enlace (no en la línea) */
+.tabline:focus-visible {
+    box-shadow: inset 0 -2px 0 0 color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
+/* Tamaños de icono dentro de los tabs */
+.tabline>svg {
+    width: 15px;
+    height: 15px;
+    opacity: .85;
+}

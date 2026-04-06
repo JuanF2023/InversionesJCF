@@ -1,0 +1,90 @@
+/* client/src/styles/global/forms.css */
+
+/* ----------------------------------------------------
+   Form Typography Standard (Enterprise)
+   - Unifica labels, hints, errores y tipografía
+   - Aplica también a labels que NO usen .form-label,
+     siempre que estén dentro de .form-page
+---------------------------------------------------- */
+
+@layer base {
+    :root {
+        --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+            Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        --fs-11: 11px;
+        --fs-12: 12px;
+        --fs-13: 13px;
+        --fs-14: 14px;
+        --lh-tight: 1.15;
+        --lh-normal: 1.35;
+    }
+}
+
+@layer components {
+
+    /* Scope: todas las pantallas de formularios deben usar .form-page */
+    .form-page,
+    .form-page * {
+        font-family: var(--font-sans);
+    }
+
+    .form-page-desc {
+        font-size: var(--fs-13);
+        line-height: var(--lh-normal);
+        opacity: 0.82;
+    }
+
+    /* Labels estándar */
+    .form-label {
+        display: block;
+        font-size: var(--fs-12);
+        line-height: var(--lh-tight);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        opacity: 0.78;
+        margin-bottom: 6px;
+    }
+
+    /* Fallback: si alguien usa <label> sin className, igual se uniforma */
+    .form-page label:not(.sr-only):not(.form-label) {
+        display: block;
+        font-size: var(--fs-12);
+        line-height: var(--lh-tight);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        opacity: 0.78;
+        margin-bottom: 6px;
+    }
+
+    .form-hint {
+        font-size: var(--fs-11);
+        line-height: var(--lh-normal);
+        opacity: 0.72;
+        margin-top: 6px;
+    }
+
+    .form-error {
+        font-size: var(--fs-11);
+        line-height: var(--lh-normal);
+        color: rgb(239 68 68);
+        margin-top: 6px;
+    }
+
+    /* Tipografía uniforme inputs/select/textarea */
+    .neo-input,
+    .neo-select,
+    .neo-textarea {
+        font-size: var(--fs-14);
+        line-height: var(--lh-normal);
+    }
+
+    .neo-select {
+        appearance: none;
+    }
+
+    .neo-textarea {
+        resize: vertical;
+    }
+}

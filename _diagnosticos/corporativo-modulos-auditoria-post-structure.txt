@@ -1,0 +1,268 @@
+﻿==================================================
+AUDITORIA POST-STRUCTURE - MODULOS CORPORATIVO
+Fecha: 2026-03-28 23:42:20
+Ruta: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo
+==================================================
+
+
+--------------------------------------------------
+MODULO: access
+--------------------------------------------------
++-- api
+|   +-- memberships.api.js
+|   +-- permissions.api.js
+|   +-- roles.api.js
+|   +-- sessions.api.js
+|   \-- users.api.js
++-- components
+|   +-- forms
+|   |   +-- ChangePinForm.jsx
+|   |   +-- MembershipForm.jsx
+|   |   +-- RoleForm.jsx
+|   |   \-- UserForm.jsx
+|   +-- layout
+|   |   +-- AccessHeader.jsx
+|   |   +-- AccessLayout.jsx
+|   |   \-- AccessStats.jsx
+|   +-- modals
+|   |   +-- ChangePinModal.jsx
+|   |   +-- DeleteUserModal.jsx
+|   |   +-- MembershipModal.jsx
+|   |   \-- UserStatusModal.jsx
+|   +-- permissions
+|   |   +-- PermissionCard.jsx
+|   |   +-- PermissionsFilters.jsx
+|   |   \-- PermissionsGrid.jsx
+|   \-- roles
+|       +-- RoleCard.jsx
+|       +-- RolesGrid.jsx
+|       \-- RoleStatsCard.jsx
++-- constants
+|   +-- accessTabs.constants.js
+|   +-- roleOptions.constants.js
+|   \-- userStatus.constants.js
++-- hooks
+|   +-- useMembershipActions.js
+|   +-- useSelectedUser.js
+|   \-- useUsersFilters.js
++-- pages
+|   +-- PermissionsPage.jsx
+|   +-- RolesPage.jsx
+|   +-- UserCreatePage.jsx
+|   +-- UserDetailPage.jsx
+|   +-- UserEditPage.jsx
+|   \-- UsersPage.jsx
++-- permissions
++-- roles
++-- store
+|   +-- accessMemberships.store.js
+|   +-- accessPermissions.store.js
+|   +-- accessRoles.store.js
+|   +-- accessSessions.store.js
+|   \-- accessUsers.store.js
++-- users
+|   \-- components
+|       +-- CompleteAccessModal.jsx
+|       \-- UsersTable.jsx
++-- utils
+|   +-- accessFormatters.js
+|   +-- accessMappers.js
+|   \-- accessValidators.js
+\-- index.js
+
+
+--------------------------------------------------
+MODULO: catalogos
+--------------------------------------------------
++-- api
+|   +-- countries.api.js
+|   \-- paises.api.js
++-- components
+|   \-- ClasificacionCards.jsx
++-- pages
+\-- store
+    \-- paises.store.js
+
+
+--------------------------------------------------
+MODULO: dashboards
+--------------------------------------------------
++-- components
+|   +-- DashboardsLayout.jsx
+|   +-- PanelIndicadores.jsx
+|   +-- PanelInformes.jsx
+|   +-- PanelNegocios.jsx
+|   +-- PanelPropiedades.jsx
+|   +-- PanelProyectos.jsx
+|   \-- PanelTransacciones.jsx
+\-- pages
+    +-- AcercaDePage.jsx
+    +-- FilosofiaDeDarPage.jsx
+    +-- GeneralesPage.jsx
+    +-- PanelNegociosPage.jsx
+    \-- PorHacerPage.jsx
+
+
+--------------------------------------------------
+MODULO: finanzas
+--------------------------------------------------
++-- components
+|   \-- modals
+|       \-- DepositoModal.jsx
+\-- pages
+
+
+--------------------------------------------------
+MODULO: ideas
+--------------------------------------------------
++-- api
+|   \-- ideas.api.js
++-- components
+|   \-- modals
+|       \-- IdeasModal.jsx
+\-- pages
+
+
+--------------------------------------------------
+MODULO: indicadores
+--------------------------------------------------
++-- api
+|   +-- ingresos.api.js
+|   \-- monthlyProduction.api.js
++-- hooks
+|   \-- useIndicadoresData.js
++-- pages
+|   +-- IndicadoresComparativosPage.jsx
+|   +-- IndicadoresLayout.jsx
+|   +-- IndicadoresPanelPage.jsx
+|   \-- IndicadoresProyeccionesPage.jsx
+\-- store
+    \-- ingresos.store.js
+
+
+--------------------------------------------------
+MODULO: informes
+--------------------------------------------------
++-- hooks
+|   \-- useInformesData.js
+\-- pages
+    +-- InformesExportarPage.jsx
+    +-- InformesLayout.jsx
+    +-- InformesResumenPage.jsx
+    \-- InformesTablasPage.jsx
+
+
+--------------------------------------------------
+MODULO: layout
+--------------------------------------------------
+\-- CorporativoLayout.jsx
+
+
+--------------------------------------------------
+MODULO: negocios
+--------------------------------------------------
++-- api
+|   +-- businessCategories.api.js
+|   +-- businesses.api.js
+|   +-- businessesSummary.api.js
+|   +-- businessesTypes.api.js
+|   +-- businessTypes.api.js
+|   +-- catalogoNegocios.api.js
+|   \-- negocios.api.js
++-- components
+|   +-- business-detail
+|   |   +-- BusinessLayout.jsx
+|   |   \-- BusinessOverview.jsx
+|   +-- kpi
+|   |   \-- KPIStripGlobal.jsx
+|   +-- BusinessMultiPicker.jsx
+|   +-- BusinessSelectBar.jsx
+|   +-- BusinessUnitsAssignModal.jsx
+|   \-- NegociosLayout.jsx
++-- hooks
++-- pages
+|   +-- BusinessFormPage.jsx
+|   +-- NegociosConfiguracionPage.jsx
+|   +-- NegociosFinanzasPage.jsx
+|   +-- NegociosOperacionPage.jsx
+|   +-- NegociosResumenPage.jsx
+|   \-- NegociosUnidadesPage.jsx
+\-- store
+    \-- negocios.store.js
+
+
+--------------------------------------------------
+MODULO: propiedades
+--------------------------------------------------
++-- api
+|   +-- properties.api.js
+|   \-- units.api.js
++-- components
+|   +-- detalles
+|   |   +-- DetallesDatosProp.jsx
+|   |   +-- DetallesHistorialProp.jsx
+|   |   +-- DetallesIngresosProp.jsx
+|   |   +-- DetallesLayout.jsx
+|   |   +-- DetallesNegociosProp.jsx
+|   |   +-- DetallesProyectosProp.jsx
+|   |   \-- DetallesUnidadesProp.jsx
+|   \-- unidades
+|       +-- UnidadesForm.jsx
+|       \-- UnidadesLayout.jsx
++-- pages
+|   +-- PropiedadesFormPage.jsx
+|   +-- PropiedadesIndex.jsx
+|   +-- PropiedadesIngresos.jsx
+|   +-- PropiedadesLayout.jsx
+|   +-- PropiedadesPanel.jsx
+|   +-- PropiedadesReportes.jsx
+|   +-- UnidadesListPage.jsx
+|   +-- UnidadesMapaPage.jsx
+|   \-- UnidadesOcupacionPage.jsx
+\-- store
+    +-- properties.store.js
+    \-- units.store.js
+
+
+--------------------------------------------------
+MODULO: proyectos
+--------------------------------------------------
++-- api
+|   \-- projects.api.js
+\-- pages
+    +-- Proyectos.jsx
+    +-- ProyectosDetailsPage.jsx
+    +-- ProyectosFormPage.jsx
+    +-- ProyectosLayout.jsx
+    \-- ProyectosListPage.jsx
+
+
+--------------------------------------------------
+MODULO: transacciones
+--------------------------------------------------
++-- api
+|   +-- banks.api.js
+|   +-- categories.api.js
+|   +-- fields.api.js
+|   +-- movements.api.js
+|   \-- transactions.api.js
++-- components
+|   +-- TransactionsFilters.jsx
+|   +-- TransactionsTable.jsx
+|   +-- TransactionsToolbar.jsx
+|   \-- TransactionsTypeSelector.jsx
+\-- pages
+    +-- TransaccionesFormPage.jsx
+    +-- TransaccionesLayout.jsx
+    +-- TransaccionesListPage.jsx
+    \-- TransaccionesReportesPage.jsx
+
+
+--------------------------------------------------
+MODULO: ui
+--------------------------------------------------
++-- navigation
+|   \-- RouteTabs.jsx
+\-- primitives
+    \-- AddAction.jsx
+

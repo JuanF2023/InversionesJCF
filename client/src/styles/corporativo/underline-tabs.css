@@ -1,0 +1,243 @@
+/* client/src/styles/components/corporativo/underline-tabs.css */
+/* ==========================================================================
+   Tabs & Subtabs — Active = ONLY a thick underline
+   - Sin box-shadow, sin bordes, sin pastillas.
+   - Hover no usa subrayado (solo leve cambio de color).
+   - Funciona con NavLink (aria-current="page") o clase .active.
+   - No se corta el underline (overflow visible en el contenedor).
+   ========================================================================== */
+
+/* Contenedores frecuentes (por si el layout los usa) */
+.tabbar,
+.route-tabs,
+.subnav,
+.subnav-bar {
+    position: relative;
+    display: flex;
+    gap: .25rem;
+    flex-wrap: wrap;
+    overflow: visible;
+    /* evita que se corte el underline */
+    padding-bottom: 6px;
+    /* espacio para el grosor del underline */
+}
+
+/* ── Nivel 1 / RouteTabs (menú de segundo nivel) ─────────────────────────── */
+.tabline {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: 40px;
+    padding: 0 10px;
+    border: 0;
+    background: transparent;
+    color: color-mix(in oklab, var(--text) 85%, var(--accent) 15%);
+    font-weight: 600;
+    border-radius: 0;
+    /* sin pastilla */
+    box-shadow: none;
+    /* sin luz alrededor */
+    transition: color .18s ease, filter .18s ease;
+}
+
+/* Ícono opcional dentro de la tab */
+.tabline .tab-icon {
+    opacity: .8;
+    transform: translateY(0);
+    transition: opacity .18s ease, transform .18s ease;
+}
+
+.tabline:hover .tab-icon {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* Hover sin underline (solo ajuste sutil de color) */
+.tabline:hover,
+.tabline:focus-visible {
+    color: var(--text);
+    filter: saturate(1.02);
+    outline: none;
+}
+
+/* Línea inferior oculta por defecto */
+.tabline::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: -4px;
+    /* despega un poco del texto */
+    height: 3px;
+    /* ── subrayado grueso ── */
+    border-radius: 999px;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+    opacity: 0;
+    transition: transform .22s ease, opacity .22s ease;
+}
+
+/* Activo = SOLO underline grueso */
+.tabline.active::after,
+.tabline[aria-current="page"]::after,
+a[aria-current="page"].tabline::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+/* Color del texto en activo (sin fondos/bordes) */
+.tabline.active,
+.tabline[aria-current="page"],
+a[aria-current="page"].tabline {
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+/* Atenuar no activos (opcional) */
+.tabline--muted {
+    color: color-mix(in oklab, var(--text) 72%, transparent);
+}
+
+/* Tamaños opcionales (si los usas como niveles jerárquicos) */
+.tabline--l1 {
+    font-weight: 700;
+}
+
+.tabline--l2 {
+    font-weight: 600;
+}
+
+.tabline--l3 {
+    font-weight: 500;
+}
+
+/* ── Nivel 2 / QueryTabs (submenús planos) ───────────────────────────────── */
+.subnav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 36px;
+    padding: 0 6px;
+    border: 0;
+    background: transparent;
+    color: color-mix(in oklab, var(--text) 85%, var(--accent) 15%);
+    font-weight: 600;
+    border-radius: 0;
+    box-shadow: none;
+    transition: color .18s ease, filter .18s ease;
+}
+
+/* Hover sin underline en subnav */
+.subnav-link:hover,
+.subnav-link:focus-visible {
+    color: var(--text);
+    filter: saturate(1.02);
+    outline: none;
+}
+
+/* Línea inferior oculta */
+.subnav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 3px;
+    /* ── subrayado grueso ── */
+    border-radius: 999px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+/* Activo en subnav = solo underline grueso */
+.subnav-link[aria-current="page"]::after,
+.subnav-link.subnav-link--active::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+/* Texto activo (sin halos/bordes) */
+.subnav-link[aria-current="page"],
+.subnav-link.subnav-link--active {
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+/* Contenedor del subnav (por si se usa otra clase) */
+.subnav,
+.subnav-bar {
+    gap: .35rem;
+    padding-bottom: 6px;
+    /* espacio para el underline */
+    overflow: visible;
+}
+
+/* ── Accesibilidad: focus claro sin alterar layout ───────────────────────── */
+.tabline:focus-visible,
+.subnav-link:focus-visible {
+    outline: none;
+    text-decoration: none;
+    /* no usamos box-shadow para evitar halo; mantenemos solo cambio de color */
+}
+
+/* ── Compatibilidad con NavLink antiguos que usaban .nav-item ─────────────── */
+/* Si todavía hay elementos con .nav-item, les aplicamos las mismas reglas */
+.nav-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: 40px;
+    padding: 0 10px;
+    color: color-mix(in oklab, var(--text) 85%, var(--accent) 15%);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transition: color .18s ease, filter .18s ease;
+}
+
+.nav-item:hover,
+.nav-item:focus-visible {
+    color: var(--text);
+    filter: saturate(1.02);
+}
+
+.nav-item::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: -4px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+    opacity: 0;
+    transition: transform .22s ease, opacity .22s ease;
+}
+
+.nav-item[aria-current="page"]::after,
+.nav-item.active::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+.nav-item[aria-current="page"],
+.nav-item.active {
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}

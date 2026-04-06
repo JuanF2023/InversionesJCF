@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var sysDark =
+          window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var t = stored || (sysDark ? 'neo-ocean' : 'neo-fog');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { }
+    })();
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inversiones JCF</title>
+</head>
+
+<body>
+  <!-- 馃敟 CONTENEDOR DE TOASTS (NECESARIO PARA SEPARARLOS) -->
+  <div id="toast-container" style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 99999;
+        pointer-events: none;
+      "></div>
+
+  <div id="root"></div>
+  <script type="module" src="/src/app/main.jsx"></script>
+</body>
+
+</html>

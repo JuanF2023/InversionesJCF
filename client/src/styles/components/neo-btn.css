@@ -1,0 +1,188 @@
+/* client/src/styles/components/neo-btn.css */
+
+/* =========================================================
+   Botones (enterprise)
+   - btn-gradient: primario con gradiente
+   - btn-tonal: secundario tonal
+   - icon-btn: botón icon-only
+   - btn-action: capa de highlight (shimmer base)
+   - btn-shimmer: shimmer animado
+   ========================================================= */
+
+:root {
+    --ctl-h: 42px;
+    --ctl-r: 18px;
+    --ctl-px: 14px;
+    --ctl-gap: .5rem;
+    --ctl-fs: 14px;
+}
+
+.control-md {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ctl-gap);
+    height: var(--ctl-h);
+    border-radius: var(--ctl-r);
+    padding: 0 var(--ctl-px);
+    font-size: var(--ctl-fs);
+}
+
+.btn-gradient {
+    --g1: color-mix(in oklab, var(--accent), #fff 14%);
+    --g2: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ctl-gap);
+    height: var(--ctl-h);
+    border-radius: var(--ctl-r);
+    padding: 0 var(--ctl-px);
+    font-size: var(--ctl-fs);
+    font-weight: 700;
+    background: linear-gradient(180deg, var(--g1), var(--g2));
+    color: var(--btn-fg-contrast, #fff);
+    border: 1px solid color-mix(in oklab, var(--accent), #fff 60%);
+    box-shadow:
+        -4px -4px 10px color-mix(in oklab, #fff 75%, var(--accent) 25%),
+        6px 6px 14px color-mix(in oklab, var(--accent) 25%, #000 75%);
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-1px);
+    filter: saturate(1.06) brightness(1.02);
+    box-shadow:
+        -6px -6px 14px color-mix(in oklab, #fff 78%, var(--accent) 22%),
+        8px 8px 18px color-mix(in oklab, var(--accent) 22%, #000 78%);
+}
+
+.btn-gradient:active {
+    transform: translateY(0);
+    box-shadow: var(--in);
+}
+
+.btn-gradient .btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-tonal {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: var(--ctl-h);
+    border-radius: var(--ctl-r);
+    padding: 0 var(--ctl-px);
+    font-size: var(--ctl-fs);
+    font-weight: 700;
+    background: color-mix(in oklab, var(--accent) 12%, var(--panel));
+    color: var(--btn-tonal-fg, var(--btn-fg, var(--text)));
+    border: 1px solid color-mix(in oklab, var(--accent) 45%, var(--border));
+    box-shadow: var(--out);
+    transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
+
+.btn-tonal:hover {
+    filter: saturate(1.05) brightness(1.02);
+    box-shadow:
+        -8px -8px 16px rgba(255, 255, 255, .92),
+        8px 8px 16px rgba(0, 0, 0, .12);
+}
+
+.btn-tonal:active {
+    transform: translateY(1px);
+    box-shadow: var(--in);
+}
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    box-shadow: var(--out);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+
+.icon-btn:hover {
+    filter: saturate(1.02);
+    box-shadow:
+        -8px -8px 16px rgba(255, 255, 255, .92),
+        8px 8px 16px rgba(0, 0, 0, .12);
+}
+
+.icon-btn:active {
+    transform: translateY(1px);
+    box-shadow: var(--in);
+}
+
+/* Capa visual para brillo diagonal al hover */
+.btn-action {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.btn-action::before {
+    content: "";
+    position: absolute;
+    inset: -60% -40% auto auto;
+    width: 120%;
+    height: 220%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, .28), transparent 35%);
+    transform: translateX(-140%) rotate(-18deg);
+    transition: transform .6s ease;
+    pointer-events: none;
+}
+
+.btn-action:hover::before {
+    transform: translateX(-10%) rotate(-18deg);
+}
+
+/* Shimmer animado */
+.btn-shimmer {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+@keyframes shimmer-move {
+    0% {
+        transform: translateX(-120%) rotate(18deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    60% {
+        transform: translateX(120%) rotate(18deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(120%) rotate(18deg);
+        opacity: 0;
+    }
+}
+
+.btn-shimmer::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    bottom: -50%;
+    left: -60%;
+    width: 80%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, .7) 0%, rgba(255, 255, 255, .35) 40%, transparent 100%);
+    transform: translateX(-120%) rotate(18deg);
+    animation: shimmer-move 2.6s infinite;
+    pointer-events: none;
+}
+
+.btn-shimmer:hover::after {
+    animation-play-state: paused;
+    opacity: 0;
+}

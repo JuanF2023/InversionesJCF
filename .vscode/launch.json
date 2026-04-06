@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Run All (Client + Server)",
+      "configurations": ["Server", "Client"]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Server",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Client",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}/client"
+    }
+  ]
+}

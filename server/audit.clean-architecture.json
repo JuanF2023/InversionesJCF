@@ -1,0 +1,275 @@
+﻿{
+    "root":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server",
+    "when":  "2025-12-30T21:02:46",
+    "modules":  [
+                    "auth",
+                    "corporativo",
+                    "restaurante"
+                ],
+    "counts":  {
+                   "errors":  32,
+                   "warnings":  5,
+                   "total":  37
+               },
+    "findings":  [
+                     {
+                         "type":  "structure.missingLayer",
+                         "severity":  "warning",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth",
+                         "detail":  "Falta capa \u0027domain\u0027 en m贸dulo \u0027auth\u0027.",
+                         "hint":  "Crea: src/modules/auth/domain (aunque est茅 vac铆o al inicio)."
+                     },
+                     {
+                         "type":  "structure.missingLayer",
+                         "severity":  "warning",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\restaurante",
+                         "detail":  "Falta capa \u0027domain\u0027 en m贸dulo \u0027restaurante\u0027.",
+                         "hint":  "Crea: src/modules/restaurante/domain (aunque est茅 vac铆o al inicio)."
+                     },
+                     {
+                         "type":  "structure.missingLayer",
+                         "severity":  "warning",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\restaurante",
+                         "detail":  "Falta capa \u0027application\u0027 en m贸dulo \u0027restaurante\u0027.",
+                         "hint":  "Crea: src/modules/restaurante/application (aunque est茅 vac铆o al inicio)."
+                     },
+                     {
+                         "type":  "structure.missingLayer",
+                         "severity":  "warning",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\restaurante",
+                         "detail":  "Falta capa \u0027infrastructure\u0027 en m贸dulo \u0027restaurante\u0027.",
+                         "hint":  "Crea: src/modules/restaurante/infrastructure (aunque est茅 vac铆o al inicio)."
+                     },
+                     {
+                         "type":  "structure.missingLayer",
+                         "severity":  "warning",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\restaurante",
+                         "detail":  "Falta capa \u0027interface\u0027 en m贸dulo \u0027restaurante\u0027.",
+                         "hint":  "Crea: src/modules/restaurante/interface (aunque est茅 vac铆o al inicio)."
+                     },
+                     {
+                         "type":  "imports.applicationToInfrastructure",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth\\application\\services\\auth.service.js",
+                         "detail":  "application importa infrastructure: \u0027#modules/auth/infrastructure/repositories/user.repository.js\u0027",
+                         "hint":  "Arregla con inyecci贸n: el controller arma repo (infra) y pasa al use case (application)."
+                     },
+                     {
+                         "type":  "imports.applicationToInfrastructure",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth\\application\\services\\auth.service.js",
+                         "detail":  "application importa infrastructure: \u0027#modules/auth/infrastructure/repositories/session.repository.js\u0027",
+                         "hint":  "Arregla con inyecci贸n: el controller arma repo (infra) y pasa al use case (application)."
+                     },
+                     {
+                         "type":  "imports.applicationToInfrastructure",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth\\application\\use-cases\\sessions\\forceCloseSession.usecase.js",
+                         "detail":  "application importa infrastructure: \u0027#modules/auth/infrastructure/repositories/session.repository.js\u0027",
+                         "hint":  "Arregla con inyecci贸n: el controller arma repo (infra) y pasa al use case (application)."
+                     },
+                     {
+                         "type":  "imports.applicationToInfrastructure",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth\\application\\use-cases\\sessions\\getActiveSessionsStatus.usecase.js",
+                         "detail":  "application importa infrastructure: \u0027#modules/auth/infrastructure/repositories/session.repository.js\u0027",
+                         "hint":  "Arregla con inyecci贸n: el controller arma repo (infra) y pasa al use case (application)."
+                     },
+                     {
+                         "type":  "imports.applicationToInfrastructure",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth\\application\\use-cases\\sessions\\toggleBreak.usecase.js",
+                         "detail":  "application importa infrastructure: \u0027#modules/auth/infrastructure/repositories/session.repository.js\u0027",
+                         "hint":  "Arregla con inyecci贸n: el controller arma repo (infra) y pasa al use case (application)."
+                     },
+                     {
+                         "type":  "imports.applicationToInfrastructure",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth\\application\\use-cases\\sessions\\verifySession.usecase.js",
+                         "detail":  "application importa infrastructure: \u0027#modules/auth/infrastructure/repositories/session.repository.js\u0027",
+                         "hint":  "Arregla con inyecci贸n: el controller arma repo (infra) y pasa al use case (application)."
+                     },
+                     {
+                         "type":  "imports.applicationToInfrastructure",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\auth\\application\\use-cases\\sessions\\verifySession.usecase.js",
+                         "detail":  "application importa infrastructure: \u0027#modules/auth/infrastructure/repositories/user.repository.js\u0027",
+                         "hint":  "Arregla con inyecci贸n: el controller arma repo (infra) y pasa al use case (application)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\audits.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../../models/audits.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\auth.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../../models/sessions.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\auth.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../../models/users.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\businessTypes.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../../models/businessTypes.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\countries.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../mongoose/models/countries.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\monthlyProduction.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../orm/idea.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\permissions.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../../models/permissions.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\roles.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../../models/roles.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\infrastructure\\repositories\\tenants.repository.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/infrastructure/repositories/../../models/tenants.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\audit.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../services/audits.service.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\banks.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../models/banks.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\business.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../services/businessTypes.service.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\businessCategories.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../models/businessCategories.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\businessCategories.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../models/businessTypes.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\businessSummary.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../models/business.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\businessTypes.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../services/businessTypes.service.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\catalog.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../models/TxnCategory.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\catalog.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../models/TxnConcept.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\catalogs.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../infrastructure/repositories/countries.repository.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\catalogs.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../application/usecases/listCountries.usecase.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\permissions.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../services/permissions.service.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\roles.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../services/roles.service.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\tenants.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../services/tenants.service.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\controllers\\users.controller.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/controllers/../../../models/users.model.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     },
+                     {
+                         "type":  "imports.invalidAliasTraversal",
+                         "severity":  "error",
+                         "file":  "C:\\Users\\Administrator\\OneDrive\\InversionesJCF\\InversionesJCF\\server\\src\\modules\\corporativo\\interface\\http\\routes\\units.routes.js",
+                         "detail":  "Import inv谩lido: \u0027#modules/corporativo/interface/http/routes/../middlewares/auth.middleware.js\u0027 (alias #modules con ../)",
+                         "hint":  "Corrige a ruta directa: \u0027#modules/\u003cmodulo\u003e/interface/http/controllers/\u003cfile\u003e.js\u0027 (sin ../)."
+                     }
+                 ]
+}

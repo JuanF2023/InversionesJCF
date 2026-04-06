@@ -1,0 +1,276 @@
+﻿FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\app\App.jsx
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\app\App.jsx
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\app\App.jsx
+MATCH: clearSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\app\App.jsx
+MATCH: isTokenValid
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\api\HttpClient.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\api\HttpClient.js
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\api\HttpClient.js
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\api\HttpClient.js
+MATCH: clearSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\security\ProtectedRoute.jsx
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\security\ProtectedRoute.jsx
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\security\ProtectedRoute.jsx
+MATCH: isTokenValid
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\security\SessionWatcher.jsx
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\security\SessionWatcher.jsx
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\security\SessionWatcher.jsx
+MATCH: clearSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\security\SessionWatcher.jsx
+MATCH: isTokenValid
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\authSession.js
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\authSession.js
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\authSession.js
+MATCH: clearSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\authSession.js
+MATCH: isTokenValid
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\authSession.js
+MATCH: resolveHomePath
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\authSession.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\idleLogout.js
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\core\utils\idleLogout.js
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\api\auth.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\hooks\useLoginFlow.js
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\hooks\useLoginFlow.js
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\hooks\useLoginFlow.js
+MATCH: clearSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\hooks\useLoginFlow.js
+MATCH: isTokenValid
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\hooks\useLoginFlow.js
+MATCH: resolveHomePath
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\hooks\useLoginFlow.js
+MATCH: toast-container
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\modals\LogoutConfirmModal.jsx
+MATCH: ConfirmModal
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\pages\LoginPage.jsx
+MATCH: ConfirmModal
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\store\auth.store.js
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\store\auth.store.js
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\store\auth.store.js
+MATCH: clearSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\store\auth.store.js
+MATCH: isTokenValid
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\store\auth.store.js
+MATCH: resolveHomePath
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\auth\store\auth.store.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\api\users.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\layout\AccessLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\layout\AccessLayout.jsx
+MATCH: AddAction
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\store\accessUsers.store.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\api\countries.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\api\paises.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\store\paises.store.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\GeneralesPage.jsx
+MATCH: ConfirmModal
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\PanelNegociosPage.jsx
+MATCH: ConfirmModal
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\DashboardsLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas\api\ideas.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\api\ingresos.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\hooks\useIndicadoresData.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\store\ingresos.store.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\IndicadoresLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\IndicadoresPanelPage.jsx
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\hooks\useInformesData.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\InformesLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\layout\CorporativoLayout.jsx
+MATCH: authSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\layout\CorporativoLayout.jsx
+MATCH: loadSession
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businessCategories.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businesses.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businessesTypes.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businessTypes.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\catalogoNegocios.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\negocios.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\business-detail\BusinessLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\business-detail\BusinessLayout.jsx
+MATCH: AddAction
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\store\negocios.store.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\NegociosLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\NegociosLayout.jsx
+MATCH: AddAction
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\api\properties.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\api\units.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesDatosProp.jsx
+MATCH: ConfirmModal
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesLayout.jsx
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\store\properties.store.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\store\units.store.js
+MATCH: use.*Data
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesLayout.jsx
+MATCH: AddAction
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesPanel.jsx
+MATCH: use.*Filters
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\ProyectosLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\ProyectosLayout.jsx
+MATCH: AddAction
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\banks.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\categories.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\fields.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\transactions.api.js
+MATCH: HttpClient
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\TransaccionesLayout.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\TransaccionesLayout.jsx
+MATCH: AddAction
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui\navigation\RouteTabs.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui\primitives\AddAction.jsx
+MATCH: AddAction
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\shared\components\ui\navigation\RouteTabs.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\shared\layout\UserMenu.jsx
+MATCH: RouteTabs
+
+FILE: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\shared\ui\modals\ConfirmModal.jsx
+MATCH: ConfirmModal
+

@@ -1,0 +1,411 @@
+﻿==================================================
+ARBOL FRONTEND CORPORATIVO
+Fecha: 2026-03-28 23:04:23
+Ruta: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo
+==================================================
+
+corporativo
++-- access
+|   +-- api
+|   |   +-- memberships.api.js
+|   |   +-- permissions.api.js
+|   |   +-- roles.api.js
+|   |   +-- sessions.api.js
+|   |   \-- users.api.js
+|   +-- components
+|   |   +-- forms
+|   |   |   +-- ChangePinForm.jsx
+|   |   |   +-- MembershipForm.jsx
+|   |   |   +-- RoleForm.jsx
+|   |   |   \-- UserForm.jsx
+|   |   +-- layout
+|   |   |   +-- AccessHeader.jsx
+|   |   |   +-- AccessLayout.jsx
+|   |   |   \-- AccessStats.jsx
+|   |   +-- modals
+|   |   |   +-- ChangePinModal.jsx
+|   |   |   +-- DeleteUserModal.jsx
+|   |   |   +-- MembershipModal.jsx
+|   |   |   \-- UserStatusModal.jsx
+|   |   +-- permissions
+|   |   |   +-- PermissionCard.jsx
+|   |   |   +-- PermissionsFilters.jsx
+|   |   |   \-- PermissionsGrid.jsx
+|   |   \-- roles
+|   |       +-- RoleCard.jsx
+|   |       +-- RolesGrid.jsx
+|   |       \-- RoleStatsCard.jsx
+|   +-- constants
+|   |   +-- accessTabs.constants.js
+|   |   +-- roleOptions.constants.js
+|   |   \-- userStatus.constants.js
+|   +-- hooks
+|   |   +-- useMembershipActions.js
+|   |   +-- useSelectedUser.js
+|   |   \-- useUsersFilters.js
+|   +-- permissions
+|   |   \-- PermissionsPage.jsx
+|   +-- roles
+|   |   \-- RolesPage.jsx
+|   +-- store
+|   |   +-- accessMemberships.store.js
+|   |   +-- accessPermissions.store.js
+|   |   +-- accessRoles.store.js
+|   |   +-- accessSessions.store.js
+|   |   \-- accessUsers.store.js
+|   +-- users
+|   |   +-- components
+|   |   |   +-- CompleteAccessModal.jsx
+|   |   |   \-- UsersTable.jsx
+|   |   +-- pages
+|   |   |   +-- UserCreatePage.jsx
+|   |   |   +-- UserDetailPage.jsx
+|   |   |   \-- UserEditPage.jsx
+|   |   \-- UsersPage.jsx
+|   +-- utils
+|   |   +-- accessFormatters.js
+|   |   +-- accessMappers.js
+|   |   \-- accessValidators.js
+|   \-- index.js
++-- catalogos
+|   +-- api
+|   |   +-- countries.api.js
+|   |   \-- paises.api.js
+|   +-- components
+|   |   \-- ClasificacionCards.jsx
+|   \-- store
+|       \-- paises.store.js
++-- dashboards
+|   +-- pages
+|   |   +-- AcercaDePage.jsx
+|   |   +-- FilosofiaDeDarPage.jsx
+|   |   +-- GeneralesPage.jsx
+|   |   +-- PanelNegociosPage.jsx
+|   |   \-- PorHacerPage.jsx
+|   +-- DashboardsLayout.jsx
+|   +-- PanelIndicadores.jsx
+|   +-- PanelInformes.jsx
+|   +-- PanelNegocios.jsx
+|   +-- PanelPropiedades.jsx
+|   +-- PanelProyectos.jsx
+|   \-- PanelTransacciones.jsx
++-- finanzas
+|   \-- components
+|       \-- modals
+|           \-- DepositoModal.jsx
++-- ideas
+|   +-- api
+|   |   \-- ideas.api.js
+|   \-- components
+|       \-- modals
+|           \-- IdeasModal.jsx
++-- indicadores
+|   +-- api
+|   |   +-- ingresos.api.js
+|   |   \-- monthlyProduction.api.js
+|   +-- hooks
+|   |   \-- useIndicadoresData.js
+|   +-- store
+|   |   \-- ingresos.store.js
+|   +-- IndicadoresComparativosPage.jsx
+|   +-- IndicadoresLayout.jsx
+|   +-- IndicadoresPanelPage.jsx
+|   \-- IndicadoresProyeccionesPage.jsx
++-- informes
+|   +-- hooks
+|   |   \-- useInformesData.js
+|   +-- InformesExportarPage.jsx
+|   +-- InformesLayout.jsx
+|   +-- InformesResumenPage.jsx
+|   \-- InformesTablasPage.jsx
++-- layout
+|   \-- CorporativoLayout.jsx
++-- negocios
+|   +-- api
+|   |   +-- businessCategories.api.js
+|   |   +-- businesses.api.js
+|   |   +-- businessesSummary.api.js
+|   |   +-- businessesTypes.api.js
+|   |   +-- businessTypes.api.js
+|   |   +-- catalogoNegocios.api.js
+|   |   \-- negocios.api.js
+|   +-- business-detail
+|   |   +-- BusinessLayout.jsx
+|   |   \-- BusinessOverview.jsx
+|   +-- components
+|   |   +-- kpi
+|   |   |   \-- KPIStripGlobal.jsx
+|   |   +-- BusinessFormPage.jsx
+|   |   +-- BusinessMultiPicker.jsx
+|   |   +-- BusinessSelectBar.jsx
+|   |   \-- BusinessUnitsAssignModal.jsx
+|   +-- pages
+|   |   +-- NegociosConfiguracionPage.jsx
+|   |   +-- NegociosFinanzasPage.jsx
+|   |   +-- NegociosOperacionPage.jsx
+|   |   +-- NegociosResumenPage.jsx
+|   |   \-- NegociosUnidadesPage.jsx
+|   +-- store
+|   |   \-- negocios.store.js
+|   \-- NegociosLayout.jsx
++-- propiedades
+|   +-- api
+|   |   +-- properties.api.js
+|   |   \-- units.api.js
+|   +-- detalles
+|   |   +-- DetallesDatosProp.jsx
+|   |   +-- DetallesHistorialProp.jsx
+|   |   +-- DetallesIngresosProp.jsx
+|   |   +-- DetallesLayout.jsx
+|   |   +-- DetallesNegociosProp.jsx
+|   |   +-- DetallesProyectosProp.jsx
+|   |   \-- DetallesUnidadesProp.jsx
+|   +-- store
+|   |   +-- properties.store.js
+|   |   \-- units.store.js
+|   +-- unidades
+|   |   +-- UnidadesForm.jsx
+|   |   +-- UnidadesLayout.jsx
+|   |   +-- UnidadesListPage.jsx
+|   |   +-- UnidadesMapaPage.jsx
+|   |   \-- UnidadesOcupacionPage.jsx
+|   +-- PropiedadesFormPage.jsx
+|   +-- PropiedadesIndex.jsx
+|   +-- PropiedadesIngresos.jsx
+|   +-- PropiedadesLayout.jsx
+|   +-- PropiedadesPanel.jsx
+|   \-- PropiedadesReportes.jsx
++-- proyectos
+|   +-- api
+|   |   \-- projects.api.js
+|   +-- Proyectos.jsx
+|   +-- ProyectosDetailsPage.jsx
+|   +-- ProyectosFormPage.jsx
+|   +-- ProyectosLayout.jsx
+|   \-- ProyectosListPage.jsx
++-- transacciones
+|   +-- api
+|   |   +-- banks.api.js
+|   |   +-- categories.api.js
+|   |   +-- fields.api.js
+|   |   +-- movements.api.js
+|   |   \-- transactions.api.js
+|   +-- components
+|   |   +-- TransactionsFilters.jsx
+|   |   +-- TransactionsTable.jsx
+|   |   +-- TransactionsToolbar.jsx
+|   |   \-- TransactionsTypeSelector.jsx
+|   +-- TransaccionesFormPage.jsx
+|   +-- TransaccionesLayout.jsx
+|   +-- TransaccionesListPage.jsx
+|   \-- TransaccionesReportesPage.jsx
++-- ui
+|   +-- navigation
+|   |   \-- RouteTabs.jsx
+|   \-- primitives
+|       \-- AddAction.jsx
+\-- index.jsx
+
+==================================================
+LISTADO DETALLADO DE ARCHIVOS
+==================================================
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\api\memberships.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\api\permissions.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\api\roles.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\api\sessions.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\api\users.api.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\forms
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\forms\ChangePinForm.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\forms\MembershipForm.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\forms\RoleForm.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\forms\UserForm.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\layout
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\layout\AccessHeader.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\layout\AccessLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\layout\AccessStats.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\modals
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\modals\ChangePinModal.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\modals\DeleteUserModal.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\modals\MembershipModal.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\modals\UserStatusModal.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\permissions
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\permissions\PermissionCard.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\permissions\PermissionsFilters.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\permissions\PermissionsGrid.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\roles
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\roles\RoleCard.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\roles\RolesGrid.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\components\roles\RoleStatsCard.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\constants
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\constants\accessTabs.constants.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\constants\roleOptions.constants.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\constants\userStatus.constants.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\hooks
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\hooks\useMembershipActions.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\hooks\useSelectedUser.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\hooks\useUsersFilters.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\index.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\permissions
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\permissions\PermissionsPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\roles
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\roles\RolesPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\store
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\store\accessMemberships.store.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\store\accessPermissions.store.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\store\accessRoles.store.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\store\accessSessions.store.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\store\accessUsers.store.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\components
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\components\CompleteAccessModal.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\components\UsersTable.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\pages
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\pages\UserCreatePage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\pages\UserDetailPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\pages\UserEditPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\users\UsersPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\utils
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\utils\accessFormatters.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\utils\accessMappers.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access\utils\accessValidators.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\api\countries.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\api\paises.api.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\components
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\components\ClasificacionCards.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\store
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos\store\paises.store.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\DashboardsLayout.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\AcercaDePage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\FilosofiaDeDarPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\GeneralesPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\PanelNegociosPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\pages\PorHacerPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\PanelIndicadores.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\PanelInformes.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\PanelNegocios.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\PanelPropiedades.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\PanelProyectos.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards\PanelTransacciones.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\finanzas
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\finanzas\components
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\finanzas\components\modals
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\finanzas\components\modals\DepositoModal.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas\api\ideas.api.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas\components
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas\components\modals
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas\components\modals\IdeasModal.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\index.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\api\ingresos.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\api\monthlyProduction.api.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\hooks
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\hooks\useIndicadoresData.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\IndicadoresComparativosPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\IndicadoresLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\IndicadoresPanelPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\IndicadoresProyeccionesPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\store
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores\store\ingresos.store.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\hooks
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\hooks\useInformesData.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\InformesExportarPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\InformesLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\InformesResumenPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes\InformesTablasPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\layout
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\layout\CorporativoLayout.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businessCategories.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businesses.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businessesSummary.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businessesTypes.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\businessTypes.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\catalogoNegocios.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\api\negocios.api.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\business-detail
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\business-detail\BusinessLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\business-detail\BusinessOverview.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\BusinessFormPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\BusinessMultiPicker.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\BusinessSelectBar.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\BusinessUnitsAssignModal.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\kpi
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\components\kpi\KPIStripGlobal.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\NegociosLayout.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\pages
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\pages\NegociosConfiguracionPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\pages\NegociosFinanzasPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\pages\NegociosOperacionPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\pages\NegociosResumenPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\pages\NegociosUnidadesPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\store
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios\store\negocios.store.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\api\properties.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\api\units.api.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesDatosProp.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesHistorialProp.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesIngresosProp.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesNegociosProp.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesProyectosProp.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\detalles\DetallesUnidadesProp.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesFormPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesIndex.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesIngresos.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesPanel.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\PropiedadesReportes.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\store
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\store\properties.store.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\store\units.store.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesForm.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesListPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesMapaPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades\unidades\UnidadesOcupacionPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\api\projects.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\Proyectos.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\ProyectosDetailsPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\ProyectosFormPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\ProyectosLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos\ProyectosListPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\banks.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\categories.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\fields.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\movements.api.js
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\api\transactions.api.js
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\components
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\components\TransactionsFilters.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\components\TransactionsTable.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\components\TransactionsToolbar.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\components\TransactionsTypeSelector.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\TransaccionesFormPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\TransaccionesLayout.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\TransaccionesListPage.jsx
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones\TransaccionesReportesPage.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui\navigation
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui\navigation\RouteTabs.jsx
+[DIR ] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui\primitives
+[FILE] C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui\primitives\AddAction.jsx

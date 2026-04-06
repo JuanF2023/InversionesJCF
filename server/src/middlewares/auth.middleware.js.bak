@@ -1,0 +1,134 @@
+// server/src/middlewares/auth.middleware.js
+import jwt from "jsonwebtoken";
+import { SessionModel } from "#modules/auth/infrastructure/mongoose/models/session.model.js";
+
+import { Users } from "#modules/auth/infrastructure/mongoose/models/users.model.js";
+
+const JWT_SECRET = process.env.JWT_SECRET || "change_me_in_env";
+
+/* --------------------------- helpers --------------------------- */
+function mapUser(u) {
+    if (!u) return null;
+    return {
+        id: String(u._id),
+        email: u.email || "",
+        nombre: u.nombre || u.displayName || [u.firstName, u.lastName].filter(Boolean).join(" "),
+        rol: u.rol || u.role || "",
+        roles: Array.isArray(u.roles) ? u.roles : u.rol ? [u.rol] : [],
+        permissions: Array.isArray(u.permissions) ? u.permissions : [],
+        negocio: u.negocio || u.restaurante || "",
+    };
+}
+
+// match de rol con comodín, p.ej. "corporativo.*"
+function roleMatches(pattern, role) {
+    if (!pattern || !role) return false;
+    if (pattern === role) return true;
+    if (pattern.endsWith(".*")) {
+        const base = pattern.slice(0, -2);
+        return role === base || role.startsWith(base + ".");
+    }
+    return false;
+}
+
+/* --------------------------- requireAuth --------------------------- */
+/**
+ * Verifica Authorization: Bearer <token>
+ * - Verifica firma JWT
+ * - Busca sesión activa por token
+ * - Rechaza expirada / finalizada / inactiva
+ * - Actualiza lastActivityAt (rolling activity)
+ * - Carga usuario y lo adjunta en req.user
+ */
+export async function requireAuth(req, res, next) {
+    try {
+        const h = String(req.headers.authorization || "");
+        if (!h.startsWith("Bearer ")) {
+            return res.status(401).json({ ok: false, message: "No autorizado" });
+        }
+
+        const token = h.slice(7).trim();
+        let payload;
+        try {
+            payload = jwt.verify(token, JWT_SECRET);
+        } catch {
+            return res.status(401).json({ ok: false, message: "Token inválido o expirado" });
+        }
+
+        // Sesión real
+        const sess = await Sessions.findOne({ token, active: true }).lean();
+        if (!sess) {
+            return res.status(401).json({ ok: false, message: "Sesión no encontrada o cerrada" });
+        }
+        const now = new Date();
+
+        // Reglas de estado/expiración
+        if (sess.endedAt) {
+            return res.status(401).json({ ok: false, message: "Sesión finalizada" });
+        }
+        if (sess.expiresAt && new Date(sess.expiresAt) <= now) {
+            return res.status(401).json({ ok: false, message: "Sesión expirada" });
+        }
+        if (!["active", "break"].includes(sess.state)) {
+            return res.status(401).json({ ok: false, message: "Estado de sesión inválido" });
+        }
+        // Inactividad (si está configurada)
+        if (
+            sess.inactivityMs &&
+            sess.lastActivityAt &&
+            now - new Date(sess.lastActivityAt) > Number(sess.inactivityMs)
+        ) {
+            return res.status(401).json({ ok: false, message: "Sesión cerrada por inactividad" });
+        }
+
+        // Rolling de actividad
+        await Sessions.updateOne({ _id: sess._id }, { $set: { lastActivityAt: now } });
+
+        // Usuario
+        const uid = payload?.sub || String(sess.userId || "");
+        const userDoc = uid ? await Users.findById(uid).lean() : null;
+        if (!userDoc) {
+            return res.status(401).json({ ok: false, message: "Usuario no existe" });
+        }
+
+        req.user = mapUser(userDoc);
+        req.session = sess;
+        req.userId = req.user.id;
+
+        return next();
+    } catch (e) {
+        // No re-emitimos el error para no filtrar detalles
+        return res.status(401).json({ ok: false, message: "No autorizado" });
+    }
+}
+
+/* --------------------------- authorize --------------------------- */
+/**
+ * authorize({ anyRole: ["corporativo.*", "restaurant.supervisor"], perm: ["users.manage"] })
+ * - Permite si el usuario tiene al menos uno de los roles de anyRole (con comodín)
+ *   O si posee todos los permisos listados en `perm` (si defines política así)
+ */
+export function authorize({ anyRole = [], perm = [] } = {}) {
+    return (req, res, next) => {
+        const user = req.user || {};
+        const roles = Array.isArray(user.roles) ? user.roles : user.rol ? [user.rol] : [];
+        const perms = Array.isArray(user.permissions) ? user.permissions : [];
+
+        // Si no se pide nada, pasa
+        if (anyRole.length === 0 && perm.length === 0) return next();
+
+        // Coincidencia por rol (soporta comodines)
+        const hasRole =
+            anyRole.length > 0 &&
+            roles.some((r) => anyRole.some((pat) => roleMatches(pat, r)));
+
+        // Coincidencia por permisos (requiere TODOS los listados)
+        const hasPerms = perm.length === 0 || perm.every((p) => perms.includes(p));
+
+        if (hasRole || hasPerms) return next();
+
+        return res.status(403).json({ ok: false, message: "Prohibido" });
+    };
+}
+
+

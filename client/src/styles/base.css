@@ -1,0 +1,35 @@
+/* client/src/styles/base.css */
+
+/* Tailwind core */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Estilos globales del sistema Inversiones JCF --- */
+
+/* ✅ Tokens globales (tu archivo actual) */
+@import "./tokens.css";
+
+/* ✅ Scrollbar theme-aware (nuevo) */
+@import "./global/scrollbar.css";
+
+/* Otros globales */
+@import "./global/forms.css";
+
+/* Componentes */
+@import "./components/buttons.css";
+@import "./components/cards.css";
+
+/* Modals */
+@import "./modals/modals.css";
+
+/* (Opcional) Overrides por feature */
+@import "./corporativo/overrides.css";
+@import "./corporativo/underline-tabs.css";
+
+/* Base fallback (si algo viejo depende de estas variables) */
+:root {
+    --accent: var(--accent, #f88);
+    --text: var(--text, #eaeaea);
+    --border: var(--border, #2a2a2a);
+}

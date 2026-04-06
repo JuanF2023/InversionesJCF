@@ -1,0 +1,443 @@
+﻿==================================================
+AUDITORIA DE MODULOS - FRONTEND CORPORATIVO
+Fecha: 2026-03-28 23:30:12
+Ruta: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo
+==================================================
+
+--------------------------------------------------
+MODULO: access
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\access
+Subcarpetas totales: 16
+Archivos JS/TS: 45
+
+Estructura esperada:
+  - api: SI
+  - components: SI
+  - hooks: SI
+  - pages: NO
+  - store: SI
+  - utils: SI
+  - constants: SI
+  - index.js: SI
+
+Subcarpetas inmediatas:
+  - api
+  - components
+  - constants
+  - hooks
+  - permissions
+  - roles
+  - store
+  - users
+  - utils
+
+Archivos:
+  - client\src\features\corporativo\access\api\memberships.api.js
+  - client\src\features\corporativo\access\api\permissions.api.js
+  - client\src\features\corporativo\access\api\roles.api.js
+  - client\src\features\corporativo\access\api\sessions.api.js
+  - client\src\features\corporativo\access\api\users.api.js
+  - client\src\features\corporativo\access\components\forms\ChangePinForm.jsx
+  - client\src\features\corporativo\access\components\forms\MembershipForm.jsx
+  - client\src\features\corporativo\access\components\forms\RoleForm.jsx
+  - client\src\features\corporativo\access\components\forms\UserForm.jsx
+  - client\src\features\corporativo\access\components\layout\AccessHeader.jsx
+  - client\src\features\corporativo\access\components\layout\AccessLayout.jsx
+  - client\src\features\corporativo\access\components\layout\AccessStats.jsx
+  - client\src\features\corporativo\access\components\modals\ChangePinModal.jsx
+  - client\src\features\corporativo\access\components\modals\DeleteUserModal.jsx
+  - client\src\features\corporativo\access\components\modals\MembershipModal.jsx
+  - client\src\features\corporativo\access\components\modals\UserStatusModal.jsx
+  - client\src\features\corporativo\access\components\permissions\PermissionCard.jsx
+  - client\src\features\corporativo\access\components\permissions\PermissionsFilters.jsx
+  - client\src\features\corporativo\access\components\permissions\PermissionsGrid.jsx
+  - client\src\features\corporativo\access\components\roles\RoleCard.jsx
+  - client\src\features\corporativo\access\components\roles\RolesGrid.jsx
+  - client\src\features\corporativo\access\components\roles\RoleStatsCard.jsx
+  - client\src\features\corporativo\access\constants\accessTabs.constants.js
+  - client\src\features\corporativo\access\constants\roleOptions.constants.js
+  - client\src\features\corporativo\access\constants\userStatus.constants.js
+  - client\src\features\corporativo\access\hooks\useMembershipActions.js
+  - client\src\features\corporativo\access\hooks\useSelectedUser.js
+  - client\src\features\corporativo\access\hooks\useUsersFilters.js
+  - client\src\features\corporativo\access\index.js
+  - client\src\features\corporativo\access\permissions\PermissionsPage.jsx
+  - client\src\features\corporativo\access\roles\RolesPage.jsx
+  - client\src\features\corporativo\access\store\accessMemberships.store.js
+  - client\src\features\corporativo\access\store\accessPermissions.store.js
+  - client\src\features\corporativo\access\store\accessRoles.store.js
+  - client\src\features\corporativo\access\store\accessSessions.store.js
+  - client\src\features\corporativo\access\store\accessUsers.store.js
+  - client\src\features\corporativo\access\users\components\CompleteAccessModal.jsx
+  - client\src\features\corporativo\access\users\components\UsersTable.jsx
+  - client\src\features\corporativo\access\users\pages\UserCreatePage.jsx
+  - client\src\features\corporativo\access\users\pages\UserDetailPage.jsx
+  - client\src\features\corporativo\access\users\pages\UserEditPage.jsx
+  - client\src\features\corporativo\access\users\UsersPage.jsx
+  - client\src\features\corporativo\access\utils\accessFormatters.js
+  - client\src\features\corporativo\access\utils\accessMappers.js
+  - client\src\features\corporativo\access\utils\accessValidators.js
+
+--------------------------------------------------
+MODULO: catalogos
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\catalogos
+Subcarpetas totales: 3
+Archivos JS/TS: 4
+
+Estructura esperada:
+  - api: SI
+  - components: SI
+  - hooks: NO
+  - pages: NO
+  - store: SI
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - api
+  - components
+  - store
+
+Archivos:
+  - client\src\features\corporativo\catalogos\api\countries.api.js
+  - client\src\features\corporativo\catalogos\api\paises.api.js
+  - client\src\features\corporativo\catalogos\components\ClasificacionCards.jsx
+  - client\src\features\corporativo\catalogos\store\paises.store.js
+
+--------------------------------------------------
+MODULO: dashboards
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\dashboards
+Subcarpetas totales: 1
+Archivos JS/TS: 12
+
+Estructura esperada:
+  - api: NO
+  - components: NO
+  - hooks: NO
+  - pages: SI
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - pages
+
+Archivos:
+  - client\src\features\corporativo\dashboards\DashboardsLayout.jsx
+  - client\src\features\corporativo\dashboards\pages\AcercaDePage.jsx
+  - client\src\features\corporativo\dashboards\pages\FilosofiaDeDarPage.jsx
+  - client\src\features\corporativo\dashboards\pages\GeneralesPage.jsx
+  - client\src\features\corporativo\dashboards\pages\PanelNegociosPage.jsx
+  - client\src\features\corporativo\dashboards\pages\PorHacerPage.jsx
+  - client\src\features\corporativo\dashboards\PanelIndicadores.jsx
+  - client\src\features\corporativo\dashboards\PanelInformes.jsx
+  - client\src\features\corporativo\dashboards\PanelNegocios.jsx
+  - client\src\features\corporativo\dashboards\PanelPropiedades.jsx
+  - client\src\features\corporativo\dashboards\PanelProyectos.jsx
+  - client\src\features\corporativo\dashboards\PanelTransacciones.jsx
+
+--------------------------------------------------
+MODULO: finanzas
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\finanzas
+Subcarpetas totales: 2
+Archivos JS/TS: 1
+
+Estructura esperada:
+  - api: NO
+  - components: SI
+  - hooks: NO
+  - pages: NO
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - components
+
+Archivos:
+  - client\src\features\corporativo\finanzas\components\modals\DepositoModal.jsx
+
+--------------------------------------------------
+MODULO: ideas
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ideas
+Subcarpetas totales: 3
+Archivos JS/TS: 2
+
+Estructura esperada:
+  - api: SI
+  - components: SI
+  - hooks: NO
+  - pages: NO
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - api
+  - components
+
+Archivos:
+  - client\src\features\corporativo\ideas\api\ideas.api.js
+  - client\src\features\corporativo\ideas\components\modals\IdeasModal.jsx
+
+--------------------------------------------------
+MODULO: indicadores
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\indicadores
+Subcarpetas totales: 3
+Archivos JS/TS: 8
+
+Estructura esperada:
+  - api: SI
+  - components: NO
+  - hooks: SI
+  - pages: NO
+  - store: SI
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - api
+  - hooks
+  - store
+
+Archivos:
+  - client\src\features\corporativo\indicadores\api\ingresos.api.js
+  - client\src\features\corporativo\indicadores\api\monthlyProduction.api.js
+  - client\src\features\corporativo\indicadores\hooks\useIndicadoresData.js
+  - client\src\features\corporativo\indicadores\IndicadoresComparativosPage.jsx
+  - client\src\features\corporativo\indicadores\IndicadoresLayout.jsx
+  - client\src\features\corporativo\indicadores\IndicadoresPanelPage.jsx
+  - client\src\features\corporativo\indicadores\IndicadoresProyeccionesPage.jsx
+  - client\src\features\corporativo\indicadores\store\ingresos.store.js
+
+--------------------------------------------------
+MODULO: informes
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\informes
+Subcarpetas totales: 1
+Archivos JS/TS: 5
+
+Estructura esperada:
+  - api: NO
+  - components: NO
+  - hooks: SI
+  - pages: NO
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - hooks
+
+Archivos:
+  - client\src\features\corporativo\informes\hooks\useInformesData.js
+  - client\src\features\corporativo\informes\InformesExportarPage.jsx
+  - client\src\features\corporativo\informes\InformesLayout.jsx
+  - client\src\features\corporativo\informes\InformesResumenPage.jsx
+  - client\src\features\corporativo\informes\InformesTablasPage.jsx
+
+--------------------------------------------------
+MODULO: layout
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\layout
+Subcarpetas totales: 0
+Archivos JS/TS: 1
+
+Estructura esperada:
+  - api: NO
+  - components: NO
+  - hooks: NO
+  - pages: NO
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - (ninguna)
+
+Archivos:
+  - client\src\features\corporativo\layout\CorporativoLayout.jsx
+
+--------------------------------------------------
+MODULO: negocios
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\negocios
+Subcarpetas totales: 6
+Archivos JS/TS: 21
+
+Estructura esperada:
+  - api: SI
+  - components: SI
+  - hooks: NO
+  - pages: SI
+  - store: SI
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - api
+  - business-detail
+  - components
+  - pages
+  - store
+
+Archivos:
+  - client\src\features\corporativo\negocios\api\businessCategories.api.js
+  - client\src\features\corporativo\negocios\api\businesses.api.js
+  - client\src\features\corporativo\negocios\api\businessesSummary.api.js
+  - client\src\features\corporativo\negocios\api\businessesTypes.api.js
+  - client\src\features\corporativo\negocios\api\businessTypes.api.js
+  - client\src\features\corporativo\negocios\api\catalogoNegocios.api.js
+  - client\src\features\corporativo\negocios\api\negocios.api.js
+  - client\src\features\corporativo\negocios\business-detail\BusinessLayout.jsx
+  - client\src\features\corporativo\negocios\business-detail\BusinessOverview.jsx
+  - client\src\features\corporativo\negocios\components\BusinessFormPage.jsx
+  - client\src\features\corporativo\negocios\components\BusinessMultiPicker.jsx
+  - client\src\features\corporativo\negocios\components\BusinessSelectBar.jsx
+  - client\src\features\corporativo\negocios\components\BusinessUnitsAssignModal.jsx
+  - client\src\features\corporativo\negocios\components\kpi\KPIStripGlobal.jsx
+  - client\src\features\corporativo\negocios\NegociosLayout.jsx
+  - client\src\features\corporativo\negocios\pages\NegociosConfiguracionPage.jsx
+  - client\src\features\corporativo\negocios\pages\NegociosFinanzasPage.jsx
+  - client\src\features\corporativo\negocios\pages\NegociosOperacionPage.jsx
+  - client\src\features\corporativo\negocios\pages\NegociosResumenPage.jsx
+  - client\src\features\corporativo\negocios\pages\NegociosUnidadesPage.jsx
+  - client\src\features\corporativo\negocios\store\negocios.store.js
+
+--------------------------------------------------
+MODULO: propiedades
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\propiedades
+Subcarpetas totales: 4
+Archivos JS/TS: 22
+
+Estructura esperada:
+  - api: SI
+  - components: NO
+  - hooks: NO
+  - pages: NO
+  - store: SI
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - api
+  - detalles
+  - store
+  - unidades
+
+Archivos:
+  - client\src\features\corporativo\propiedades\api\properties.api.js
+  - client\src\features\corporativo\propiedades\api\units.api.js
+  - client\src\features\corporativo\propiedades\detalles\DetallesDatosProp.jsx
+  - client\src\features\corporativo\propiedades\detalles\DetallesHistorialProp.jsx
+  - client\src\features\corporativo\propiedades\detalles\DetallesIngresosProp.jsx
+  - client\src\features\corporativo\propiedades\detalles\DetallesLayout.jsx
+  - client\src\features\corporativo\propiedades\detalles\DetallesNegociosProp.jsx
+  - client\src\features\corporativo\propiedades\detalles\DetallesProyectosProp.jsx
+  - client\src\features\corporativo\propiedades\detalles\DetallesUnidadesProp.jsx
+  - client\src\features\corporativo\propiedades\PropiedadesFormPage.jsx
+  - client\src\features\corporativo\propiedades\PropiedadesIndex.jsx
+  - client\src\features\corporativo\propiedades\PropiedadesIngresos.jsx
+  - client\src\features\corporativo\propiedades\PropiedadesLayout.jsx
+  - client\src\features\corporativo\propiedades\PropiedadesPanel.jsx
+  - client\src\features\corporativo\propiedades\PropiedadesReportes.jsx
+  - client\src\features\corporativo\propiedades\store\properties.store.js
+  - client\src\features\corporativo\propiedades\store\units.store.js
+  - client\src\features\corporativo\propiedades\unidades\UnidadesForm.jsx
+  - client\src\features\corporativo\propiedades\unidades\UnidadesLayout.jsx
+  - client\src\features\corporativo\propiedades\unidades\UnidadesListPage.jsx
+  - client\src\features\corporativo\propiedades\unidades\UnidadesMapaPage.jsx
+  - client\src\features\corporativo\propiedades\unidades\UnidadesOcupacionPage.jsx
+
+--------------------------------------------------
+MODULO: proyectos
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\proyectos
+Subcarpetas totales: 1
+Archivos JS/TS: 6
+
+Estructura esperada:
+  - api: SI
+  - components: NO
+  - hooks: NO
+  - pages: NO
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - api
+
+Archivos:
+  - client\src\features\corporativo\proyectos\api\projects.api.js
+  - client\src\features\corporativo\proyectos\Proyectos.jsx
+  - client\src\features\corporativo\proyectos\ProyectosDetailsPage.jsx
+  - client\src\features\corporativo\proyectos\ProyectosFormPage.jsx
+  - client\src\features\corporativo\proyectos\ProyectosLayout.jsx
+  - client\src\features\corporativo\proyectos\ProyectosListPage.jsx
+
+--------------------------------------------------
+MODULO: transacciones
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\transacciones
+Subcarpetas totales: 2
+Archivos JS/TS: 13
+
+Estructura esperada:
+  - api: SI
+  - components: SI
+  - hooks: NO
+  - pages: NO
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - api
+  - components
+
+Archivos:
+  - client\src\features\corporativo\transacciones\api\banks.api.js
+  - client\src\features\corporativo\transacciones\api\categories.api.js
+  - client\src\features\corporativo\transacciones\api\fields.api.js
+  - client\src\features\corporativo\transacciones\api\movements.api.js
+  - client\src\features\corporativo\transacciones\api\transactions.api.js
+  - client\src\features\corporativo\transacciones\components\TransactionsFilters.jsx
+  - client\src\features\corporativo\transacciones\components\TransactionsTable.jsx
+  - client\src\features\corporativo\transacciones\components\TransactionsToolbar.jsx
+  - client\src\features\corporativo\transacciones\components\TransactionsTypeSelector.jsx
+  - client\src\features\corporativo\transacciones\TransaccionesFormPage.jsx
+  - client\src\features\corporativo\transacciones\TransaccionesLayout.jsx
+  - client\src\features\corporativo\transacciones\TransaccionesListPage.jsx
+  - client\src\features\corporativo\transacciones\TransaccionesReportesPage.jsx
+
+--------------------------------------------------
+MODULO: ui
+RUTA: C:\Users\Administrator\OneDrive\InversionesJCF\InversionesJCF\client\src\features\corporativo\ui
+Subcarpetas totales: 2
+Archivos JS/TS: 2
+
+Estructura esperada:
+  - api: NO
+  - components: NO
+  - hooks: NO
+  - pages: NO
+  - store: NO
+  - utils: NO
+  - constants: NO
+  - index.js: NO
+
+Subcarpetas inmediatas:
+  - navigation
+  - primitives
+
+Archivos:
+  - client\src\features\corporativo\ui\navigation\RouteTabs.jsx
+  - client\src\features\corporativo\ui\primitives\AddAction.jsx
+
