@@ -1,13 +1,23 @@
+# =========================================================
+# InversionesJCF - Git Ignore Profesional
+# =========================================================
+
+# -----------------------------
 # Dependencies
+# -----------------------------
 node_modules/
 **/node_modules/
 
+# -----------------------------
 # Environment
+# -----------------------------
 .env
 .env.*
 !.env.example
 
+# -----------------------------
 # Logs
+# -----------------------------
 logs/
 *.log
 npm-debug.log*
@@ -15,33 +25,73 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Build outputs
+# -----------------------------
+# Build / coverage / generated
+# -----------------------------
 dist/
 build/
 coverage/
 .vite/
 .next/
 out/
+.nyc_output/
 
-# OS
+# -----------------------------
+# Runtime / temp / cache
+# -----------------------------
+tmp/
+temp/
+.cache/
+.eslintcache
+pids/
+*.pid
+*.seed
+*.pid.lock
+*.tmp
+*.temp
+*.tsbuildinfo
+
+# -----------------------------
+# Uploads / generated assets
+# -----------------------------
+server/uploads/
+server/public/uploads/
+client/public/uploads/
+client/uploads/
+
+# -----------------------------
+# Backups / audit / exports
+# -----------------------------
+*.zip
+*_backup.*
+*_audit.*
+*.bak
+*.old
+*.orig
+
+# -----------------------------
+# OS files
+# -----------------------------
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# IDE
+# -----------------------------
+# Editors / IDE
+# -----------------------------
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
 !.vscode/tasks.json
 !.vscode/launch.json
 
-# Temp / cache
-*.tmp
-*.temp
-.cache/
-.eslintcache
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
-# Runtime
-pids
-*.pid
-*.seed
-*.pid.lock
+# -----------------------------
+# OneDrive / sync leftovers
+# -----------------------------
+*conflicted copy*
