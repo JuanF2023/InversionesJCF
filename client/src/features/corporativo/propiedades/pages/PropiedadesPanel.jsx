@@ -1,6 +1,6 @@
 // client/src/features/corporativo/Propiedades/PropiedadesPanel.jsx
 import React, { useEffect, useMemo, useState } from "react";
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 
 /* Stores modulares */
 import { usePropertiesStore } from "@/features/corporativo/propiedades/store/properties.store.js";
@@ -247,12 +247,6 @@ export default function PropiedadesPanel() {
       loaded: s.loaded,
     }));
 
-  const { cargar: cargarIngresos, loading: loadingIngresos, loaded: ingresosLoaded } =
-    useIngresosStore((s) => ({
-      cargar: s.cargar,
-      loading: s.loading,
-      loaded: s.loaded,
-    }));
 
   const negocios = useNegociosStore ? useNegociosStore((s) => s.negocios || []) : [];
 
@@ -266,7 +260,7 @@ export default function PropiedadesPanel() {
       try {
         if (!propsLoaded && !loadingProps) await cargarPropiedades?.({ force: false });
         if (!unidadesLoaded && !loadingUnidades) await cargarUnidades?.({ force: false });
-        if (!ingresosLoaded && !loadingIngresos) await cargarIngresos?.({ force: false });
+
         if (!paisesItems?.length && !paisesLoading) await loadPaises?.({ force: false });
       } catch {
         // Silencio intencional en panel.
@@ -279,9 +273,7 @@ export default function PropiedadesPanel() {
     unidadesLoaded,
     loadingUnidades,
     cargarUnidades,
-    ingresosLoaded,
-    loadingIngresos,
-    cargarIngresos,
+
     paisesItems,
     paisesLoading,
     loadPaises,
@@ -535,7 +527,7 @@ export default function PropiedadesPanel() {
     [workingList]
   );
 
-  const isLoadingAny = loadingProps || loadingUnidades || loadingIngresos || paisesLoading;
+  const isLoadingAny = loadingProps || loadingUnidades || paisesLoading;
 
   return (
     <div className="space-y-5" data-theme={theme}>

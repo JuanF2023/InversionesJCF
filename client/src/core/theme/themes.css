@@ -1,0 +1,117 @@
+/* client/src/core/theme/themes.css */
+
+/* ===== TEMAS ===== */
+
+/* CLAROS */
+:root[data-theme="neo-ice"],
+[data-theme="neo-ice"] {
+    --bg: color-mix(in oklab, #ffffff 84%, var(--accent) 16%);
+    --panel: color-mix(in oklab, #ffffff 92%, var(--accent) 8%);
+    --border: color-mix(in oklab, #e7edf5 70%, var(--accent) 30%);
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #5b6b84;
+    --accent: #2ea8ff;
+    --accent-2: #8bd3ff;
+    --out: -8px -8px 16px #ffffff, 8px 8px 16px #cdd7e3;
+    --in: inset -6px -6px 12px #ffffff, inset 6px 6px 12px #d4dce7;
+}
+
+:root[data-theme="neo-mint"],
+[data-theme="neo-mint"] {
+    --bg: #e6f6f0;
+    --panel: #f2fbf7;
+    --border: #dcefe9;
+    --card: #ffffff;
+    --text: #0b1220;
+    --muted: #4b6364;
+    --accent: #12b981;
+    --accent-2: #7ae7c4;
+    --out: -8px -8px 16px #ffffff, 8px 8px 16px #cfe0db;
+    --in: inset -6px -6px 12px #ffffff, inset 6px 6px 12px #d5e5e0;
+}
+
+:root[data-theme="neo-dawn"],
+[data-theme="neo-dawn"] {
+    --bg: color-mix(in oklab, #ffffff 86%, var(--accent) 14%);
+    --panel: color-mix(in oklab, #ffffff 93%, var(--accent) 7%);
+    --border: color-mix(in oklab, #e2e8f0 70%, var(--accent) 30%);
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #f59e0b;
+    --accent-2: #fde68a;
+}
+
+:root[data-theme="neo-stone"],
+[data-theme="neo-stone"] {
+    --bg: color-mix(in oklab, #ffffff 85%, var(--accent) 15%);
+    --panel: color-mix(in oklab, #ffffff 92%, var(--accent) 8%);
+    --border: color-mix(in oklab, #e1e6ef 70%, var(--accent) 30%);
+    --card: #ffffff;
+    --text: #0e1525;
+    --muted: #586172;
+    --accent: #647cff;
+    --accent-2: #a5b4ff;
+}
+
+/* OSCUROS */
+:root[data-theme="neo-ocean"],
+[data-theme="neo-ocean"] {
+    --bg: #0f1e24;
+    --panel: #13262e;
+    --card: #11242b;
+    --border: #1f3540;
+    --text: #e6fbff;
+    --muted: #9cc3cf;
+    --accent: #2ed3c4;
+    --accent-2: #7ee3d8;
+}
+
+:root[data-theme="neo-plum"],
+[data-theme="neo-plum"] {
+    --bg: #0f1f5c;
+    --panel: #152a66;
+    --card: #18316f;
+    --border: #233c7d;
+    --text: #eaf0ff;
+    --muted: #b7c3e1;
+    --accent: #b388ff;
+    --accent-2: #e2d6ff;
+}
+
+:root[data-theme="neo-dusk"],
+[data-theme="neo-dusk"] {
+    --bg: #131821;
+    --panel: #171e29;
+    --card: #141b26;
+    --border: #222b3a;
+    --text: #eaf2ff;
+    --muted: #a7b4c8;
+    --accent: #56a0ff;
+    --accent-2: #7cc0ff;
+}
+
+:root[data-theme="neo-graphite"],
+[data-theme="neo-graphite"] {
+    --bg: #171a1f;
+    --panel: #1c2128;
+    --card: #1a2027;
+    --border: #2a3340;
+    --text: #e8ecf4;
+    --muted: #b0b8c4;
+    --accent: #ff8b6a;
+    --accent-2: #ffc3a6;
+}
+
+:root[data-theme="neo-dark"],
+[data-theme="neo-dark"] {
+    --bg: #0f131a;
+    --panel: #121822;
+    --card: #0f141c;
+    --border: #1a2331;
+    --text: #e7f0ff;
+    --muted: #9fb0c9;
+    --accent: #1dd6ff;
+    --accent-2: #2bf0c4;
+}

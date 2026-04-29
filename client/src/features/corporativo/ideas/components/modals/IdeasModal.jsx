@@ -1,6 +1,6 @@
 // client/src/components/ui/IdeasModal.jsx
 import React, { useEffect, useState } from "react";
-import { useTheme } from "../../../context/ThemeContext.jsx";
+import { useTheme } from "../@/core/theme/ThemeProvider.jsx";
 
 
 const cx = (...c) => c.filter(Boolean).join(" ");
@@ -31,7 +31,7 @@ export default function IdeasModal({ open, onClose, onSave, initialData, mode = 
 
         <div className="space-y-3">
           <div>
-            <label className="block text-xs subtle mb-1">T¨ªtulo</label>
+            <label className="block text-xs subtle mb-1">Tï¿½ï¿½tulo</label>
             <input className="neo-input w-full px-3 py-2" value={idea.titulo} onChange={(e) => setIdea((x) => ({ ...x, titulo: e.target.value }))} />
           </div>
           <div>

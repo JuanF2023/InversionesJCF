@@ -19,7 +19,9 @@ const INTENTS = {
 };
 
 /**
- * Extrae token desde Authorization: Bearer o header x-session-token
+ * Extrae token desde Authorization: Bearer o header x-session-token.
+ * @param {Record<string, string>} headers
+ * @returns {string|null}
  */
 export function extractTokenFromHeaders(headers = {}) {
     const auth = headers?.authorization;
@@ -36,6 +38,24 @@ export function extractTokenFromHeaders(headers = {}) {
     return null;
 }
 
+/**
+ * Normaliza cualquier identificador a string.
+ * @param {unknown} value
+ * @returns {string}
+ */
+function asObjectIdString(value) {
+    return value != null ? String(value).trim() : "";
+}
+
+/**
+ * Firma el JWT de sesión.
+ * @param {object} params
+ * @param {object} params.user
+ * @param {string} params.tenantId
+ * @param {string|null} params.sessionId
+ * @param {string|null} params.membershipId
+ * @returns {{ ok: true, token: string, tenantId: string, expiresAtMs: number }}
+ */
 function signJwt({ user, tenantId, sessionId, membershipId }) {
     const payload = {
         sub: String(user._id),
@@ -61,8 +81,19 @@ function signJwt({ user, tenantId, sessionId, membershipId }) {
     };
 }
 
-function asObjectIdString(value) {
-    return value != null ? String(value).trim() : "";
+/**
+ * Construye opciones de tenant para selección en login.
+ * @param {Array<object>} tenants
+ * @returns {Array<object>}
+ */
+function buildTenantOptions(tenants = []) {
+    return tenants.map((tenant) => ({
+        tenantId: asObjectIdString(tenant?._id),
+        key: tenant?.key || "",
+        name: tenant?.name || "",
+        type: tenant?.type || "",
+        slug: tenant?.slug || "",
+    }));
 }
 
 export class AuthService {
@@ -144,6 +175,22 @@ export class AuthService {
         }
     }
 
+    /**
+     * Login por PIN.
+     * Regla de negocio:
+     * 1. Validar PIN y memberships.
+     * 2. Si el usuario tiene múltiples tenants y no envía tenantId, SIEMPRE pedir selección.
+     * 3. Solo después validar sesión activa existente.
+     *
+     * @param {object} params
+     * @param {string|number} params.pin
+     * @param {string} [params.device]
+     * @param {"enter"|"continue"|"validate_only"} [params.intent]
+     * @param {string|null} [params.tenantId]
+     * @param {string|null} [params.ipAddress]
+     * @param {string|null} [params.userAgent]
+     * @returns {Promise<object>}
+     */
     async loginByPin({
         pin,
         device = "web",
@@ -206,23 +253,21 @@ export class AuthService {
         const distinctTenantIds = [
             ...new Set(
                 memberships
-                    .map((membership) => asObjectIdString(membership.tenantId))
+                    .map((membership) => asObjectIdString(membership?.tenantId))
                     .filter(Boolean)
             ),
         ];
 
         let targetTenantId = tenantId ? asObjectIdString(tenantId) : "";
 
+        /**
+         * PRIORIDAD 1:
+         * Si el usuario tiene múltiples tenants y no indicó tenant,
+         * se obliga la selección ANTES de validar si ya existe sesión activa.
+         */
         if (distinctTenantIds.length > 1 && !targetTenantId) {
             const tenants = await this.tenantsRepository.findByIds(distinctTenantIds);
-
-            const options = tenants.map((tenant) => ({
-                tenantId: asObjectIdString(tenant._id),
-                key: tenant.key || "",
-                name: tenant.name || "",
-                type: tenant.type || "",
-                slug: tenant.slug || "",
-            }));
+            const options = buildTenantOptions(tenants);
 
             return {
                 ok: false,
@@ -235,6 +280,10 @@ export class AuthService {
             };
         }
 
+        /**
+         * PRIORIDAD 2:
+         * Si solo existe un tenant activo, se resuelve automáticamente.
+         */
         if (!targetTenantId && distinctTenantIds.length === 1) {
             targetTenantId = distinctTenantIds[0];
         }
@@ -254,6 +303,10 @@ export class AuthService {
             };
         }
 
+        /**
+         * PRIORIDAD 3:
+         * Una vez resuelto el tenant, ahora sí se valida si ya existe una sesión activa.
+         */
         const existing = await this.sessionRepository.findActiveByUserId(userId);
 
         if (intent === INTENTS.CONTINUE) {
@@ -308,12 +361,16 @@ export class AuthService {
                 statusCode: 409,
                 code: "SESSION_EXISTS",
                 message: 'Ya existe una sesión activa para este usuario. Usa "Continuar".',
+                data: {
+                    tenantId: asObjectIdString(existing?.tenantId),
+                    sessionId: existing?._id ? String(existing._id) : null,
+                    state: existing?.state || STATES.ACTIVE,
+                },
             };
         }
 
         const now = new Date();
         const tempToken = `pending_${crypto.randomUUID()}`;
-
         const expiresAt = new Date(Date.now() + SESSION_MS);
 
         const created = await this.sessionRepository.create({
@@ -327,7 +384,7 @@ export class AuthService {
             state: STATES.ACTIVE,
             startedAt: now,
             lastActiveAt: now,
-            expiresAt, // 🔥 FIX CRÍTICO
+            expiresAt,
         });
 
         const sessionId = created?._id ? String(created._id) : null;
@@ -365,6 +422,13 @@ export class AuthService {
         };
     }
 
+    /**
+     * Verifica una sesión por token.
+     * @param {object} params
+     * @param {string} params.token
+     * @param {boolean} [params.touchActivity=true]
+     * @returns {Promise<object>}
+     */
     async verifySession({ token, touchActivity = true }) {
         const cleanedToken = String(token || "").trim();
 
@@ -439,6 +503,16 @@ export class AuthService {
         };
     }
 
+    /**
+     * Cierra una sesión activa.
+     * No elimina el documento; conserva historial para auditoría.
+     *
+     * @param {object} params
+     * @param {string|null} [params.sessionId]
+     * @param {string|null} [params.token]
+     * @param {string|null} [params.tenantId]
+     * @returns {Promise<object>}
+     */
     async forceCloseSession({
         sessionId = null,
         token = null,

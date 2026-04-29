@@ -1,9 +1,9 @@
-// server/src/modules/corporativo/infrastructure/repositories/User.repository.mongo.js
+// server/src/modules/corporativo/infrastructure/repositories/users.repository.mongo.js
 import { User } from "#modules/auth/infrastructure/mongoose/models/user.model.js";
 import { Role } from "#modules/roles/infrastructure/mongoose/models/role.model.js";
 import { Tenant } from "#modules/tenants/infrastructure/mongoose/models/tenant.model.js";
 import { Membership } from "#modules/auth/infrastructure/mongoose/models/membership.model.js";
-
+import mongoose from "mongoose";
 const Q_MAX_TIME_MS = Number(process.env.MONGO_QUERY_MAX_TIME_MS || 4000);
 
 function str(value) {
@@ -52,81 +52,24 @@ function buildMembershipLookupPipeline() {
                     $or: [
                         { $eq: ["$userId", "$$userIdObj"] },
                         { $eq: [{ $toString: "$userId" }, "$$userIdStr"] },
-                        { $eq: ["$user._id", "$$userIdObj"] },
-                        { $eq: [{ $toString: "$user._id" }, "$$userIdStr"] },
                     ],
                 },
             },
         },
-        {
-            $sort: { createdAt: -1, _id: -1 },
-        },
+        { $sort: { createdAt: -1 } },
         {
             $lookup: {
                 from: "roles",
-                let: {
-                    roleIdObj: "$roleId",
-                    roleIdStr: { $toString: "$roleId" },
-                    roleKeyRaw: "$roleKey",
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $or: [
-                                    { $eq: ["$_id", "$$roleIdObj"] },
-                                    { $eq: [{ $toString: "$_id" }, "$$roleIdStr"] },
-                                    { $eq: ["$key", "$$roleKeyRaw"] },
-                                    { $eq: ["$slug", "$$roleKeyRaw"] },
-                                ],
-                            },
-                        },
-                    },
-                    {
-                        $project: {
-                            _id: 1,
-                            key: 1,
-                            slug: 1,
-                            name: 1,
-                            tenantType: 1,
-                        },
-                    },
-                ],
+                localField: "roleId",
+                foreignField: "_id",
                 as: "roleDoc",
             },
         },
         {
             $lookup: {
                 from: "tenants",
-                let: {
-                    tenantIdObj: "$tenantId",
-                    tenantIdStr: { $toString: "$tenantId" },
-                    tenantKeyRaw: "$tenantKey",
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $or: [
-                                    { $eq: ["$_id", "$$tenantIdObj"] },
-                                    { $eq: [{ $toString: "$_id" }, "$$tenantIdStr"] },
-                                    { $eq: ["$key", "$$tenantKeyRaw"] },
-                                    { $eq: ["$slug", "$$tenantKeyRaw"] },
-                                ],
-                            },
-                        },
-                    },
-                    {
-                        $project: {
-                            _id: 1,
-                            key: 1,
-                            slug: 1,
-                            name: 1,
-                            type: 1,
-                            status: 1,
-                        },
-                    },
-                ],
+                localField: "tenantId",
+                foreignField: "_id",
                 as: "tenantDoc",
             },
         },
@@ -142,11 +85,8 @@ function buildMembershipLookupPipeline() {
                 userId: 1,
                 roleId: 1,
                 tenantId: 1,
-                roleKey: 1,
-                tenantKey: 1,
                 status: 1,
                 createdAt: 1,
-                updatedAt: 1,
                 roleResolved: 1,
                 tenantResolved: 1,
             },
@@ -160,7 +100,6 @@ function buildProjectionStage() {
             _id: 0,
             id: { $toString: "$_id" },
             mongoId: "$_id",
-
             nombre: {
                 $let: {
                     vars: {
@@ -178,28 +117,69 @@ function buildProjectionStage() {
                         },
                     },
                     in: {
-                        $cond: [{ $ne: ["$$displayName", ""] }, "$$displayName", "$$fallbackName"],
+                        $cond: [
+                            { $ne: ["$$displayName", ""] },
+                            "$$displayName",
+                            "$$fallbackName",
+                        ],
                     },
                 },
             },
-
             email: { $ifNull: ["$email", ""] },
-
             activo: {
                 $eq: [{ $toLower: { $ifNull: ["$status", "inactive"] } }, "active"],
             },
-
             estado: {
                 $cond: [
-                    {
-                        $eq: [{ $toLower: { $ifNull: ["$status", "inactive"] } }, "active"],
-                    },
+                    { $eq: [{ $toLower: { $ifNull: ["$status", "inactive"] } }, "active"] },
                     "Activo",
                     "Inactivo",
                 ],
             },
-
-            // NUEVO: Array de membresías con todos los tenants y roles
+            tenantId: {
+                $cond: [
+                    { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.tenantResolved._id", 0] }, false] },
+                    { $toString: { $arrayElemAt: ["$membershipsResolved.tenantResolved._id", 0] } },
+                    "",
+                ],
+            },
+            tenantKey: {
+                $ifNull: [
+                    { $arrayElemAt: ["$membershipsResolved.tenantResolved.key", 0] },
+                    "",
+                ],
+            },
+            tenantNombre: {
+                $ifNull: [
+                    { $arrayElemAt: ["$membershipsResolved.tenantResolved.name", 0] },
+                    "Sin tenant",
+                ],
+            },
+            tenantTipo: {
+                $ifNull: [
+                    { $arrayElemAt: ["$membershipsResolved.tenantResolved.type", 0] },
+                    "",
+                ],
+            },
+            rolId: {
+                $cond: [
+                    { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.roleResolved._id", 0] }, false] },
+                    { $toString: { $arrayElemAt: ["$membershipsResolved.roleResolved._id", 0] } },
+                    "",
+                ],
+            },
+            roleKey: {
+                $ifNull: [
+                    { $arrayElemAt: ["$membershipsResolved.roleResolved.key", 0] },
+                    "",
+                ],
+            },
+            roleName: {
+                $ifNull: [
+                    { $arrayElemAt: ["$membershipsResolved.roleResolved.name", 0] },
+                    "Sin rol",
+                ],
+            },
             memberships: {
                 $map: {
                     input: "$membershipsResolved",
@@ -214,142 +194,20 @@ function buildProjectionStage() {
                                 "",
                             ],
                         },
-                        tenantKey: {
-                            $ifNull: [
-                                "$$mem.tenantResolved.key",
-                                { $ifNull: ["$$mem.tenantKey", ""] },
-                            ],
-                        },
                         tenantNombre: {
-                            $let: {
-                                vars: {
-                                    resolvedTenantName: { $ifNull: ["$$mem.tenantResolved.name", ""] },
-                                },
-                                in: {
-                                    $cond: [
-                                        { $ne: ["$$resolvedTenantName", ""] },
-                                        "$$resolvedTenantName",
-                                        "Sin tenant",
-                                    ],
-                                },
-                            },
-                        },
-                        tenantTipo: {
-                            $ifNull: ["$$mem.tenantResolved.type", ""],
-                        },
-                        rolId: {
-                            $cond: [
-                                { $ifNull: ["$$mem.roleResolved._id", false] },
-                                { $toString: "$$mem.roleResolved._id" },
-                                "",
-                            ],
-                        },
-                        roleKey: {
-                            $let: {
-                                vars: {
-                                    resolvedRoleKey: { $ifNull: ["$$mem.roleResolved.key", ""] },
-                                    membershipRoleKey: { $ifNull: ["$$mem.roleKey", ""] },
-                                },
-                                in: {
-                                    $cond: [
-                                        { $ne: ["$$resolvedRoleKey", ""] },
-                                        "$$resolvedRoleKey",
-                                        { $ifNull: ["$$membershipRoleKey", ""] },
-                                    ],
-                                },
-                            },
+                            $ifNull: ["$$mem.tenantResolved.name", "Sin tenant"],
                         },
                         roleName: {
-                            $let: {
-                                vars: {
-                                    resolvedRoleName: { $ifNull: ["$$mem.roleResolved.name", ""] },
-                                },
-                                in: {
-                                    $cond: [
-                                        { $ne: ["$$resolvedRoleName", ""] },
-                                        "$$resolvedRoleName",
-                                        "Sin rol",
-                                    ],
-                                },
-                            },
+                            $ifNull: ["$$mem.roleResolved.name", "Sin rol"],
                         },
-                        createdAt: { $ifNull: ["$$mem.createdAt", null] },
                     },
                 },
             },
-
-            // MANTENEMOS CAMPOS POR COMPATIBILIDAD (primer tenant/rol)
-            tenantId: {
-                $cond: [
-                    { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.tenantResolved._id", 0] }, false] },
-                    { $toString: { $arrayElemAt: ["$membershipsResolved.tenantResolved._id", 0] } },
-                    "",
-                ],
-            },
-            tenantKey: {
-                $ifNull: [
-                    { $arrayElemAt: ["$membershipsResolved.tenantResolved.key", 0] },
-                    { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.tenantKey", 0] }, ""] },
-                ],
-            },
-            tenantNombre: {
-                $let: {
-                    vars: {
-                        resolvedTenantName: { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.tenantResolved.name", 0] }, ""] },
-                    },
-                    in: {
-                        $cond: [
-                            { $ne: ["$$resolvedTenantName", ""] },
-                            "$$resolvedTenantName",
-                            "Sin tenant",
-                        ],
-                    },
-                },
-            },
-            tenantTipo: {
-                $ifNull: [{ $arrayElemAt: ["$membershipsResolved.tenantResolved.type", 0] }, ""],
-            },
-
-            rolId: {
-                $cond: [
-                    { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.roleResolved._id", 0] }, false] },
-                    { $toString: { $arrayElemAt: ["$membershipsResolved.roleResolved._id", 0] } },
-                    "",
-                ],
-            },
-            roleKey: {
-                $let: {
-                    vars: {
-                        resolvedRoleKey: { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.roleResolved.key", 0] }, ""] },
-                        membershipRoleKey: { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.roleKey", 0] }, ""] },
-                    },
-                    in: {
-                        $cond: [
-                            { $ne: ["$$resolvedRoleKey", ""] },
-                            "$$resolvedRoleKey",
-                            "$$membershipRoleKey",
-                        ],
-                    },
-                },
-            },
-            roleName: {
-                $let: {
-                    vars: {
-                        resolvedRoleName: { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.roleResolved.name", 0] }, ""] },
-                    },
-                    in: {
-                        $cond: [
-                            { $ne: ["$$resolvedRoleName", ""] },
-                            "$$resolvedRoleName",
-                            "Sin rol",
-                        ],
-                    },
-                },
-            },
-
-            ultimoAcceso: { $ifNull: ["$lastLoginAt", null] },
-            membershipStatus: { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.status", 0] }, "unassigned"] },
             membershipsCount: { $size: "$membershipsResolved" },
+            membershipStatus: {
+                $ifNull: [{ $arrayElemAt: ["$membershipsResolved.status", 0] }, "unassigned"],
+            },
+            ultimoAcceso: { $ifNull: ["$lastLoginAt", null] },
             createdAt: 1,
             updatedAt: 1,
         },
@@ -357,14 +215,7 @@ function buildProjectionStage() {
 }
 
 export const usersRepositoryMongo = {
-    async list({
-        q = "",
-        estado = "",
-        tenantKey = "",
-        roleKey = "",
-        page = 1,
-        limit = 50,
-    }) {
+    async list({ q = "", estado = "", tenantKey = "", roleKey = "", page = 1, limit = 50 }) {
         const pageNum = Math.max(1, Number(page) || 1);
         const limitNum = Math.max(1, Math.min(200, Number(limit) || 50));
         const skip = (pageNum - 1) * limitNum;
@@ -394,8 +245,6 @@ export const usersRepositoryMongo = {
             },
         });
 
-        // CAMBIO IMPORTANTE: Ya no tomamos solo el primer elemento
-        // Mantenemos el array completo para procesarlo en la proyección
         pipeline.push(buildProjectionStage());
 
         const tenantKeySafe = str(tenantKey);
@@ -482,16 +331,7 @@ export const usersRepositoryMongo = {
         return Array.isArray(docs) && docs[0] ? docs[0] : null;
     },
 
-    async create({
-        nombre,
-        email,
-        pin,
-        rolId = null,
-        tenantId = null,
-        activo = true,
-        createdBy = null,
-        updatedBy = null,
-    }) {
+    async create({ nombre, email, pin, rolId = null, tenantId = null, activo = true, createdBy = null, updatedBy = null }) {
         const safeNombre = str(nombre);
         const [firstName = "", ...rest] = safeNombre.split(/\s+/);
         const lastName = rest.join(" ").trim();
@@ -552,7 +392,15 @@ export const usersRepositoryMongo = {
         }
 
         if (typeof nextPatch.pin !== "undefined") {
-            nextPatch.pinLength = str(nextPatch.pin).length || undefined;
+            const cleanPin = str(nextPatch.pin);
+
+            if (!cleanPin) {
+                delete nextPatch.pin;
+                delete nextPatch.pinLength;
+            } else {
+                nextPatch.pin = cleanPin;
+                nextPatch.pinLength = cleanPin.length;
+            }
         }
 
         const doc = await User.findByIdAndUpdate(id, nextPatch, {
@@ -580,83 +428,85 @@ export const usersRepositoryMongo = {
         return this.findById(id);
     },
 
-    // Actualizar acceso de usuario (crear/actualizar membership)
+    /**
+     * Eliminación física temporal para limpieza inicial de datos.
+     * Después de limpiar la BD, el controller debe volver a usar softDeleteById.
+     */
+    async hardDeleteById(id) {
+        const safeId = str(id);
+        if (!safeId) return null;
+
+        const doc = await User.findByIdAndDelete(safeId).lean().exec();
+
+        if (!doc) return null;
+
+        await Membership.deleteMany({
+            $or: [
+                { userId: safeId },
+                { user: safeId },
+            ],
+        }).exec();
+
+        return {
+            id: String(doc._id),
+            nombre: doc.displayName || `${doc.firstName || ""} ${doc.lastName || ""}`.trim(),
+            email: doc.email,
+        };
+    },
+
     async upsertAccessByUserId(userId, { tenantId, roleId, status = "active", createdBy = null, updatedBy = null }) {
-        try {
-            const safeUserId = str(userId);
-            if (!safeUserId) {
-                throw new Error("User ID is required");
-            }
+        const safeUserId = str(userId);
+        const safeTenantId = str(tenantId);
+        const safeRoleId = str(roleId);
 
-            console.log(`[UpsertAccess] Updating access for user: ${safeUserId}`);
+        if (!safeUserId) throw new Error("User ID is required");
+        if (!safeTenantId) throw new Error("Tenant ID is required");
+        if (!safeRoleId) throw new Error("Role ID is required");
 
-            // Verificar que el usuario existe
-            const user = await User.findById(safeUserId).lean().exec();
-            if (!user) {
-                console.log(`[UpsertAccess] User not found: ${safeUserId}`);
-                return null;
-            }
+        const user = await User.findById(safeUserId).lean().exec();
+        if (!user) return null;
 
-            // Verificar que el rol existe (si se proporcionó)
-            if (roleId) {
-                const roleExists = await Role.findById(roleId).lean().exec();
-                if (!roleExists) {
-                    throw new Error(`Role not found: ${roleId}`);
-                }
-            }
+        const tenant = await Tenant.findById(safeTenantId).lean().exec();
+        if (!tenant) throw new Error(`Tenant not found: ${safeTenantId}`);
 
-            // Verificar que el tenant existe (si se proporcionó)
-            if (tenantId) {
-                const tenantExists = await Tenant.findById(tenantId).lean().exec();
-                if (!tenantExists) {
-                    throw new Error(`Tenant not found: ${tenantId}`);
-                }
-            }
+        const role = await Role.findById(safeRoleId).lean().exec();
+        if (!role) throw new Error(`Role not found: ${safeRoleId}`);
 
-            // Buscar membership existente para este tenant específico
-            let membership = await Membership.findOne({
+        const userObjectId = new mongoose.Types.ObjectId(safeUserId);
+        const tenantObjectId = new mongoose.Types.ObjectId(safeTenantId);
+        const roleObjectId = new mongoose.Types.ObjectId(safeRoleId);
+
+        const now = new Date();
+        const actorId = updatedBy || createdBy || null;
+
+        await Membership.updateOne(
+            {
                 $or: [
-                    { userId: safeUserId, tenantId: tenantId },
-                    { user: safeUserId, tenantId: tenantId }
-                ]
-            }).exec();
-
-            const now = new Date();
-            const actorId = updatedBy || createdBy || null;
-
-            if (membership) {
-                // Actualizar membership existente
-                membership.roleId = roleId || membership.roleId;
-                membership.status = status;
-                membership.updatedAt = now;
-                membership.updatedBy = actorId;
-
-                await membership.save();
-                console.log(`[UpsertAccess] Updated existing membership: ${membership._id}`);
-            } else {
-                // Crear nueva membership
-                membership = await Membership.create({
-                    userId: safeUserId,
-                    roleId,
-                    tenantId,
+                    { userId: userObjectId, tenantId: tenantObjectId },
+                    { userId: safeUserId, tenantId: safeTenantId },
+                ],
+            },
+            {
+                $set: {
+                    userId: userObjectId,
+                    tenantId: tenantObjectId,
+                    roleId: roleObjectId,
+                    roleKey: role.key || "",
+                    tenantKey: tenant.key || "",
                     status,
-                    createdAt: now,
                     updatedAt: now,
+                    updatedBy: actorId,
+                },
+                $setOnInsert: {
+                    createdAt: now,
                     createdBy: actorId,
-                    updatedBy: actorId
-                });
-                console.log(`[UpsertAccess] Created new membership: ${membership._id}`);
-            }
+                },
+            },
+            { upsert: true }
+        ).exec();
 
-            // Obtener el usuario actualizado con todas sus memberships
-            const updatedUser = await this.findById(safeUserId);
-
-            return updatedUser;
-        } catch (error) {
-            console.error("[UpsertAccess Error]", error);
-            throw error;
-        }
-    }
+        return this.findById(safeUserId);
+    },
 };
 
 export default usersRepositoryMongo;

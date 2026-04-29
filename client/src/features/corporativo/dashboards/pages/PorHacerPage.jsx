@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 
 const cx = (...c) => c.filter(Boolean).join(" ");
 

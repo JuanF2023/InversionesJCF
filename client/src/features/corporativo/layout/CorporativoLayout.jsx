@@ -1,13 +1,13 @@
-// client/src/features/corporativo/layout/CorporativoLayout.jsx
+Ôªø// client/src/features/corporativo/layout/CorporativoLayout.jsx
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Outlet, Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import "@/styles/corporativo/underline-tabs.css";
 
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 import { loadSession } from "@/core/utils/authSession.js";
 import { useIdleLogout } from "@/core/utils/idleLogout";
 import { useAuthStore } from "@/features/auth/store/auth.store.js";
+import ThemeSwitcher from "@/core/theme/ThemeSwitcher.jsx";
 
 import {
   LayoutDashboard,
@@ -27,10 +27,6 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-/**
- * Tabs principales del shell corporativo.
- * El layout no debe depender de stores de dominio inexistentes.
- */
 const MAIN_TABS = [
   { to: "/corporativo/dashboards", label: "Dashboards", icon: <LayoutDashboard size={16} />, end: false },
   { to: "/corporativo/negocios", label: "Negocios", icon: <KanbanSquare size={16} /> },
@@ -40,7 +36,7 @@ const MAIN_TABS = [
   { to: "/corporativo/admin/users", label: "Accesos", icon: <ShieldCheck size={16} /> },
   { to: "/corporativo/por-hacer", label: "Por hacer", icon: <ListChecks size={16} /> },
   { to: "/corporativo/acerca-de", label: "Acerca de", icon: <Info size={16} /> },
-  { to: "/corporativo/filosofia-de-dar", label: "Filosof®™a de Dar", icon: <HomeIcon size={16} /> },
+  { to: "/corporativo/filosofia-de-dar", label: "Filosof√≠a de Dar", icon: <HomeIcon size={16} /> },
 ];
 
 function computeIsFormRoute(pathname) {
@@ -70,32 +66,27 @@ function readRuntimeUser() {
 function normalizeRoles(user) {
   const rolesFromArray = Array.isArray(user?.roles)
     ? user.roles
-      .map((r) => {
-        if (!r) return null;
-        if (typeof r === "string") return r.toLowerCase();
-        if (typeof r === "object") {
-          return String(
-            r.slug ||
-            r.roleSlug ||
-            r.name ||
-            r.roleName ||
-            r.code ||
-            r.id ||
-            r._id ||
-            ""
-          ).toLowerCase();
-        }
-        return String(r).toLowerCase();
-      })
-      .filter(Boolean)
+        .map((r) => {
+          if (!r) return null;
+          if (typeof r === "string") return r.toLowerCase();
+          if (typeof r === "object") {
+            return String(
+              r.slug ||
+                r.roleSlug ||
+                r.name ||
+                r.roleName ||
+                r.code ||
+                r.id ||
+                r._id ||
+                ""
+            ).toLowerCase();
+          }
+          return String(r).toLowerCase();
+        })
+        .filter(Boolean)
     : [];
 
-  const rolesFromFlatFields = [
-    user?.rol,
-    user?.role,
-    user?.roleSlug,
-    user?.roleName,
-  ]
+  const rolesFromFlatFields = [user?.rol, user?.role, user?.roleSlug, user?.roleName]
     .filter(Boolean)
     .map((r) => String(r).toLowerCase());
 
@@ -117,6 +108,7 @@ function canSeeAccessTab(user) {
     (Array.isArray(user?.tenants) ? user.tenants[0] : null);
 
   const tenant = rawTenant ? String(rawTenant).toLowerCase() : "";
+
   const isCorpTenant =
     tenant === "corp" ||
     tenant === "corporativo" ||
@@ -144,9 +136,10 @@ function ConfirmLogoutModal({ open, onCancel, onConfirm }) {
     <div className="fixed inset-0 z-[90] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/60" onClick={onCancel} />
       <div className="relative w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-2xl">
-        <h3 className="text-lg font-semibold">Cerrar sesi®Æn</h3>
+        <h3 className="text-lg font-semibold">Cerrar sesi√≥n</h3>
+
         <p className="mt-2 text-sm opacity-80">
-          ?Seguro que deseas cerrar la sesi®Æn?
+          ¬øSeguro que deseas cerrar la sesi√≥n?
         </p>
 
         <div className="mt-6 flex items-center justify-end gap-3">
@@ -161,9 +154,9 @@ function ConfirmLogoutModal({ open, onCancel, onConfirm }) {
           <button
             type="button"
             onClick={onConfirm}
-            className="rounded-xl border border-red-500/30 bg-red-500/15 px-4 py-2 text-sm font-semibold text-red-200"
+            className="rounded-xl border border-red-500/30 bg-red-500/15 px-4 py-2 text-sm font-semibold text-red-500"
           >
-            Cerrar sesi®Æn
+            Cerrar sesi√≥n
           </button>
         </div>
       </div>
@@ -211,11 +204,13 @@ export default function CorporativoLayout() {
   useEffect(() => {
     if (!userMenuOpen) return;
 
-    const onDoc = (e) => {
+    const onDoc = (event) => {
       const menu = document.getElementById("user-menu-popover");
       const btn = document.getElementById("user-menu-button");
+
       if (!menu || !btn) return;
-      if (!menu.contains(e.target) && !btn.contains(e.target)) {
+
+      if (!menu.contains(event.target) && !btn.contains(event.target)) {
         setUserMenuOpen(false);
       }
     };
@@ -227,8 +222,8 @@ export default function CorporativoLayout() {
   useEffect(() => {
     if (!userMenuOpen) return;
 
-    const onKey = (e) => {
-      if (e.key === "Escape") setUserMenuOpen(false);
+    const onKey = (event) => {
+      if (event.key === "Escape") setUserMenuOpen(false);
     };
 
     document.addEventListener("keydown", onKey);
@@ -269,17 +264,19 @@ export default function CorporativoLayout() {
               >
                 <BarChart3 size={16} />
               </div>
+
               <span className="font-semibold tracking-tight">Inversiones JCF</span>
             </Link>
 
             <div className="flex items-center gap-2">
               <button
+                type="button"
                 onClick={goLoginKeepAlive}
                 className={clsx(
                   "hidden md:inline-flex items-center gap-2 h-9 px-3 rounded-lg text-sm ring-1 ring-border",
                   isNeo ? "bg-bgElev neu" : "bg-[var(--chip)] hover:bg-[var(--chip-hover)]"
                 )}
-                title="Cambiar usuario (mantiene sesi®Æn activa)"
+                title="Cambiar usuario (mantiene sesi√≥n activa)"
               >
                 <Undo2 size={16} />
                 Ir a Login
@@ -288,34 +285,41 @@ export default function CorporativoLayout() {
               <div className="hidden md:flex items-center">
                 <button
                   id="user-menu-button"
+                  type="button"
                   aria-haspopup="menu"
                   aria-expanded={userMenuOpen}
-                  onClick={() => setUserMenuOpen((v) => !v)}
+                  onClick={() => setUserMenuOpen((value) => !value)}
                   className="user-pill"
                   title={user.email}
                 >
                   <div className="user-pill__avatar flex items-center justify-center overflow-hidden">
                     {user.photoUrl ? (
-                      <img src={user.photoUrl} alt={user.name} className="w-full h-full object-cover" />
+                      <img
+                        src={user.photoUrl}
+                        alt={user.name}
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
                       <UserIcon size={18} className="opacity-70" />
                     )}
                   </div>
+
                   <span className="user-pill__name">{user.name}</span>
                   <ChevronDown size={16} className="caret opacity-70" />
                 </button>
 
-                {userMenuOpen && (
+                {userMenuOpen ? (
                   <div
                     id="user-menu-popover"
                     role="menu"
-                    aria-label="Men®≤ de usuario"
+                    aria-label="Men√∫ de usuario"
                     className="user-menu"
                     style={{ marginTop: 8 }}
                     tabIndex={-1}
                   >
                     <div className="user-menu__item user-menu__item--static" role="presentation">
                       <UserIcon size={16} />
+
                       <div className="text-left">
                         <div className="text-sm font-semibold leading-4">{user.name}</div>
                         <div className="text-[11px] subtle leading-4">{user.email}</div>
@@ -324,24 +328,30 @@ export default function CorporativoLayout() {
 
                     <div className="user-menu__sep" />
 
+                    <ThemeSwitcher />
+
+                    <div className="user-menu__sep" />
+
                     <button
+                      type="button"
                       className="user-menu__item user-menu__item--danger"
                       role="menuitem"
                       onClick={() => setConfirmLogoutOpen(true)}
-                      title="Cerrar sesi®Æn"
+                      title="Cerrar sesi√≥n"
                     >
                       <LogOut size={16} />
-                      <span>Cerrar sesi®Æn</span>
+                      <span>Cerrar sesi√≥n</span>
                     </button>
                   </div>
-                )}
+                ) : null}
               </div>
 
               <div className="md:hidden flex items-center gap-2">
                 <button
-                  aria-label="Abrir men®≤"
+                  type="button"
+                  aria-label="Abrir men√∫"
                   aria-expanded={mobileOpen}
-                  onClick={() => setMobileOpen((v) => !v)}
+                  onClick={() => setMobileOpen((value) => !value)}
                   className={clsx(
                     "inline-flex items-center justify-center h-11 w-11 rounded-xl ring-1 ring-border",
                     isNeo ? "bg-bgElev neu" : "bg-[var(--chip)] hover:bg-[var(--chip-hover)]"
@@ -383,7 +393,7 @@ export default function CorporativoLayout() {
           </div>
         </div>
 
-        {mobileOpen && (
+        {mobileOpen ? (
           <div className="md:hidden border-t border-border/60 bg-bgElev">
             <div className="container-90 py-3 flex flex-col gap-2">
               {visibleMainTabs.map((item) => (
@@ -393,9 +403,7 @@ export default function CorporativoLayout() {
                   className={({ isActive }) =>
                     clsx(
                       "rounded-xl px-3 py-2 text-sm font-semibold",
-                      isActive
-                        ? "bg-[var(--chip-hover)]"
-                        : "bg-[var(--chip)]"
+                      isActive ? "bg-[var(--chip-hover)]" : "bg-[var(--chip)]"
                     )
                   }
                 >
@@ -414,19 +422,27 @@ export default function CorporativoLayout() {
                 Ir a Login
               </button>
 
+              <div className="rounded-xl bg-[var(--chip)] p-2">
+                <ThemeSwitcher />
+              </div>
+
               <button
                 type="button"
                 onClick={() => setConfirmLogoutOpen(true)}
-                className="rounded-xl px-3 py-2 text-left text-sm font-semibold bg-red-500/15 text-red-200"
+                className="rounded-xl px-3 py-2 text-left text-sm font-semibold bg-red-500/15 text-red-500"
               >
-                Cerrar sesi®Æn
+                Cerrar sesi√≥n
               </button>
             </div>
           </div>
-        )}
+        ) : null}
       </header>
 
-      <main id="contenido" tabIndex={-1} className="flex-1 focus:outline-none overflow-y-auto overflow-x-hidden">
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="flex-1 focus:outline-none overflow-y-auto overflow-x-hidden"
+      >
         <div className={clsx("container-90 pt-6", mainBottomPadding)}>
           <Outlet />
         </div>
@@ -458,16 +474,16 @@ export default function CorporativoLayout() {
               { to: "/corporativo", label: "Inicio" },
               { to: "/corporativo/transacciones", label: "Transacciones" },
               { to: "/corporativo/dashboards/informes", label: "Informes" },
-            ].map((b) => (
+            ].map((button) => (
               <Link
-                key={b.to}
-                to={b.to}
+                key={button.to}
+                to={button.to}
                 className={clsx(
                   "rounded-md px-3 py-1.5 text-sm text-text",
                   isNeo ? "bg-bgElev neu" : "bg-[var(--chip)] hover:bg-[var(--chip-hover)]"
                 )}
               >
-                {b.label}
+                {button.label}
               </Link>
             ))}
           </div>

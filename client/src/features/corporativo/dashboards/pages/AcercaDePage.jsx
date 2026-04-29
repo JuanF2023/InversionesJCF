@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 
 const cx = (...c) => c.filter(Boolean).join(" ");
 
@@ -12,8 +12,8 @@ export default function AcercaDe() {
       <div className={cx("p-5", isNeo ? "neo-card neo-card--deep neo-card--tinted" : "card")}>
         <h3 className="text-lg font-semibold text-text">Acerca de esta iniciativa</h3>
         <p className="text-sm subtle">
-          Aqu¨ª ir¨¢ el contenido de la primera p¨¢gina del PDF <i>¡°Indicadores de Inversi¨®n JULIO 2025¡±</i>.
-          (Mock) Agrega visi¨®n, misi¨®n, objetivos y estrategia general resumida.
+          Aquï¿½ï¿½ irï¿½ï¿½ el contenido de la primera pï¿½ï¿½gina del PDF <i>ï¿½ï¿½Indicadores de Inversiï¿½ï¿½n JULIO 2025ï¿½ï¿½</i>.
+          (Mock) Agrega visiï¿½ï¿½n, misiï¿½ï¿½n, objetivos y estrategia general resumida.
         </p>
       </div>
       <div className="text-xs subtle">

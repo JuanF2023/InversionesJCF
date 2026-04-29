@@ -20,14 +20,15 @@ import { useAuthStore } from "@/features/auth/store/auth.store.js";
 
 /* ---------- Fallbacks ---------- */
 const Fallback = () => (
-  <div className="min-h-[40vh] grid place-items-center p-8">
+  <div className="grid min-h-[40vh] place-items-center p-8">
     <div className="w-full max-w-4xl space-y-4">
-      <div className="h-8 w-56 rounded-xl animate-pulse bg-[color-mix(in_srgb,var(--panel)_85%,var(--text)_15%)]" />
-      <div className="h-4 w-80 rounded-md animate-pulse bg-[color-mix(in_srgb,var(--panel)_85%,var(--text)_15%)]" />
+      <div className="h-8 w-56 animate-pulse rounded-xl bg-[color-mix(in_srgb,var(--panel)_85%,var(--text)_15%)]" />
+      <div className="h-4 w-80 animate-pulse rounded-md bg-[color-mix(in_srgb,var(--panel)_85%,var(--text)_15%)]" />
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {[1, 2, 3].map((k) => (
+        {[1, 2, 3].map((key) => (
           <div
-            key={k}
+            key={key}
             className="h-40 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--panel)] shadow-sm"
           >
             <div className="h-full w-full animate-pulse bg-[color-mix(in_srgb,var(--panel)_80%,var(--text)_10%)]" />
@@ -40,18 +41,19 @@ const Fallback = () => (
 
 const RouteError = () => (
   <div className="grid min-h-[50vh] place-items-center p-8">
-    <div className="max-w-xl w-full rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-xl">
-      <h2 className="mb-2 text-xl font-semibold">Ocurri®Æ un problema</h2>
-      <p className="text-sm opacity-80">Intenta refrescar o volver atr®¢s.</p>
+    <div className="w-full max-w-xl rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-xl">
+      <h2 className="mb-2 text-xl font-semibold">Ocurri√≥ un problema</h2>
+      <p className="text-sm opacity-80">Intenta refrescar o volver atr√°s.</p>
     </div>
   </div>
 );
 
 const NotFound = () => (
   <div className="grid min-h-[50vh] place-items-center p-8">
-    <div className="max-w-xl w-full rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-xl">
+    <div className="w-full max-w-xl rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-xl">
       <h1 className="mb-1 text-2xl font-semibold">404</h1>
       <p className="opacity-80">La ruta que buscas no existe.</p>
+
       <div className="mt-4">
         <a
           href="/login"
@@ -77,7 +79,6 @@ function RouterShell() {
 /* ---------- Lazy pages ---------- */
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage.jsx"));
 
-/* Corporativo base */
 const CorporativoLayout = lazy(() =>
   import("@/features/corporativo/layout/CorporativoLayout.jsx")
 );
@@ -144,7 +145,6 @@ const BusinessFormPage = lazy(() =>
   import("@/features/corporativo/negocios/pages/BusinessFormPage.jsx")
 );
 
-/* Negocio detalle */
 const BusinessLayout = lazy(() =>
   import("@/features/corporativo/negocios/components/business-detail/BusinessLayout.jsx")
 );
@@ -172,7 +172,6 @@ const PropiedadesIngresos = lazy(() =>
   import("@/features/corporativo/propiedades/pages/PropiedadesIngresos.jsx")
 );
 
-/* Propiedades > Detalles */
 const DetallesLayout = lazy(() =>
   import("@/features/corporativo/propiedades/components/detalles/DetallesLayout.jsx")
 );
@@ -195,7 +194,6 @@ const DetallesHistorialProp = lazy(() =>
   import("@/features/corporativo/propiedades/components/detalles/DetallesHistorialProp.jsx")
 );
 
-/* Propiedades > Unidades */
 const UnidadesLayout = lazy(() =>
   import("@/features/corporativo/propiedades/components/unidades/UnidadesLayout.jsx")
 );
@@ -301,6 +299,7 @@ const withProtected = (element) => <ProtectedRoute>{element}</ProtectedRoute>;
 function hasValidPersistedSession() {
   const session = loadSession() || {};
   const token = typeof session?.token === "string" ? session.token.trim() : "";
+
   return Boolean(token && isTokenValid(token));
 }
 
@@ -331,7 +330,6 @@ const router = createBrowserRouter([
         errorElement: <RouteError />,
         children: [
           { index: true, element: <Navigate to="dashboards/negocios" replace /> },
-
           {
             path: "dashboards",
             element: withSuspense(<DashboardsLayout />),
@@ -345,7 +343,6 @@ const router = createBrowserRouter([
               { path: "informes", element: withSuspense(<PanelInformes />) },
             ],
           },
-
           {
             path: "negocios",
             element: withSuspense(<NegociosLayout />),
@@ -371,7 +368,6 @@ const router = createBrowserRouter([
               },
             ],
           },
-
           {
             path: "propiedades",
             element: withSuspense(<PropiedadesLayout />),
@@ -392,7 +388,7 @@ const router = createBrowserRouter([
                     index: true,
                     element: (
                       <div className="subtle rounded-xl border border-[var(--border)] bg-[var(--panel)] p-3 text-sm">
-                        Selecciona una propiedad y una secci®Æn°≠
+                        Selecciona una propiedad y una secci√≥n.
                       </div>
                     ),
                   },
@@ -418,7 +414,6 @@ const router = createBrowserRouter([
               },
             ],
           },
-
           {
             path: "proyectos",
             element: withSuspense(<ProyectosLayout />),
@@ -431,7 +426,6 @@ const router = createBrowserRouter([
               { path: ":id", element: withSuspense(<ProyectosDetailsPage />) },
             ],
           },
-
           {
             path: "indicadores",
             element: withSuspense(<IndicadoresLayout />),
@@ -443,7 +437,6 @@ const router = createBrowserRouter([
               { path: "proyecciones", element: withSuspense(<IndicadoresProyeccionesPage />) },
             ],
           },
-
           {
             path: "informes",
             element: withSuspense(<InformesLayout />),
@@ -455,7 +448,6 @@ const router = createBrowserRouter([
               { path: "exportar", element: withSuspense(<InformesExportarPage />) },
             ],
           },
-
           {
             path: "transacciones",
             element: withSuspense(<TransaccionesLayout />),
@@ -468,13 +460,11 @@ const router = createBrowserRouter([
               { path: "reportes", element: withSuspense(<TransaccionesReportesPage />) },
             ],
           },
-
           { path: "generales", element: withSuspense(<GeneralesPage />) },
           { path: "por-hacer", element: withSuspense(<PorHacerPage />) },
           { path: "acerca-de", element: withSuspense(<AcercaDePage />) },
           { path: "filosofia-de-dar", element: withSuspense(<FilosofiaDeDarPage />) },
           { path: "panel-negocios-page", element: withSuspense(<PanelNegociosPage />) },
-
           {
             path: "admin/users",
             element: withSuspense(<AccessLayout />),
@@ -488,7 +478,6 @@ const router = createBrowserRouter([
               { path: ":userId", element: withSuspense(<UserDetailPage />) },
             ],
           },
-
           { path: "*", element: <Navigate to="dashboards/negocios" replace /> },
         ],
       },
@@ -503,8 +492,7 @@ export default function App() {
 
   useEffect(() => {
     const session = loadSession() || {};
-    const token =
-      typeof session?.token === "string" ? session.token.trim() : "";
+    const token = typeof session?.token === "string" ? session.token.trim() : "";
 
     if (token && !isTokenValid(token)) {
       clearSession();

@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
-import DataTable from "@/shared/components/ui/table/DataTable.jsx";
+// client/src/features/corporativo/proyectos/pages/ProyectosListPage.jsx
+import React, { useMemo, useState } from "react";
+import DataTable from "@/core/ui/components/DataTable.jsx";
 
 const money = (n) =>
   new Intl.NumberFormat("es-US", {
@@ -7,12 +8,13 @@ const money = (n) =>
     currency: "USD",
   }).format(Number(n || 0));
 
-const d = (x) => (x ? String(x).slice(0, 10) : "�?);
+const formatDate = (value) =>
+  value ? String(value).slice(0, 10) : "—";
 
 export default function ProyectosListPage() {
-  // Más adelante vas a remplazar esto con fetch real a /api/proyectos
-  const [loading, setLoading] = useState(false);
-  const [rows, setRows] = useState([
+  // Más adelante vas a reemplazar esto con fetch real a /api/proyectos
+  const [loading] = useState(false);
+  const [rows] = useState([
     {
       id: "demo-1",
       codigo: "PRJ-0001",
@@ -37,13 +39,13 @@ export default function ProyectosListPage() {
         key: "inicio",
         header: "Inicio",
         width: 130,
-        render: (r) => d(r.inicio),
+        render: (r) => formatDate(r.inicio),
       },
       {
         key: "fin",
         header: "Fin",
         width: 130,
-        render: (r) => d(r.fin),
+        render: (r) => formatDate(r.fin),
       },
       {
         key: "presupuesto",
@@ -60,8 +62,8 @@ export default function ProyectosListPage() {
   );
 
   return (
-    <section className="neo-card neo-card--deep neo-card--tinted p-4 rounded-2xl space-y-3">
-      <div className="text-sm subtle">Listado de proyectos</div>
+    <section className="neo-card neo-card--deep neo-card--tinted space-y-3 rounded-2xl p-4">
+      <div className="subtle text-sm">Listado de proyectos</div>
 
       <DataTable
         columns={columns}
@@ -70,7 +72,7 @@ export default function ProyectosListPage() {
         striped
         dense
         searchable
-        searchPlaceholder="Buscar�?código, nombre, estado"
+        searchPlaceholder="Buscar por código, nombre o estado"
         pageSize={10}
         pageSizeOptions={[5, 10, 20, 50]}
         rowKey={(r) => r.id || r.codigo}
@@ -83,4 +85,3 @@ export default function ProyectosListPage() {
     </section>
   );
 }
-
