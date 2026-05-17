@@ -1,145 +1,166 @@
-﻿// client/src/features/corporativo/access/components/CompleteAccessModal.jsx
-import React, { useEffect, useState } from "react";
-import { X } from "lucide-react";
-import toast from "react-hot-toast";
+// client/src/features/corporativo/access/components/CompleteAccessModal.jsx
+import React from "react";
+import { CheckCircle2, UserRound, X } from "lucide-react";
 
-import { useAccessMembershipsStore } from "@/features/corporativo/access/store/accessMemberships.store.js";
+import FormPrimaryButton from "@/core/ui/actions/FormPrimaryButton.jsx";
+import ConfirmModal from "@/core/ui/modals/ConfirmModal.jsx";
+import PanelSurface from "@/core/ui/surfaces/PanelSurface.jsx";
 
-export default function CompleteAccessModal({ open, onClose, user, onSaved }) {
-  const tenants = useAccessMembershipsStore((state) => state.tenants);
-  const roles = useAccessMembershipsStore((state) => state.roles);
-  const cargarOpciones = useAccessMembershipsStore((state) => state.cargarOpciones);
-  const guardarAccesoUsuario = useAccessMembershipsStore(
-    (state) => state.guardarAccesoUsuario
-  );
+import {
+    AccessSummaryPanel,
+    CurrentAccessPanel,
+    NewAccessForm,
+    useCompleteAccessModal,
+} from "@/features/corporativo/access/components/access-modal";
 
-  const [tenantId, setTenantId] = useState("");
-  const [roleId, setRoleId] = useState("");
+import { EMPTY_VALUE } from "@/features/corporativo/access/components/access-modal/utils/accessModal.utils.js";
 
-  useEffect(() => {
-    if (!open || !user?.id) return;
-
-    cargarOpciones(user.id).catch(() => {
-      toast.error("Error cargando opciones");
+export default function CompleteAccessModal({
+    open,
+    onClose,
+    user,
+    onSaved,
+}) {
+    const modal = useCompleteAccessModal({
+        open,
+        user,
+        onSaved,
     });
-  }, [open, user?.id, cargarOpciones]);
 
-  useEffect(() => {
-    if (!open || !user) return;
-
-    setTenantId("");
-    setRoleId("");
-  }, [open, user]);
-
-  if (!open || !user) return null;
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    if (!tenantId || !roleId) {
-      toast.error("Debes seleccionar tenant y rol");
-      return;
+    if (!open || !user) {
+        return null;
     }
 
-    try {
-      await guardarAccesoUsuario(user.id, {
-        tenantId,
-        roleId,
-        status: "active",
-      });
-
-      toast.success("Acceso agregado");
-
-      if (typeof onSaved === "function") {
-        await onSaved();
-      }
-
-      setTenantId("");
-      setRoleId("");
-    } catch {
-      toast.error("Error guardando acceso");
-    }
-  }
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl dark:bg-neutral-900">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-semibold">Gestionar accesos</h3>
-            <p className="text-xs opacity-60">
-              Puedes asignar múltiples accesos al usuario
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-xl p-2 transition hover:bg-black/5 dark:hover:bg-white/10"
-            aria-label="Cerrar modal"
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        <div className="mb-4 rounded-xl bg-gray-100 p-3 text-sm dark:bg-neutral-800">
-          <strong>{user.nombre}</strong>
-          <div className="text-xs opacity-70">{user.email}</div>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="mb-1 block text-sm font-semibold">Tenant</label>
-            <select
-              value={tenantId}
-              onChange={(event) => setTenantId(event.target.value)}
-              className="w-full rounded-xl border p-3"
+    return (
+        <>
+            <div
+                className="fixed inset-0 z-50 flex items-end justify-center overflow-x-hidden bg-black/45 px-3 py-3 backdrop-blur-sm sm:items-center sm:px-6"
+                role="presentation"
             >
-              <option value="">Seleccione tenant</option>
+                <PanelSurface
+                    variant="glass"
+                    padding="lg"
+                    className="max-h-[92vh] w-full max-w-5xl overflow-y-auto border-[color:color-mix(in_srgb,var(--accent)_28%,var(--border))] shadow-2xl"
+                >
+                    <div
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="complete-access-title"
+                        className="space-y-5"
+                    >
+                        <div className="flex items-start justify-between gap-4">
+                            <div className="min-w-0">
+                                <h3
+                                    id="complete-access-title"
+                                    className="text-lg font-bold tracking-tight"
+                                >
+                                    Gestionar accesos
+                                </h3>
 
-              {tenants.map((tenant) => (
-                <option key={tenant.id} value={tenant.id}>
-                  {tenant.nombre}
-                </option>
-              ))}
-            </select>
-          </div>
+                                <p className="mt-1 text-sm opacity-65">
+                                    Asigna tenant y rol al usuario seleccionado.
+                                </p>
+                            </div>
 
-          <div>
-            <label className="mb-1 block text-sm font-semibold">Rol</label>
-            <select
-              value={roleId}
-              onChange={(event) => setRoleId(event.target.value)}
-              className="w-full rounded-xl border p-3"
-            >
-              <option value="">Seleccione rol</option>
+                            <button
+                                type="button"
+                                onClick={onClose}
+                                disabled={modal.saving}
+                                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--chip)] transition hover:bg-[var(--chip-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+                                aria-label="Cerrar modal"
+                                title="Cerrar"
+                            >
+                                <X size={18} />
+                            </button>
+                        </div>
 
-              {roles.map((role) => (
-                <option key={role.id} value={role.id}>
-                  {role.nombre}
-                </option>
-              ))}
-            </select>
-          </div>
+                        <div className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--chip)] p-3">
+                            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-[var(--border)] bg-[var(--bg)]">
+                                <UserRound size={18} className="opacity-70" />
+                            </div>
 
-          <div className="flex items-center justify-between pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-xl border px-4 py-2"
-            >
-              Cerrar
-            </button>
+                            <div className="min-w-0">
+                                <p className="truncate text-sm font-bold">
+                                    {user.nombre || EMPTY_VALUE}
+                                </p>
 
-            <button
-              type="submit"
-              className="rounded-xl bg-emerald-500 px-4 py-2 text-white"
-            >
-              Agregar acceso
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+                                <p className="truncate text-xs opacity-65">
+                                    {user.email || EMPTY_VALUE}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,1.05fr)]">
+                            <CurrentAccessPanel
+                                memberships={modal.memberships}
+                                deletingAccessId={modal.deletingAccessId}
+                                onDelete={modal.openDeleteModal}
+                            />
+
+                            <form
+                                onSubmit={modal.handleSubmit}
+                                className="space-y-4"
+                            >
+                                <NewAccessForm
+                                    tenantId={modal.tenantId}
+                                    roleId={modal.roleId}
+                                    availableTenants={modal.availableTenants}
+                                    filteredRoles={modal.filteredRoles}
+                                    disabled={modal.disabled}
+                                    hasAvailableTenants={
+                                        modal.hasAvailableTenants
+                                    }
+                                    onTenantChange={modal.handleTenantChange}
+                                    onRoleChange={modal.handleRoleChange}
+                                />
+
+                                <AccessSummaryPanel
+                                    selectedTenant={modal.selectedTenant}
+                                    selectedRole={modal.selectedRole}
+                                />
+
+                                <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:items-center sm:justify-between">
+                                    <button
+                                        type="button"
+                                        onClick={onClose}
+                                        disabled={modal.saving}
+                                        className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--chip)] px-4 py-2.5 text-sm font-semibold transition hover:bg-[var(--chip-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+                                    >
+                                        Cerrar
+                                    </button>
+
+                                    <FormPrimaryButton
+                                        type="submit"
+                                        icon={CheckCircle2}
+                                        loading={modal.saving}
+                                        disabled={!modal.canSubmit}
+                                        title="Agregar acceso"
+                                        disabledTitle="Selecciona tenant y rol para habilitar esta acción."
+                                        loadingText="Guardando..."
+                                    >
+                                        Agregar acceso
+                                    </FormPrimaryButton>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </PanelSurface>
+            </div>
+
+            <ConfirmModal
+                open={modal.deleteModal.open}
+                title="Quitar acceso"
+                message={`¿Seguro que deseas quitar el acceso "${modal.deleteModal.membership?.roleName || "Sin rol"}" del tenant "${modal.deleteModal.membership?.tenantNombre || "Sin tenant"}"?`}
+                confirmText="Sí, quitar acceso"
+                cancelText="Cancelar"
+                loading={
+                    modal.deletingAccessId ===
+                    modal.deleteModal.membership?.membershipId
+                }
+                variant="danger"
+                onCancel={modal.closeDeleteModal}
+                onConfirm={modal.confirmDeleteAccess}
+            />
+        </>
+    );
 }
