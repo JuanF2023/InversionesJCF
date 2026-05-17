@@ -1,24 +1,66 @@
 // server/src/modules/corporativo/infrastructure/repositories/users.repository.mongo.js
-import { User } from "#modules/auth/infrastructure/mongoose/models/user.model.js";
-import { Role } from "#modules/roles/infrastructure/mongoose/models/role.model.js";
-import { Tenant } from "#modules/tenants/infrastructure/mongoose/models/tenant.model.js";
-import { Membership } from "#modules/auth/infrastructure/mongoose/models/membership.model.js";
+
 import mongoose from "mongoose";
-const Q_MAX_TIME_MS = Number(process.env.MONGO_QUERY_MAX_TIME_MS || 4000);
+
+import { User } from "#modules/auth/infrastructure/mongoose/models/user.model.js";
+import { Membership } from "#modules/auth/infrastructure/mongoose/models/membership.model.js";
+
+import { Role } from "#modules/roles/infrastructure/mongoose/models/role.model.js";
+
+import { Tenant } from "#modules/tenants/infrastructure/mongoose/models/tenant.model.js";
+
+import { hashPin } from "#modules/auth/application/security/pin.security.js";
+
+import { auditLogService } from "#modules/audit/application/services/audit-log.service.js";
+
+import {
+    AUDIT_ACTIONS,
+    AUDIT_MODULES,
+} from "#modules/audit/domain/audit-actions.constants.js";
+
+const Q_MAX_TIME_MS = Number(
+    process.env.MONGO_QUERY_MAX_TIME_MS || 4000
+);
 
 function str(value) {
-    return String(value ?? "").trim();
+    return String(value ? "").trim();
 }
 
 function escapeRegex(value) {
-    return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return String(value).replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+    );
+}
+
+function resolveActorId(value) {
+    if (!value) return null;
+    if (value?._id) return value._id;
+    return value;
+}
+
+async function recordAuditSafe(payload) {
+    try {
+        await auditLogService.record(payload);
+    } catch (error) {
+        console.error(
+            "[audit] No se pudo registrar auditoría:",
+            error?.message || error
+        );
+    }
 }
 
 function buildSearchMatch(q) {
     const safe = str(q);
-    if (!safe) return null;
 
-    const regex = new RegExp(escapeRegex(safe), "i");
+    if (!safe) {
+        return null;
+    }
+
+    const regex = new RegExp(
+        escapeRegex(safe),
+        "i"
+    );
 
     return {
         $or: [
@@ -33,12 +75,30 @@ function buildSearchMatch(q) {
 function buildStatusMatch(estado) {
     const normalized = str(estado).toLowerCase();
 
-    if (["activo", "activos", "activa", "activas"].includes(normalized)) {
-        return { status: "active" };
+    if (
+        [
+            "activo",
+            "activos",
+            "activa",
+            "activas",
+        ].includes(normalized)
+    ) {
+        return {
+            status: "active",
+        };
     }
 
-    if (["inactivo", "inactivos", "inactiva", "inactivas"].includes(normalized)) {
-        return { status: "inactive" };
+    if (
+        [
+            "inactivo",
+            "inactivos",
+            "inactiva",
+            "inactivas",
+        ].includes(normalized)
+    ) {
+        return {
+            status: "inactive",
+        };
     }
 
     return null;
@@ -50,13 +110,32 @@ function buildMembershipLookupPipeline() {
             $match: {
                 $expr: {
                     $or: [
-                        { $eq: ["$userId", "$$userIdObj"] },
-                        { $eq: [{ $toString: "$userId" }, "$$userIdStr"] },
+                        {
+                            $eq: [
+                                "$userId",
+                                "$$userIdObj",
+                            ],
+                        },
+                        {
+                            $eq: [
+                                {
+                                    $toString:
+                                        "$userId",
+                                },
+                                "$$userIdStr",
+                            ],
+                        },
                     ],
                 },
             },
         },
-        { $sort: { createdAt: -1 } },
+
+        {
+            $sort: {
+                createdAt: -1,
+            },
+        },
+
         {
             $lookup: {
                 from: "roles",
@@ -65,6 +144,7 @@ function buildMembershipLookupPipeline() {
                 as: "roleDoc",
             },
         },
+
         {
             $lookup: {
                 from: "tenants",
@@ -73,20 +153,38 @@ function buildMembershipLookupPipeline() {
                 as: "tenantDoc",
             },
         },
+
         {
             $addFields: {
-                roleResolved: { $arrayElemAt: ["$roleDoc", 0] },
-                tenantResolved: { $arrayElemAt: ["$tenantDoc", 0] },
+                roleResolved: {
+                    $arrayElemAt: [
+                        "$roleDoc",
+                        0,
+                    ],
+                },
+
+                tenantResolved: {
+                    $arrayElemAt: [
+                        "$tenantDoc",
+                        0,
+                    ],
+                },
             },
         },
+
         {
             $project: {
                 _id: 1,
                 userId: 1,
                 roleId: 1,
                 tenantId: 1,
+                roleKey: 1,
+                tenantKey: 1,
                 status: 1,
                 createdAt: 1,
+                updatedAt: 1,
+                createdBy: 1,
+                updatedBy: 1,
                 roleResolved: 1,
                 tenantResolved: 1,
             },
@@ -98,201 +196,437 @@ function buildProjectionStage() {
     return {
         $project: {
             _id: 0,
-            id: { $toString: "$_id" },
+
+            id: {
+                $toString: "$_id",
+            },
+
             mongoId: "$_id",
+
             nombre: {
                 $let: {
                     vars: {
-                        displayName: { $trim: { input: { $ifNull: ["$displayName", ""] } } },
+                        displayName: {
+                            $trim: {
+                                input: {
+                                    $ifNull: [
+                                        "$displayName",
+                                        "",
+                                    ],
+                                },
+                            },
+                        },
+
                         fallbackName: {
                             $trim: {
                                 input: {
                                     $concat: [
-                                        { $ifNull: ["$firstName", ""] },
+                                        {
+                                            $ifNull:
+                                                [
+                                                    "$firstName",
+                                                    "",
+                                                ],
+                                        },
+
                                         " ",
-                                        { $ifNull: ["$lastName", ""] },
+
+                                        {
+                                            $ifNull:
+                                                [
+                                                    "$lastName",
+                                                    "",
+                                                ],
+                                        },
                                     ],
                                 },
                             },
                         },
                     },
+
                     in: {
                         $cond: [
-                            { $ne: ["$$displayName", ""] },
+                            {
+                                $ne: [
+                                    "$$displayName",
+                                    "",
+                                ],
+                            },
+
                             "$$displayName",
+
                             "$$fallbackName",
                         ],
                     },
                 },
             },
-            email: { $ifNull: ["$email", ""] },
-            activo: {
-                $eq: [{ $toLower: { $ifNull: ["$status", "inactive"] } }, "active"],
+
+            email: {
+                $ifNull: [
+                    "$email",
+                    "",
+                ],
             },
+
+            activo: {
+                $eq: [
+                    {
+                        $toLower: {
+                            $ifNull: [
+                                "$status",
+                                "inactive",
+                            ],
+                        },
+                    },
+                    "active",
+                ],
+            },
+
             estado: {
                 $cond: [
-                    { $eq: [{ $toLower: { $ifNull: ["$status", "inactive"] } }, "active"] },
+                    {
+                        $eq: [
+                            {
+                                $toLower: {
+                                    $ifNull: [
+                                        "$status",
+                                        "inactive",
+                                    ],
+                                },
+                            },
+                            "active",
+                        ],
+                    },
+
                     "Activo",
+
                     "Inactivo",
                 ],
             },
-            tenantId: {
-                $cond: [
-                    { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.tenantResolved._id", 0] }, false] },
-                    { $toString: { $arrayElemAt: ["$membershipsResolved.tenantResolved._id", 0] } },
-                    "",
-                ],
-            },
-            tenantKey: {
-                $ifNull: [
-                    { $arrayElemAt: ["$membershipsResolved.tenantResolved.key", 0] },
-                    "",
-                ],
-            },
-            tenantNombre: {
-                $ifNull: [
-                    { $arrayElemAt: ["$membershipsResolved.tenantResolved.name", 0] },
-                    "Sin tenant",
-                ],
-            },
-            tenantTipo: {
-                $ifNull: [
-                    { $arrayElemAt: ["$membershipsResolved.tenantResolved.type", 0] },
-                    "",
-                ],
-            },
-            rolId: {
-                $cond: [
-                    { $ifNull: [{ $arrayElemAt: ["$membershipsResolved.roleResolved._id", 0] }, false] },
-                    { $toString: { $arrayElemAt: ["$membershipsResolved.roleResolved._id", 0] } },
-                    "",
-                ],
-            },
-            roleKey: {
-                $ifNull: [
-                    { $arrayElemAt: ["$membershipsResolved.roleResolved.key", 0] },
-                    "",
-                ],
-            },
-            roleName: {
-                $ifNull: [
-                    { $arrayElemAt: ["$membershipsResolved.roleResolved.name", 0] },
-                    "Sin rol",
-                ],
-            },
+
             memberships: {
                 $map: {
-                    input: "$membershipsResolved",
+                    input:
+                        "$membershipsResolved",
+
                     as: "mem",
+
                     in: {
-                        membershipId: { $toString: "$$mem._id" },
-                        membershipStatus: { $ifNull: ["$$mem.status", "unknown"] },
-                        tenantId: {
+                        membershipId: {
                             $cond: [
-                                { $ifNull: ["$$mem.tenantResolved._id", false] },
-                                { $toString: "$$mem.tenantResolved._id" },
+                                {
+                                    $ifNull: [
+                                        "$$mem._id",
+                                        false,
+                                    ],
+                                },
+
+                                {
+                                    $toString:
+                                        "$$mem._id",
+                                },
+
                                 "",
                             ],
                         },
-                        tenantNombre: {
-                            $ifNull: ["$$mem.tenantResolved.name", "Sin tenant"],
+
+                        membershipStatus: {
+                            $ifNull: [
+                                "$$mem.status",
+                                "unknown",
+                            ],
                         },
+
+                        tenantId: {
+                            $cond: [
+                                {
+                                    $ifNull: [
+                                        "$$mem.tenantResolved._id",
+                                        false,
+                                    ],
+                                },
+
+                                {
+                                    $toString:
+                                        "$$mem.tenantResolved._id",
+                                },
+
+                                "",
+                            ],
+                        },
+
+                        tenantKey: {
+                            $ifNull: [
+                                "$$mem.tenantResolved.key",
+                                "",
+                            ],
+                        },
+
+                        tenantNombre: {
+                            $ifNull: [
+                                "$$mem.tenantResolved.name",
+                                "Sin tenant",
+                            ],
+                        },
+
+                        tenantTipo: {
+                            $ifNull: [
+                                "$$mem.tenantResolved.type",
+                                "",
+                            ],
+                        },
+
+                        roleId: {
+                            $cond: [
+                                {
+                                    $ifNull: [
+                                        "$$mem.roleResolved._id",
+                                        false,
+                                    ],
+                                },
+
+                                {
+                                    $toString:
+                                        "$$mem.roleResolved._id",
+                                },
+
+                                "",
+                            ],
+                        },
+
+                        roleKey: {
+                            $ifNull: [
+                                "$$mem.roleResolved.key",
+                                "",
+                            ],
+                        },
+
                         roleName: {
-                            $ifNull: ["$$mem.roleResolved.name", "Sin rol"],
+                            $ifNull: [
+                                "$$mem.roleResolved.name",
+                                "Sin rol",
+                            ],
+                        },
+
+                        assignedAt: {
+                            $ifNull: [
+                                "$$mem.createdAt",
+                                null,
+                            ],
+                        },
+
+                        updatedAt: {
+                            $ifNull: [
+                                "$$mem.updatedAt",
+                                null,
+                            ],
                         },
                     },
                 },
             },
-            membershipsCount: { $size: "$membershipsResolved" },
-            membershipStatus: {
-                $ifNull: [{ $arrayElemAt: ["$membershipsResolved.status", 0] }, "unassigned"],
+
+            membershipsCount: {
+                $size:
+                    "$membershipsResolved",
             },
-            ultimoAcceso: { $ifNull: ["$lastLoginAt", null] },
+
             createdAt: 1,
             updatedAt: 1,
+            lastLoginAt: 1,
         },
     };
 }
 
-export const usersRepositoryMongo = {
-    async list({ q = "", estado = "", tenantKey = "", roleKey = "", page = 1, limit = 50 }) {
-        const pageNum = Math.max(1, Number(page) || 1);
-        const limitNum = Math.max(1, Math.min(200, Number(limit) || 50));
-        const skip = (pageNum - 1) * limitNum;
+const usersRepositoryMongo = {
+    async list({
+        q = "",
+        estado = "",
+        tenantKey = "",
+        roleKey = "",
+        page = 1,
+        limit = 50,
+    }) {
+        const pageNum = Math.max(
+            1,
+            Number(page) || 1
+        );
+
+        const limitNum = Math.max(
+            1,
+            Math.min(
+                200,
+                Number(limit) || 50
+            )
+        );
+
+        const skip =
+            (pageNum - 1) * limitNum;
 
         const baseMatch = {};
-        const searchMatch = buildSearchMatch(q);
-        const statusMatch = buildStatusMatch(estado);
 
-        if (searchMatch) Object.assign(baseMatch, searchMatch);
-        if (statusMatch) Object.assign(baseMatch, statusMatch);
+        const searchMatch =
+            buildSearchMatch(q);
+
+        const statusMatch =
+            buildStatusMatch(
+                estado
+            );
+
+        if (searchMatch) {
+            Object.assign(
+                baseMatch,
+                searchMatch
+            );
+        }
+
+        if (statusMatch) {
+            Object.assign(
+                baseMatch,
+                statusMatch
+            );
+        }
 
         const pipeline = [];
 
-        if (Object.keys(baseMatch).length > 0) {
-            pipeline.push({ $match: baseMatch });
+        if (
+            Object.keys(baseMatch)
+                .length > 0
+        ) {
+            pipeline.push({
+                $match: baseMatch,
+            });
         }
 
         pipeline.push({
             $lookup: {
                 from: "memberships",
+
                 let: {
                     userIdObj: "$_id",
-                    userIdStr: { $toString: "$_id" },
+
+                    userIdStr: {
+                        $toString:
+                            "$_id",
+                    },
                 },
-                pipeline: buildMembershipLookupPipeline(),
+
+                pipeline:
+                    buildMembershipLookupPipeline(),
+
                 as: "membershipsResolved",
             },
         });
 
-        pipeline.push(buildProjectionStage());
+        pipeline.push(
+            buildProjectionStage()
+        );
 
-        const tenantKeySafe = str(tenantKey);
+        const tenantKeySafe =
+            str(tenantKey);
+
         if (tenantKeySafe) {
             pipeline.push({
                 $match: {
                     $or: [
-                        { tenantKey: tenantKeySafe },
-                        { tenantId: tenantKeySafe },
-                        { tenantNombre: new RegExp(`^${escapeRegex(tenantKeySafe)}$`, "i") },
+                        {
+                            tenantKey:
+                                tenantKeySafe,
+                        },
+
+                        {
+                            tenantNombre:
+                                new RegExp(
+                                    `^${escapeRegex(
+                                        tenantKeySafe
+                                    )}$`,
+                                    "i"
+                                ),
+                        },
                     ],
                 },
             });
         }
 
-        const roleKeySafe = str(roleKey);
+        const roleKeySafe =
+            str(roleKey);
+
         if (roleKeySafe) {
             pipeline.push({
                 $match: {
                     $or: [
-                        { roleKey: roleKeySafe },
-                        { rolId: roleKeySafe },
-                        { roleName: new RegExp(`^${escapeRegex(roleKeySafe)}$`, "i") },
+                        {
+                            roleKey:
+                                roleKeySafe,
+                        },
+
+                        {
+                            roleName:
+                                new RegExp(
+                                    `^${escapeRegex(
+                                        roleKeySafe
+                                    )}$`,
+                                    "i"
+                                ),
+                        },
                     ],
                 },
             });
         }
 
-        pipeline.push({ $sort: { nombre: 1, email: 1 } });
-
         pipeline.push({
-            $facet: {
-                rows: [{ $skip: skip }, { $limit: limitNum }],
-                meta: [{ $count: "total" }],
+            $sort: {
+                nombre: 1,
+                email: 1,
             },
         });
 
-        const result = await User.aggregate(pipeline)
-            .option({ maxTimeMS: Q_MAX_TIME_MS })
-            .exec();
+        pipeline.push({
+            $facet: {
+                rows: [
+                    {
+                        $skip: skip,
+                    },
 
-        const payload = Array.isArray(result) && result[0] ? result[0] : {};
-        const items = Array.isArray(payload.rows) ? payload.rows : [];
-        const total = Number(payload.meta?.[0]?.total || 0);
+                    {
+                        $limit:
+                            limitNum,
+                    },
+                ],
+
+                meta: [
+                    {
+                        $count:
+                            "total",
+                    },
+                ],
+            },
+        });
+
+        const result =
+            await User.aggregate(
+                pipeline
+            )
+                .option({
+                    maxTimeMS:
+                        Q_MAX_TIME_MS,
+                })
+                .exec();
+
+        const payload =
+            Array.isArray(result) &&
+            result[0]
+                ? result[0]
+                : {};
 
         return {
-            items,
-            total,
+            items:
+                payload.rows || [],
+
+            total: Number(
+                payload.meta?.[0]
+                    ?.total || 0
+            ),
+
             page: pageNum,
             limit: limitNum,
         };
@@ -300,212 +634,438 @@ export const usersRepositoryMongo = {
 
     async findById(id) {
         const safeId = str(id);
-        if (!safeId) return null;
+
+        if (!safeId) {
+            return null;
+        }
 
         const pipeline = [
             {
                 $match: {
                     $expr: {
-                        $eq: [{ $toString: "$_id" }, safeId],
+                        $eq: [
+                            {
+                                $toString:
+                                    "$_id",
+                            },
+                            safeId,
+                        ],
                     },
                 },
             },
+
             {
                 $lookup: {
                     from: "memberships",
+
                     let: {
                         userIdObj: "$_id",
-                        userIdStr: { $toString: "$_id" },
+
+                        userIdStr: {
+                            $toString:
+                                "$_id",
+                        },
                     },
-                    pipeline: buildMembershipLookupPipeline(),
+
+                    pipeline:
+                        buildMembershipLookupPipeline(),
+
                     as: "membershipsResolved",
                 },
             },
+
             buildProjectionStage(),
         ];
 
-        const docs = await User.aggregate(pipeline)
-            .option({ maxTimeMS: Q_MAX_TIME_MS })
-            .exec();
+        const docs =
+            await User.aggregate(
+                pipeline
+            )
+                .option({
+                    maxTimeMS:
+                        Q_MAX_TIME_MS,
+                })
+                .exec();
 
-        return Array.isArray(docs) && docs[0] ? docs[0] : null;
+        return Array.isArray(docs) &&
+            docs[0]
+            ? docs[0]
+            : null;
     },
 
-    async create({ nombre, email, pin, rolId = null, tenantId = null, activo = true, createdBy = null, updatedBy = null }) {
-        const safeNombre = str(nombre);
-        const [firstName = "", ...rest] = safeNombre.split(/\s+/);
-        const lastName = rest.join(" ").trim();
+    async getAccessOptions() {
+        const [
+            tenants,
+            roles,
+        ] = await Promise.all([
+            Tenant.find({
+                status: "active",
+            })
+                .lean()
+                .exec(),
 
-        const doc = await User.create({
-            firstName,
-            lastName,
-            displayName: safeNombre,
-            email: str(email).toLowerCase(),
-            pin,
-            pinLength: str(pin).length || undefined,
-            status: activo ? "active" : "inactive",
-            roles: [],
-            tenantId: tenantId || null,
-            createdBy: createdBy || null,
-            updatedBy: updatedBy || null,
-        });
+            Role.find({
+                status: "active",
+            })
+                .lean()
+                .exec(),
+        ]);
 
         return {
-            id: String(doc._id),
-            nombre: doc.displayName,
-            email: doc.email,
-            activo: doc.status === "active",
-            estado: doc.status === "active" ? "Activo" : "Inactivo",
-            tenantId: tenantId || "",
-            tenantKey: "",
-            tenantNombre: tenantId ? "Asignado" : "Sin tenant",
-            rolId: rolId || "",
-            roleKey: "",
-            roleName: rolId ? "Asignado" : "Sin rol",
-            ultimoAcceso: doc.lastLoginAt ?? null,
-            membershipStatus: "pending",
-            memberships: [],
+            tenants,
+
+            roles,
         };
     },
 
-    async updateById(id, patch = {}) {
-        const nextPatch = { ...patch };
+    async upsertAccessByUserId(
+        userId,
+        {
+            tenantId,
+            roleId,
+            status = "active",
+            createdBy = null,
+            updatedBy = null,
+        }
+    ) {
+        const safeUserId =
+            str(userId);
 
-        if (typeof nextPatch.nombre !== "undefined") {
-            const safeNombre = str(nextPatch.nombre);
-            const [firstName = "", ...rest] = safeNombre.split(/\s+/);
-            const lastName = rest.join(" ").trim();
+        const safeTenantId =
+            str(tenantId);
 
-            nextPatch.displayName = safeNombre;
-            nextPatch.firstName = firstName;
-            nextPatch.lastName = lastName;
-            delete nextPatch.nombre;
+        const safeRoleId =
+            str(roleId);
+
+        if (!safeUserId) {
+            throw new Error(
+                "User ID is required"
+            );
         }
 
-        if (typeof nextPatch.activo !== "undefined") {
-            nextPatch.status = nextPatch.activo ? "active" : "inactive";
-            delete nextPatch.activo;
+        if (!safeTenantId) {
+            throw new Error(
+                "Tenant ID is required"
+            );
         }
 
-        if (typeof nextPatch.email !== "undefined") {
-            nextPatch.email = str(nextPatch.email).toLowerCase();
+        if (!safeRoleId) {
+            throw new Error(
+                "Role ID is required"
+            );
         }
 
-        if (typeof nextPatch.pin !== "undefined") {
-            const cleanPin = str(nextPatch.pin);
+        const user =
+            await User.findById(
+                safeUserId
+            )
+                .lean()
+                .exec();
 
-            if (!cleanPin) {
-                delete nextPatch.pin;
-                delete nextPatch.pinLength;
-            } else {
-                nextPatch.pin = cleanPin;
-                nextPatch.pinLength = cleanPin.length;
-            }
+        if (!user) {
+            return null;
         }
 
-        const doc = await User.findByIdAndUpdate(id, nextPatch, {
-            new: true,
-            runValidators: true,
-        }).lean();
+        const tenant =
+            await Tenant.findById(
+                safeTenantId
+            )
+                .lean()
+                .exec();
 
-        if (!doc) return null;
+        if (!tenant) {
+            throw new Error(
+                `Tenant not found: ${safeTenantId}`
+            );
+        }
 
-        return this.findById(id);
-    },
+        const role =
+            await Role.findById(
+                safeRoleId
+            )
+                .lean()
+                .exec();
 
-    async softDeleteById(id, updatedBy = null) {
-        const doc = await User.findByIdAndUpdate(
-            id,
-            {
-                status: "inactive",
-                updatedBy: updatedBy || null,
-            },
-            { new: true }
-        ).lean();
+        if (!role) {
+            throw new Error(
+                `Role not found: ${safeRoleId}`
+            );
+        }
 
-        if (!doc) return null;
+        const userObjectId =
+            new mongoose.Types.ObjectId(
+                safeUserId
+            );
 
-        return this.findById(id);
-    },
+        const tenantObjectId =
+            new mongoose.Types.ObjectId(
+                safeTenantId
+            );
 
-    /**
-     * Eliminación física temporal para limpieza inicial de datos.
-     * Después de limpiar la BD, el controller debe volver a usar softDeleteById.
-     */
-    async hardDeleteById(id) {
-        const safeId = str(id);
-        if (!safeId) return null;
-
-        const doc = await User.findByIdAndDelete(safeId).lean().exec();
-
-        if (!doc) return null;
-
-        await Membership.deleteMany({
-            $or: [
-                { userId: safeId },
-                { user: safeId },
-            ],
-        }).exec();
-
-        return {
-            id: String(doc._id),
-            nombre: doc.displayName || `${doc.firstName || ""} ${doc.lastName || ""}`.trim(),
-            email: doc.email,
-        };
-    },
-
-    async upsertAccessByUserId(userId, { tenantId, roleId, status = "active", createdBy = null, updatedBy = null }) {
-        const safeUserId = str(userId);
-        const safeTenantId = str(tenantId);
-        const safeRoleId = str(roleId);
-
-        if (!safeUserId) throw new Error("User ID is required");
-        if (!safeTenantId) throw new Error("Tenant ID is required");
-        if (!safeRoleId) throw new Error("Role ID is required");
-
-        const user = await User.findById(safeUserId).lean().exec();
-        if (!user) return null;
-
-        const tenant = await Tenant.findById(safeTenantId).lean().exec();
-        if (!tenant) throw new Error(`Tenant not found: ${safeTenantId}`);
-
-        const role = await Role.findById(safeRoleId).lean().exec();
-        if (!role) throw new Error(`Role not found: ${safeRoleId}`);
-
-        const userObjectId = new mongoose.Types.ObjectId(safeUserId);
-        const tenantObjectId = new mongoose.Types.ObjectId(safeTenantId);
-        const roleObjectId = new mongoose.Types.ObjectId(safeRoleId);
+        const roleObjectId =
+            new mongoose.Types.ObjectId(
+                safeRoleId
+            );
 
         const now = new Date();
-        const actorId = updatedBy || createdBy || null;
+
+        const actorId =
+            updatedBy ||
+            createdBy ||
+            null;
+
+        const beforeMembership =
+            await Membership.findOne({
+                userId:
+                    userObjectId,
+
+                tenantId:
+                    tenantObjectId,
+            })
+                .lean()
+                .exec();
 
         await Membership.updateOne(
             {
-                $or: [
-                    { userId: userObjectId, tenantId: tenantObjectId },
-                    { userId: safeUserId, tenantId: safeTenantId },
-                ],
+                userId:
+                    userObjectId,
+
+                tenantId:
+                    tenantObjectId,
             },
+
             {
                 $set: {
-                    userId: userObjectId,
-                    tenantId: tenantObjectId,
-                    roleId: roleObjectId,
-                    roleKey: role.key || "",
-                    tenantKey: tenant.key || "",
+                    userId:
+                        userObjectId,
+
+                    tenantId:
+                        tenantObjectId,
+
+                    roleId:
+                        roleObjectId,
+
+                    roleKey:
+                        role.key ||
+                        "",
+
+                    tenantKey:
+                        tenant.key ||
+                        "",
+
                     status,
-                    updatedAt: now,
-                    updatedBy: actorId,
+
+                    updatedAt:
+                        now,
+
+                    updatedBy:
+                        actorId,
                 },
+
                 $setOnInsert: {
-                    createdAt: now,
-                    createdBy: actorId,
+                    createdAt:
+                        now,
+
+                    createdBy:
+                        actorId,
                 },
             },
-            { upsert: true }
+
+            {
+                upsert: true,
+            }
         ).exec();
 
-        return this.findById(safeUserId);
+        const afterMembership =
+            await Membership.findOne({
+                userId:
+                    userObjectId,
+
+                tenantId:
+                    tenantObjectId,
+            })
+                .lean()
+                .exec();
+
+        await recordAuditSafe({
+            actorUserId:
+                resolveActorId(
+                    actorId
+                ),
+
+            actorTenantId:
+                safeTenantId,
+
+            module:
+                AUDIT_MODULES.ACCESS,
+
+            action:
+                AUDIT_ACTIONS.ACCESS_ASSIGNED,
+
+            targetType:
+                "MEMBERSHIP",
+
+            targetId:
+                afterMembership?._id
+                    ? String(
+                          afterMembership._id
+                      )
+                    : safeUserId,
+
+            before:
+                beforeMembership,
+
+            after: {
+                membershipId:
+                    afterMembership?._id
+                        ? String(
+                              afterMembership._id
+                          )
+                        : null,
+
+                userId:
+                    safeUserId,
+
+                userEmail:
+                    user.email || "",
+
+                tenantId:
+                    safeTenantId,
+
+                tenantKey:
+                    tenant.key || "",
+
+                tenantName:
+                    tenant.name || "",
+
+                roleId:
+                    safeRoleId,
+
+                roleKey:
+                    role.key || "",
+
+                roleName:
+                    role.name || "",
+
+                status,
+            },
+
+            diff: {
+                tenantId:
+                    safeTenantId,
+
+                roleId:
+                    safeRoleId,
+
+                status,
+            },
+        });
+
+        return this.findById(
+            safeUserId
+        );
+    },
+
+    async deactivateAccessByMembershipId(
+        userId,
+        membershipId,
+        {
+            updatedBy = null,
+        } = {}
+    ) {
+        const safeUserId =
+            str(userId);
+
+        const safeMembershipId =
+            str(membershipId);
+
+        if (!safeUserId) {
+            throw new Error(
+                "User ID is required"
+            );
+        }
+
+        if (!safeMembershipId) {
+            throw new Error(
+                "Membership ID is required"
+            );
+        }
+
+        const beforeMembership =
+            await Membership.findById(
+                safeMembershipId
+            )
+                .lean()
+                .exec();
+
+        if (!beforeMembership) {
+            return null;
+        }
+
+        await Membership.findByIdAndUpdate(
+            safeMembershipId,
+            {
+                status: "inactive",
+
+                updatedAt:
+                    new Date(),
+
+                updatedBy:
+                    updatedBy ||
+                    null,
+            },
+
+            {
+                new: true,
+            }
+        ).exec();
+
+        await recordAuditSafe({
+            actorUserId:
+                resolveActorId(
+                    updatedBy
+                ),
+
+            actorTenantId:
+                beforeMembership.tenantId ||
+                null,
+
+            module:
+                AUDIT_MODULES.ACCESS,
+
+            action:
+                AUDIT_ACTIONS.ACCESS_REVOKED ||
+                "ACCESS_REVOKED",
+
+            targetType:
+                "MEMBERSHIP",
+
+            targetId:
+                safeMembershipId,
+
+            before:
+                beforeMembership,
+
+            after: {
+                ...beforeMembership,
+
+                status:
+                    "inactive",
+
+                updatedBy:
+                    updatedBy ||
+                    null,
+            },
+
+            diff: {
+                status:
+                    "inactive",
+            },
+        });
+
+        return this.findById(
+            safeUserId
+        );
     },
 };
 

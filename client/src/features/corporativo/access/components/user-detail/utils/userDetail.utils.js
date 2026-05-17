@@ -48,7 +48,7 @@ export function formatSystemLabel(value, fallback = EMPTY_VALUE) {
 }
 
 export function formatStatusLabel(value, fallback = EMPTY_VALUE) {
-    const normalized = String(value ?? "").trim().toLowerCase();
+    const normalized = String(value ? "").trim().toLowerCase();
 
     const labels = {
         active: "Activo",
