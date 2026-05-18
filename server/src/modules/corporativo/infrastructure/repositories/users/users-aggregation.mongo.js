@@ -249,8 +249,73 @@ export function buildProjectionStage() {
             },
 
             createdAt: 1,
-            updatedAt: 1,
-            lastLoginAt: 1,
+updatedAt: 1,
+
+lastLoginAt: {
+    $ifNull: ["$lastLoginAt", null],
+},
+lastLoginIp: {
+    $ifNull: ["$lastLoginIp", ""],
+},
+lastLoginUserAgent: {
+    $ifNull: ["$lastLoginUserAgent", ""],
+},
+
+pinLength: {
+    $ifNull: ["$pinLength", null],
+},
+pinChangedAt: {
+    $ifNull: ["$pinChangedAt", null],
+},
+failedPinAttempts: {
+    $ifNull: ["$failedPinAttempts", 0],
+},
+lockedUntil: {
+    $ifNull: ["$lockedUntil", null],
+},
+mustChangePin: {
+    $ifNull: ["$mustChangePin", false],
+},
+
+actividad: {
+    ultimoAcceso: {
+        $ifNull: ["$lastLoginAt", null],
+    },
+    ultimaIp: {
+        $ifNull: ["$lastLoginIp", ""],
+    },
+    ultimoDispositivo: {
+        $ifNull: ["$lastLoginUserAgent", ""],
+    },
+    createdAt: "$createdAt",
+    updatedAt: "$updatedAt",
+},
+
+security: {
+    hasPin: {
+        $gt: [{ $ifNull: ["$pinLength", 0] }, 0],
+    },
+    pinLength: {
+        $ifNull: ["$pinLength", null],
+    },
+    pinChangedAt: {
+        $ifNull: ["$pinChangedAt", null],
+    },
+    failedPinAttempts: {
+        $ifNull: ["$failedPinAttempts", 0],
+    },
+    lockedUntil: {
+        $ifNull: ["$lockedUntil", null],
+    },
+    mustChangePin: {
+        $ifNull: ["$mustChangePin", false],
+    },
+},
+
+auditoria: {
+    createdAt: "$createdAt",
+    updatedAt: "$updatedAt",
+},
         },
     };
 }
