@@ -1,26 +1,59 @@
 // server/src/modules/corporativo/interface/http/routes/users.routes.js
+
 import { Router } from "express";
 
 import {
-  listUsersController,
-  getUserByIdController,
-  createUserController,
-  updateUserController,
-  deleteUserController,
-  getUserAccessOptionsController,
-  updateUserAccessController,
+    listUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser,
+    listUserAccessOptions,
+    updateUserAccess,
+    deleteUserAccess,
 } from "#modules/corporativo/interface/http/controllers/users.controller.js";
 
 const router = Router();
 
-router.get("/", listUsersController);
-router.get("/:userId/access-options", getUserAccessOptionsController);
-router.get("/:userId", getUserByIdController);
+router.get("/_ping", (_req, res) => {
+    res.json({
+        ok: true,
+        module: "users",
+    });
+});
 
-router.post("/", createUserController);
-router.patch("/:userId", updateUserController);
-router.delete("/:userId", deleteUserController);
+/*
+|--------------------------------------------------------------------------
+| Access options
+|--------------------------------------------------------------------------
+*/
 
-router.put("/:userId/access", updateUserAccessController);
+router.get("/access/options", listUserAccessOptions);
+
+/*
+|--------------------------------------------------------------------------
+| User access / memberships
+|--------------------------------------------------------------------------
+*/
+
+router.patch("/:id/access", updateUserAccess);
+
+router.delete("/:id/access/:membershipId", deleteUserAccess);
+
+/*
+|--------------------------------------------------------------------------
+| Users CRUD
+|--------------------------------------------------------------------------
+*/
+
+router.get("/", listUsers);
+
+router.get("/:id", getUserById);
+
+router.post("/", createUser);
+
+router.patch("/:id", updateUser);
+
+router.delete("/:id", deleteUser);
 
 export default router;

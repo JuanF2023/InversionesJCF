@@ -1,169 +1,305 @@
 // server/src/modules/corporativo/interface/http/controllers/users.controller.js
-import usersRepositoryMongo from "#modules/corporativo/infrastructure/repositories/users.repository.mongo.js";
-import { listUsersUseCase } from "#modules/corporativo/application/use-cases/users/listUsers.usecase.js";
-import { Role } from "#modules/roles/infrastructure/mongoose/models/role.model.js";
-import { Tenant } from "#modules/tenants/infrastructure/mongoose/models/tenant.model.js";
 
-function sendError(res, error, fallbackMessage = "Error interno del servidor.") {
-    console.error("[users.controller] error:", error);
+import { buildUsersModule } from "#modules/corporativo/application/builders/users.builder.js";
+import { buildGetAccessOptionsUseCase } from "#modules/corporativo/application/builders/access.builder.js";
 
+const { usersRepository } = buildUsersModule();
+
+function normalizeActorId(req) {
+    return req?.actorId || req?.auth?.user?._id || req?.user?._id || null;
+}
+
+function str(value) {
+    return String(value ?? "").trim();
+}
+
+function handleError(res, error, fallbackMessage) {
     return res.status(error?.statusCode || 500).json({
         ok: false,
+        code: error?.code || "INTERNAL_ERROR",
         message: error?.message || fallbackMessage,
+        data: error?.data || null,
     });
 }
 
-function mapTenant(doc) {
-    return {
-        id: String(doc._id),
-        nombre: doc.name || doc.nombre || doc.key || "Sin nombre",
-        key: doc.key || "",
-        slug: doc.slug || "",
-        tipo: doc.type || doc.tipo || "",
-        status: doc.status || "",
-    };
-}
-
-function mapRole(doc) {
-    return {
-        id: String(doc._id),
-        nombre: doc.name || doc.nombre || doc.key || "Sin nombre",
-        key: doc.key || "",
-        slug: doc.slug || "",
-        tenantType: doc.tenantType || "",
-        status: doc.status || "active",
-    };
-}
-
-export async function listUsersController(req, res) {
+/**
+ * GET /api/corporativo/users
+ */
+export async function listUsers(req, res) {
     try {
-        const result = await listUsersUseCase(req.query);
-        return res.status(200).json(result);
-    } catch (error) {
-        return sendError(res, error, "Error obteniendo usuarios.");
-    }
-}
-
-export async function getUserAccessOptionsController(_req, res) {
-    try {
-        const [tenants, roles] = await Promise.all([
-            Tenant.find({ status: { $ne: "inactive" } }).sort({ type: 1, name: 1 }).lean().exec(),
-            Role.find({}).sort({ tenantType: 1, name: 1 }).lean().exec(),
-        ]);
+        const result = await usersRepository.list({
+            q: str(req.query?.q),
+            estado: str(req.query?.estado),
+            tenantKey: str(req.query?.tenantKey || req.query?.tenantId),
+            roleKey: str(req.query?.roleKey || req.query?.rolId),
+            page: req.query?.page,
+            limit: req.query?.limit,
+        });
 
         return res.status(200).json({
             ok: true,
-            data: {
-                tenants: tenants.map(mapTenant),
-                roles: roles.map(mapRole),
-            },
+            total: result.total,
+            page: result.page,
+            limit: result.limit,
+            items: Array.isArray(result.items) ? result.items : [],
         });
     } catch (error) {
-        return sendError(res, error, "Error cargando opciones de acceso.");
+        return handleError(res, error, "Error obteniendo usuarios.");
     }
 }
 
-export async function getUserByIdController(req, res) {
+/**
+ * GET /api/corporativo/users/:id
+ */
+export async function getUserById(req, res) {
     try {
-        const user = await usersRepositoryMongo.findById(req.params.userId);
+        const user = await usersRepository.findById(req.params.id);
 
         if (!user) {
             return res.status(404).json({
                 ok: false,
-                message: "Usuario no encontrado.",
-            });
-        }
-
-        return res.status(200).json({ ok: true, data: user });
-    } catch (error) {
-        return sendError(res, error, "Error obteniendo usuario.");
-    }
-}
-
-export async function createUserController(req, res) {
-    try {
-        const user = await usersRepositoryMongo.create(req.body);
-        return res.status(201).json({ ok: true, data: user });
-    } catch (error) {
-        return sendError(res, error, "Error creando usuario.");
-    }
-}
-
-export async function updateUserController(req, res) {
-    try {
-        const user = await usersRepositoryMongo.updateById(req.params.userId, req.body);
-
-        if (!user) {
-            return res.status(404).json({
-                ok: false,
-                message: "Usuario no encontrado.",
-            });
-        }
-
-        return res.status(200).json({ ok: true, data: user });
-    } catch (error) {
-        return sendError(res, error, "Error actualizando usuario.");
-    }
-}
-
-export async function deleteUserController(req, res) {
-    try {
-        const user = await usersRepositoryMongo.hardDeleteById(req.params.userId);
-
-        if (!user) {
-            return res.status(404).json({
-                ok: false,
-                message: "Usuario no encontrado.",
+                error: "Usuario no encontrado",
             });
         }
 
         return res.status(200).json({
             ok: true,
-            message: "Usuario eliminado completamente",
-            data: user,
+            item: user,
         });
     } catch (error) {
-        return sendError(res, error, "Error eliminando usuario.");
+        return handleError(res, error, "Error obteniendo usuario.");
     }
 }
 
-export async function updateUserAccessController(req, res) {
+/**
+ * POST /api/corporativo/users
+ */
+export async function createUser(req, res) {
     try {
-        const user = await usersRepositoryMongo.upsertAccessByUserId(req.params.userId, req.body);
+        const actorId = normalizeActorId(req);
 
-        if (!user) {
-            return res.status(404).json({
+        const {
+            nombre,
+            email,
+            pin,
+            rolId,
+            tenantId,
+            activo = true,
+        } = req.body || {};
+
+        const created = await usersRepository.create({
+            nombre,
+            email,
+            pin,
+            rolId,
+            tenantId,
+            activo,
+            createdBy: actorId,
+            updatedBy: actorId,
+        });
+
+        return res.status(201).json({
+            ok: true,
+            item: created,
+        });
+    } catch (error) {
+        if (error?.code === 11000) {
+            return res.status(409).json({
                 ok: false,
-                message: "Usuario no encontrado.",
+                error: "Email duplicado",
             });
         }
 
-        return res.status(200).json({ ok: true, data: user });
-    } catch (error) {
-        return sendError(res, error, "Error actualizando acceso del usuario.");
+        return handleError(res, error, "Error creando usuario.");
     }
 }
 
-export async function deleteUserAccessController(req, res) {
+/**
+ * PATCH /api/corporativo/users/:id
+ */
+export async function updateUser(req, res) {
     try {
-        const user = await usersRepositoryMongo.deactivateAccessByMembershipId(
-            req.params.userId,
-            req.params.membershipId
+        const actorId = normalizeActorId(req);
+
+        const {
+            nombre,
+            email,
+            pin,
+            rolId,
+            tenantId,
+            activo,
+        } = req.body || {};
+
+        const patch = {
+            updatedBy: actorId,
+        };
+
+        if (typeof nombre !== "undefined") patch.nombre = nombre;
+        if (typeof email !== "undefined") patch.email = email;
+        if (typeof pin !== "undefined") patch.pin = pin;
+        if (typeof rolId !== "undefined") patch.rolId = rolId;
+        if (typeof tenantId !== "undefined") patch.tenantId = tenantId;
+        if (typeof activo !== "undefined") patch.activo = Boolean(activo);
+
+        const updated = await usersRepository.updateById(req.params.id, patch);
+
+        if (!updated) {
+            return res.status(404).json({
+                ok: false,
+                error: "Usuario no encontrado",
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            item: updated,
+        });
+    } catch (error) {
+        if (error?.code === 11000) {
+            return res.status(409).json({
+                ok: false,
+                error: "Email duplicado",
+            });
+        }
+
+        return handleError(res, error, "Error actualizando usuario.");
+    }
+}
+
+/**
+ * DELETE /api/corporativo/users/:id
+ */
+export async function deleteUser(req, res) {
+    try {
+        const actorId = normalizeActorId(req);
+
+        const updated = await usersRepository.softDeleteById(
+            req.params.id,
+            actorId
         );
 
-        if (!user) {
+        if (!updated) {
             return res.status(404).json({
                 ok: false,
-                message: "Acceso no encontrado.",
+                error: "Usuario no encontrado",
             });
         }
 
         return res.status(200).json({
             ok: true,
-            message: "Acceso desactivado correctamente.",
-            data: user,
+            item: updated,
+            message: "Usuario desactivado correctamente.",
         });
     } catch (error) {
-        return sendError(res, error, "Error eliminando acceso del usuario.");
+        return handleError(res, error, "Error eliminando usuario.");
+    }
+}
+
+/**
+ * GET /api/corporativo/users/access/options?tenantId=
+ */
+export async function listUserAccessOptions(req, res) {
+    try {
+        const tenantId = str(req.query?.tenantId || "");
+
+        const getAccessOptionsUseCase = buildGetAccessOptionsUseCase();
+
+        const result = await getAccessOptionsUseCase.execute({
+            tenantId: tenantId || null,
+            status: "active",
+        });
+
+        return res.status(200).json({
+            ok: true,
+            ...result,
+        });
+    } catch (error) {
+        return handleError(
+            res,
+            error,
+            "Error obteniendo opciones de acceso."
+        );
+    }
+}
+
+/**
+ * PATCH /api/corporativo/users/:id/access
+ */
+export async function updateUserAccess(req, res) {
+    try {
+        const actorId = normalizeActorId(req);
+
+        const {
+            tenantId,
+            roleId,
+            status = "active",
+            confirmReplace = false,
+        } = req.body || {};
+
+        const updated = await usersRepository.upsertAccessByUserId(
+            req.params.id,
+            {
+                tenantId,
+                roleId,
+                status,
+                confirmReplace,
+                createdBy: actorId,
+                updatedBy: actorId,
+            }
+        );
+
+        if (!updated) {
+            return res.status(404).json({
+                ok: false,
+                error: "Usuario no encontrado",
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            item: updated,
+        });
+    } catch (error) {
+        return handleError(
+            res,
+            error,
+            "Error actualizando acceso del usuario."
+        );
+    }
+}
+
+/**
+ * DELETE /api/corporativo/users/:id/access/:membershipId
+ */
+export async function deleteUserAccess(req, res) {
+    try {
+        const actorId = normalizeActorId(req);
+
+        const updated = await usersRepository.deactivateAccessByMembershipId(
+            req.params.id,
+            req.params.membershipId,
+            {
+                updatedBy: actorId,
+            }
+        );
+
+        if (!updated) {
+            return res.status(404).json({
+                ok: false,
+                error: "Acceso no encontrado",
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            item: updated,
+            message: "Acceso desactivado correctamente.",
+        });
+    } catch (error) {
+        return handleError(
+            res,
+            error,
+            "Error eliminando acceso del usuario."
+        );
     }
 }

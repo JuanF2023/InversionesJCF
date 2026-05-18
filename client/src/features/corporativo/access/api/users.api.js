@@ -13,9 +13,9 @@ function normalizeError(error, fallbackMsg = "Error de comunicación con el serv
     };
 }
 
-/* -------------------------------------------------------------------------- */
-/* Users                                                                       */
-/* -------------------------------------------------------------------------- */
+/**
+ * Users
+ */
 
 export async function getAccessUsers(params = {}) {
     try {
@@ -70,27 +70,60 @@ export async function deleteUser(userId) {
     }
 }
 
-/* -------------------------------------------------------------------------- */
-/* Access / Memberships                                                        */
-/* -------------------------------------------------------------------------- */
+/**
+ * Access / Memberships
+ */
 
-export async function getUserAccessOptions(userId) {
+export async function getUserAccessOptions(params = {}) {
     try {
-        const response = await http.get(`/corporativo/users/${userId}/access-options`);
+        const response = await http.get("/corporativo/users/access/options", {
+            params,
+        });
+
         return response.data;
     } catch (error) {
-        throw normalizeError(error, "No se pudieron obtener las opciones de acceso.");
+        throw normalizeError(
+            error,
+            "No se pudieron obtener las opciones de acceso."
+        );
     }
 }
 
 export async function updateUserAccess(userId, payload = {}) {
     try {
-        const response = await http.put(`/corporativo/users/${userId}/access`, payload);
+        const response = await http.patch(
+            `/corporativo/users/${userId}/access`,
+            payload
+        );
+
         return response.data;
     } catch (error) {
-        throw normalizeError(error, "No se pudo actualizar el acceso del usuario.");
+        throw normalizeError(
+            error,
+            "No se pudo actualizar el acceso del usuario."
+        );
     }
 }
+
+export async function deleteUserAccess(userId, membershipId) {
+    try {
+        const response = await http.delete(
+            `/corporativo/users/${userId}/access/${membershipId}`
+        );
+
+        return response.data;
+    } catch (error) {
+        throw normalizeError(
+            error,
+            "No se pudo eliminar el acceso del usuario."
+        );
+    }
+}
+
+/**
+ * Legacy membership endpoints.
+ * Mantener solo si todavía existen rutas /corporativo/memberships en backend.
+ */
 
 export async function createUserMembership(payload = {}) {
     try {
@@ -103,7 +136,11 @@ export async function createUserMembership(payload = {}) {
 
 export async function updateUserMembership(membershipId, payload = {}) {
     try {
-        const response = await http.patch(`/corporativo/memberships/${membershipId}`, payload);
+        const response = await http.patch(
+            `/corporativo/memberships/${membershipId}`,
+            payload
+        );
+
         return response.data;
     } catch (error) {
         throw normalizeError(error, "No se pudo actualizar la membresía.");
@@ -112,7 +149,10 @@ export async function updateUserMembership(membershipId, payload = {}) {
 
 export async function deleteUserMembership(membershipId) {
     try {
-        const response = await http.delete(`/corporativo/memberships/${membershipId}`);
+        const response = await http.delete(
+            `/corporativo/memberships/${membershipId}`
+        );
+
         return response.data;
     } catch (error) {
         throw normalizeError(error, "No se pudo eliminar la membresía.");

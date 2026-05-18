@@ -1,3 +1,316 @@
-// client-/src-/features/corporativo/access-/pages/UserCreatePage.jsx- - import- React,- -{- useEffect-,- useState -}- from -"react"-;- - import- -{- useNavigate,- useParams- -}- from -"react-router--dom-"-;- - import- toast from -"react-hot--toast"-;- - import- -{- Save,- ArrowLeft- -}- from -"lucide--react"-;- - - - import- -{- useAccessUsersStore -}- from -"-@-/features/corporativo/access-/users/store/accessUsers.store.js"-;- - - - export- default function UserCreatePage(-)- -{- - - - const navigate -=- useNavigate(-)-;- - - - const -{- id -}- -=- useParams-(-)-;- - - - - - const crear -=- useAccessUsersStore(-(s)- -=->- s.crear)-;- - - - const actualizar -=- useAccessUsersStore(-(s)- -=->- s.actualizar)-;- - - - const obtenerPorId- -=- useAccessUsersStore(-(s)- -=->- s.obtenerPorId-)-;- - - - const currentItem -=- useAccessUsersStore(-(s)- -=->- s.currentItem)-;- - - - const loading -=- useAccessUsersStore(-(s)- -=->- s.loading)-;- - - - const saving- -=- useAccessUsersStore(-(s)- -=->- s.saving-)-;- - - - - - const isEdit- -=- Boolean(id)-;- - - - - - const -[form,- setForm]- -=- useState(-{- - - - - - nombre-:- -"-"-,- - - - - - email:- -"-"-,- - - - - - pin-:- -"-"-,- - - - - - rolId:- -"-"-,- - - - - - tenantId:- -"-"-,- - - - - - activo-:- true,- - - - -}-)-;- - - - - - function updateField(field,- value)- -{- - - - - - setForm(-(prev)- -=->- -(-{- - - - - - - - -.-.-.prev,- - - - - - - - -[field]-:- value,- - - - - - -}-)-)-;- - - - -}- - - - - - useEffect-(-(-)- -=->- -{- - - - - - document.title -=- isEdit- -?- -"Editar- usuario"- -:- -"Nuevo usuario"-;- - - - -}-,- -[isEdit-]-)-;- - - - - - useEffect-(-(-)- -=->- -{- - - - - - if -(-!isEdit-)- return-;- - - - - - - - obtenerPorId-(id)-.catch(-(err-)- -=->- -{- - - - - - - - toast.error(err-.message -|-|- -"Error cargando usuario"-)-;- - - - - - -}-)-;- - - - -}-,- -[id,- isEdit-,- obtenerPorId-]-)-;- - - - - - useEffect-(-(-)- -=->- -{- - - - - - if -(-!currentItem -|-|- -!isEdit-)- return-;- - - - - - - - setForm(-{- - - - - - - - nombre-:- currentItem.nombre- -|-|- -"-"-,- - - - - - - - email:- currentItem.email -|-|- -"-"-,- - - - - - - - pin-:- -"-"-,- - - - - - - - rolId:- currentItem.rolId -|-|- -"-"-,- - - - - - - - tenantId:- currentItem.tenantId -|-|- -"-"-,- - - - - - - - activo-:- currentItem.activo- -?-?- true,- - - - - - -}-)-;- - - - -}-,- -[currentItem,- isEdit-]-)-;- - - - - - async function handleSubmit-(e)- -{- - - - - - e.preventDefault(-)-;- - - - - - - - try- -{- - - - - - - - if -(-!form.nombre- -|-|- -!form.email)- -{- - - - - - - - - - toast.error(-"Nombre- y email son- obligatorios-"-)-;- - - - - - - - - - return-;- - - - - - - - -}- - - - - - - - - - if -(isEdit-)- -{- - - - - - - - - - await actualizar(id,- form)-;- - - - - - - - - - toast.success(-"Usuario actualizado"-)-;- - - - - - - - -}- else -{- - - - - - - - - - await crear(form)-;- - - - - - - - - - toast.success(-"Usuario creado-"-)-;- - - - - - - - -}- - - - - - - - - - navigate(-"-/corporativo/admin/users"-)-;- - - - - - -}- catch -(err-)- -{- - - - - - - - toast.error(err-.message -|-|- -"Error guardando- usuario"-)-;- - - - - - -}- - - - -}- - - - - - return- -(- - - - - - -<section className-=-"max--w--2xl space-y--6-"->- - - - - - - - - - -<button- - - - - - - - - - onClick=-{-(-)- -=->- navigate(-"-/corporativo/admin/users"-)-}- - - - - - - - - - className-=-"inline--flex items-center- gap---2- text-sm opacity--7-0- hover:opacity--1-0-0-"- - - - - - - - ->- - - - - - - - - - -<ArrowLeft- size=-{-1-6-}- -/->- - - - - - - - - - Volver- - - - - - - - -<-/button->- - - - - - - - - - -<h1- className-=-"text--2xl font-semibold"->- - - - - - - - - - -{isEdit- -?- -"Editar- usuario"- -:- -"Nuevo usuario"-}- - - - - - - - -<-/h1->- - - - - - - - - - -<form - - - - - - - - - onSubmit=-{handleSubmit-}- - - - - - - - - - className-=-"space-y--4- rounded--2xl border- border---[var-(----border-)-]- bg--[var-(----panel)-]- p--6-"- - - - - - - - ->- - - - - - - - - - - - -<div- className-=-"space-y--1-"->- - - - - - - - - - - - -<label className-=-"text-sm font-semibold"->Nombre-<-/label>- - - - - - - - - - - - -<input - - - - - - - - - - - - - value=-{form.nombre-}- - - - - - - - - - - - - - onChange=-{-(e)- -=->- updateField(-"nombre-"-,- e.target-.value)-}- - - - - - - - - - - - - - className-=-"w-full rounded-xl border- border---[var-(----border-)-]- px--3- py--2-"- - - - - - - - - - - - -/->- - - - - - - - - - -<-/div->- - - - - - - - - - - - -<div- className-=-"space-y--1-"->- - - - - - - - - - - - -<label className-=-"text-sm font-semibold"->Email<-/label>- - - - - - - - - - - - -<input - - - - - - - - - - - - - value=-{form.email}- - - - - - - - - - - - - - onChange=-{-(e)- -=->- updateField(-"email"-,- e.target-.value)-}- - - - - - - - - - - - - - className-=-"w-full rounded-xl border- border---[var-(----border-)-]- px--3- py--2-"- - - - - - - - - - - - -/->- - - - - - - - - - -<-/div->- - - - - - - - - - - - -<div- className-=-"space-y--1-"->- - - - - - - - - - - - -<label className-=-"text-sm font-semibold"->PIN-<-/label>- - - - - - - - - - - - -<input - - - - - - - - - - - - - value=-{form.pin-}- - - - - - - - - - - - - - onChange=-{-(e)- -=->- updateField(-"pin-"-,- e.target-.value)-}- - - - - - - - - - - - - - className-=-"w-full rounded-xl border- border---[var-(----border-)-]- px--3- py--2-"- - - - - - - - - - - - -/->- - - - - - - - - - -<-/div->- - - - - - - - - - - - -<div- className-=-"space-y--1-"->- - - - - - - - - - - - -<label className-=-"text-sm font-semibold"->Rol-<-/label>- - - - - - - - - - - - -<input - - - - - - - - - - - - - value=-{form.rolId}- - - - - - - - - - - - - - onChange=-{-(e)- -=->- updateField(-"rolId"-,- e.target-.value)-}- - - - - - - - - - - - - - className-=-"w-full rounded-xl border- border---[var-(----border-)-]- px--3- py--2-"- - - - - - - - - - - - -/->- - - - - - - - - - -<-/div->- - - - - - - - - - - - -<div- className-=-"space-y--1-"->- - - - - - - - - - - - -<label className-=-"text-sm font-semibold"->Tenant-<-/label>- - - - - - - - - - - - -<input - - - - - - - - - - - - - value=-{form.tenantId}- - - - - - - - - - - - - - onChange=-{-(e)- -=->- updateField(-"tenantId"-,- e.target-.value)-}- - - - - - - - - - - - - - className-=-"w-full rounded-xl border- border---[var-(----border-)-]- px--3- py--2-"- - - - - - - - - - - - -/->- - - - - - - - - - -<-/div->- - - - - - - - - - - - -<div- className-=-"flex items-center- gap---2-"->- - - - - - - - - - - - -<input - - - - - - - - - - - - - type=-"checkbox"- - - - - - - - - - - - - - checked=-{form.activo-}- - - - - - - - - - - - - - onChange=-{-(e)- -=->- updateField(-"activo-"-,- e.target-.checked)-}- - - - - - - - - - - - -/->- - - - - - - - - - - - -<span className-=-"text-sm"->Usuario activo-<-/span>- - - - - - - - - - -<-/div->- - - - - - - - - - - - -<button- - - - - - - - - - - - type=-"submit-"- - - - - - - - - - - - disabled=-{saving-}- - - - - - - - - - - - className-=-"inline--flex items-center- gap---2- rounded-xl bg-indigo---6-0-0- px--4- py--2- text-white hover:opacity--9-0-"- - - - - - - - - - ->- - - - - - - - - - - - -<Save size=-{-1-6-}- -/->- - - - - - - - - - - - -{saving- -?- -"Guardando-.-.-.-"- -:- -"Guardar"-}- - - - - - - - - - -<-/button->- - - - - - - - -<-/form>- - - - - - -<-/section>- - - - -)-;- - -}- - -
+// client/src/features/corporativo/access/pages/UserCreatePage.jsx
+import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import {
+    ArrowLeft,
+    Save,
+    UserPlus,
+    UserRound,
+    ShieldCheck,
+    ToggleRight,
+} from "lucide-react";
 
-export default UserCreatePage;
+import { PageSurface, PanelSurface } from "@/core/ui/surfaces";
+import {
+    DetailGrid,
+    DetailItem,
+    DetailPageHeader,
+    DetailSection,
+} from "@/core/ui/detail";
+import { FormField, TextInput } from "@/core/ui/forms";
+import TableActionButton from "@/core/ui/actions/TableActionButton.jsx";
+
+import { useAccessUsersStore } from "@/features/corporativo/access/store/accessUsers.store.js";
+
+const EMPTY_VALUE = "N/A";
+
+const initialForm = {
+    nombre: "",
+    email: "",
+    pin: "",
+    activo: true,
+};
+
+function normalizePin(value) {
+    return String(value || "").replace(/\D/g, "").slice(0, 6);
+}
+
+export default function UserCreatePage() {
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    const isEdit = Boolean(id);
+
+    const crear = useAccessUsersStore((state) => state.crear);
+    const actualizar = useAccessUsersStore((state) => state.actualizar);
+    const obtenerPorId = useAccessUsersStore((state) => state.obtenerPorId);
+    const limpiarActual = useAccessUsersStore((state) => state.limpiarActual);
+    const currentItem = useAccessUsersStore((state) => state.currentItem);
+    const loading = useAccessUsersStore((state) => state.loading);
+    const saving = useAccessUsersStore((state) => state.saving);
+
+    const [form, setForm] = useState(initialForm);
+
+    useEffect(() => {
+        document.title = isEdit ? "Editar usuario" : "Nuevo usuario";
+    }, [isEdit]);
+
+    useEffect(() => {
+        if (!isEdit) {
+            limpiarActual();
+            setForm(initialForm);
+            return;
+        }
+
+        obtenerPorId(id).catch((error) => {
+            toast.error(error?.message || "Error cargando usuario.");
+        });
+    }, [id, isEdit, obtenerPorId, limpiarActual]);
+
+    useEffect(() => {
+        if (!isEdit || !currentItem) return;
+
+        setForm({
+            nombre: currentItem.nombre || "",
+            email: currentItem.email || "",
+            pin: "",
+            activo: currentItem.activo ?? true,
+        });
+    }, [currentItem, isEdit]);
+
+    const title = isEdit ? "Editar usuario" : "Nuevo usuario";
+
+    const subtitle = isEdit
+        ? "Actualiza la información principal del usuario. El PIN solo cambia si escribes uno nuevo."
+        : "Registra un usuario nuevo con su información principal y PIN inicial.";
+
+    const pinHelper = useMemo(() => {
+        if (isEdit) return "Déjalo vacío para conservar el PIN actual.";
+        return "Usa solo números. Recomendado: 4 o 6 dígitos.";
+    }, [isEdit]);
+
+    function updateField(field, value) {
+        setForm((prev) => ({ ...prev, [field]: value }));
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        const nombre = form.nombre.trim();
+        const email = form.email.trim().toLowerCase();
+        const pin = normalizePin(form.pin);
+
+        if (!nombre) {
+            toast.error("El nombre es obligatorio.");
+            return;
+        }
+
+        if (!email) {
+            toast.error("El email es obligatorio.");
+            return;
+        }
+
+        if (!isEdit && !pin) {
+            toast.error("El PIN es obligatorio para crear usuarios.");
+            return;
+        }
+
+        if (pin && ![4, 6].includes(pin.length)) {
+            toast.error("El PIN debe tener 4 o 6 dígitos.");
+            return;
+        }
+
+        const payload = {
+            nombre,
+            email,
+            activo: Boolean(form.activo),
+        };
+
+        if (pin) {
+            payload.pin = pin;
+        }
+
+        try {
+            if (isEdit) {
+                await actualizar(id, payload);
+                toast.success("Usuario actualizado correctamente.");
+            } else {
+                await crear(payload);
+                toast.success("Usuario creado correctamente.");
+            }
+
+            navigate("/corporativo/admin/users");
+        } catch (error) {
+            toast.error(error?.message || "Error guardando usuario.");
+        }
+    }
+
+    if (isEdit && loading) {
+        return (
+            <PageSurface>
+                <PanelSurface>
+                    <p className="text-sm opacity-70">Cargando usuario...</p>
+                </PanelSurface>
+            </PageSurface>
+        );
+    }
+
+    return (
+        <PageSurface>
+            <div>
+                <TableActionButton
+                    icon={ArrowLeft}
+                    variant="neutral"
+                    onClick={() => navigate("/corporativo/admin/users")}
+                >
+                    Volver
+                </TableActionButton>
+            </div>
+
+            <DetailPageHeader
+                eyebrow={isEdit ? "Administración de usuario" : "Alta de usuario"}
+                title={title}
+                subtitle={subtitle}
+                avatar={
+                    <div className="grid h-12 w-12 place-items-center rounded-2xl border border-[var(--border)] bg-[var(--chip)]">
+                        {isEdit ? <UserRound size={20} /> : <UserPlus size={20} />}
+                    </div>
+                }
+                status={
+                    <span className="rounded-full border border-[var(--border)] bg-[var(--chip)] px-3 py-1 text-xs font-bold">
+                        {isEdit ? "Modo edición" : "Nuevo registro"}
+                    </span>
+                }
+            />
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid gap-4 xl:grid-cols-[1.4fr_0.8fr]">
+                    <DetailSection
+                        icon={UserRound}
+                        title="Información del usuario"
+                        description="Datos principales para identificar al usuario dentro del sistema."
+                    >
+                        <DetailGrid>
+                            <FormField label="Nombre completo" required>
+                                <TextInput
+                                    value={form.nombre}
+                                    onChange={(event) =>
+                                        updateField("nombre", event.target.value)
+                                    }
+                                    placeholder="Ej. Ana Palacios"
+                                    disabled={saving}
+                                />
+                            </FormField>
+
+                            <FormField label="Email" required>
+                                <TextInput
+                                    type="email"
+                                    value={form.email}
+                                    onChange={(event) =>
+                                        updateField("email", event.target.value)
+                                    }
+                                    placeholder="usuario@empresa.com"
+                                    disabled={saving}
+                                />
+                            </FormField>
+
+                            <FormField
+                                label={isEdit ? "Nuevo PIN" : "PIN inicial"}
+                                required={!isEdit}
+                                helper={pinHelper}
+                            >
+                                <TextInput
+                                    inputMode="numeric"
+                                    value={form.pin}
+                                    onChange={(event) =>
+                                        updateField(
+                                            "pin",
+                                            normalizePin(event.target.value)
+                                        )
+                                    }
+                                    placeholder={isEdit ? "Opcional" : "0000"}
+                                    disabled={saving}
+                                />
+                            </FormField>
+
+                            <FormField label="Estado">
+                                <button
+                                    type="button"
+                                    disabled={saving}
+                                    onClick={() => updateField("activo", !form.activo)}
+                                    className="flex w-full items-center justify-between rounded-2xl border border-[var(--border)] bg-[var(--chip)] px-4 py-3 text-sm font-bold transition hover:bg-[var(--chip-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+                                >
+                                    <span>{form.activo ? "Activo" : "Inactivo"}</span>
+                                    <ToggleRight
+                                        size={20}
+                                        className={
+                                            form.activo
+                                                ? "text-emerald-600"
+                                                : "opacity-45"
+                                        }
+                                    />
+                                </button>
+                            </FormField>
+                        </DetailGrid>
+                    </DetailSection>
+
+                    <DetailSection
+                        icon={ShieldCheck}
+                        title="Resumen"
+                        description="Vista rápida antes de guardar."
+                    >
+                        <DetailGrid columns={1}>
+                            <DetailItem
+                                label="Nombre"
+                                value={form.nombre || EMPTY_VALUE}
+                            />
+
+                            <DetailItem
+                                label="Email"
+                                value={form.email || EMPTY_VALUE}
+                            />
+
+                            <DetailItem
+                                label="Estado"
+                                value={form.activo ? "Activo" : "Inactivo"}
+                            />
+
+                            <DetailItem
+                                label="PIN"
+                                value={
+                                    form.pin
+                                        ? `${form.pin.length} dígitos configurados`
+                                        : isEdit
+                                          ? "Sin cambios"
+                                          : "Pendiente"
+                                }
+                            />
+                        </DetailGrid>
+                    </DetailSection>
+                </div>
+
+                <PanelSurface padding="md" variant="soft">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+                        <TableActionButton
+                            type="button"
+                            variant="neutral"
+                            onClick={() => navigate("/corporativo/admin/users")}
+                        >
+                            Cancelar
+                        </TableActionButton>
+
+                        <TableActionButton
+                            type="submit"
+                            icon={Save}
+                            variant="access"
+                            disabled={saving}
+                        >
+                            {saving ? "Guardando..." : "Guardar cambios"}
+                        </TableActionButton>
+                    </div>
+                </PanelSurface>
+            </form>
+        </PageSurface>
+    );
+}
