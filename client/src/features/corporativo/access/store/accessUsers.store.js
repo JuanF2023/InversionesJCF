@@ -115,7 +115,12 @@ function normalizeMembership(item = {}) {
 function normalizeMemberships(items = []) {
     return asArray(items)
         .map(normalizeMembership)
-        .filter((membership) => membership.membershipStatus !== "inactive");
+        .sort((a, b) => {
+            const aActive = a.membershipStatus === "active" ? 0 : 1;
+            const bActive = b.membershipStatus === "active" ? 0 : 1;
+
+            return aActive - bActive;
+        });
 }
 
 function resolvePrimaryAccess(item = {}, memberships = []) {

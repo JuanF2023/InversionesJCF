@@ -66,9 +66,12 @@ export function getUserMemberships(user) {
         return [];
     }
 
-    return user.memberships.filter(
-        (membership) => membership?.membershipStatus !== "inactive"
-    );
+    return [...user.memberships].sort((a, b) => {
+        const aActive = a?.membershipStatus === "active" ? 0 : 1;
+        const bActive = b?.membershipStatus === "active" ? 0 : 1;
+
+        return aActive - bActive;
+    });
 }
 
 export function getUserInitials(name = "") {

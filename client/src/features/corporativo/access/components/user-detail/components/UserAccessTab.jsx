@@ -15,7 +15,7 @@ export default function UserAccessTab({ memberships, onManageAccess }) {
         <DetailSection
             icon={Layers3}
             title="Accesos asignados"
-            description="Lista completa de memberships activos del usuario."
+            description="Lista completa de accesos del usuario, incluyendo activos e inactivos."
             actions={
                 <TableActionButton
                     icon={KeyRound}
