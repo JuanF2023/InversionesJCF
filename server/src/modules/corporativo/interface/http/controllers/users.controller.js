@@ -3,7 +3,15 @@
 import { buildUsersModule } from "#modules/corporativo/application/builders/users.builder.js";
 import { buildGetAccessOptionsUseCase } from "#modules/corporativo/application/builders/access.builder.js";
 
-const { usersRepository } = buildUsersModule();
+const {
+    listUsersUseCase,
+    getUserByIdUseCase,
+    createUserUseCase,
+    updateUserUseCase,
+    deleteUserUseCase,
+    updateUserAccessUseCase,
+    deleteUserAccessUseCase,
+} = buildUsersModule();
 
 function normalizeActorId(req) {
     return req?.actorId || req?.auth?.user?._id || req?.user?._id || null;
@@ -27,7 +35,7 @@ function handleError(res, error, fallbackMessage) {
  */
 export async function listUsers(req, res) {
     try {
-        const result = await usersRepository.list({
+        const result = await listUsersUseCase.execute({
             q: str(req.query?.q),
             estado: str(req.query?.estado),
             tenantKey: str(req.query?.tenantKey || req.query?.tenantId),
@@ -53,7 +61,7 @@ export async function listUsers(req, res) {
  */
 export async function getUserById(req, res) {
     try {
-        const user = await usersRepository.findById(req.params.id);
+        const user = await getUserByIdUseCase.execute(req.params.id);
 
         if (!user) {
             return res.status(404).json({
@@ -78,22 +86,8 @@ export async function createUser(req, res) {
     try {
         const actorId = normalizeActorId(req);
 
-        const {
-            nombre,
-            email,
-            pin,
-            rolId,
-            tenantId,
-            activo = true,
-        } = req.body || {};
-
-        const created = await usersRepository.create({
-            nombre,
-            email,
-            pin,
-            rolId,
-            tenantId,
-            activo,
+        const created = await createUserUseCase.execute({
+            ...(req.body || {}),
             createdBy: actorId,
             updatedBy: actorId,
         });
@@ -121,27 +115,10 @@ export async function updateUser(req, res) {
     try {
         const actorId = normalizeActorId(req);
 
-        const {
-            nombre,
-            email,
-            pin,
-            rolId,
-            tenantId,
-            activo,
-        } = req.body || {};
-
-        const patch = {
+        const updated = await updateUserUseCase.execute(req.params.id, {
+            ...(req.body || {}),
             updatedBy: actorId,
-        };
-
-        if (typeof nombre !== "undefined") patch.nombre = nombre;
-        if (typeof email !== "undefined") patch.email = email;
-        if (typeof pin !== "undefined") patch.pin = pin;
-        if (typeof rolId !== "undefined") patch.rolId = rolId;
-        if (typeof tenantId !== "undefined") patch.tenantId = tenantId;
-        if (typeof activo !== "undefined") patch.activo = Boolean(activo);
-
-        const updated = await usersRepository.updateById(req.params.id, patch);
+        });
 
         if (!updated) {
             return res.status(404).json({
@@ -172,11 +149,7 @@ export async function updateUser(req, res) {
 export async function deleteUser(req, res) {
     try {
         const actorId = normalizeActorId(req);
-
-        const updated = await usersRepository.softDeleteById(
-            req.params.id,
-            actorId
-        );
+        const updated = await deleteUserUseCase.execute(req.params.id, actorId);
 
         if (!updated) {
             return res.status(404).json({
@@ -201,7 +174,6 @@ export async function deleteUser(req, res) {
 export async function listUserAccessOptions(req, res) {
     try {
         const tenantId = str(req.query?.tenantId || "");
-
         const getAccessOptionsUseCase = buildGetAccessOptionsUseCase();
 
         const result = await getAccessOptionsUseCase.execute({
@@ -229,24 +201,11 @@ export async function updateUserAccess(req, res) {
     try {
         const actorId = normalizeActorId(req);
 
-        const {
-            tenantId,
-            roleId,
-            status = "active",
-            confirmReplace = false,
-        } = req.body || {};
-
-        const updated = await usersRepository.upsertAccessByUserId(
-            req.params.id,
-            {
-                tenantId,
-                roleId,
-                status,
-                confirmReplace,
-                createdBy: actorId,
-                updatedBy: actorId,
-            }
-        );
+        const updated = await updateUserAccessUseCase.execute(req.params.id, {
+            ...(req.body || {}),
+            createdBy: actorId,
+            updatedBy: actorId,
+        });
 
         if (!updated) {
             return res.status(404).json({
@@ -275,7 +234,7 @@ export async function deleteUserAccess(req, res) {
     try {
         const actorId = normalizeActorId(req);
 
-        const updated = await usersRepository.deactivateAccessByMembershipId(
+        const updated = await deleteUserAccessUseCase.execute(
             req.params.id,
             req.params.membershipId,
             {

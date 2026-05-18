@@ -1,19 +1,14 @@
-// server/src/modules/auth/infrastructure/repositories/user.repository.js
+// server/src/modules/corporativo/infrastructure/repositories/users.repository.js
+
+import usersRepositoryMongo from "#modules/corporativo/infrastructure/repositories/users.repository.mongo.js";
 
 /**
- * ⚠️ Placeholder temporal:
- * Este repositorio requiere un modelo Mongoose real (Users).
- * Ejecuta los comandos de búsqueda para ubicar el modelo existente
- * y luego actualiza el import.
+ * Repository facade for corporativo users.
+ *
+ * This facade keeps the application layer independent from the concrete MongoDB
+ * implementation path. The next refactor phase will split the Mongo adapter into
+ * read, write, access and aggregation files behind this facade.
  */
-export const UserRepository = {
-  async findByPin() {
-    throw new Error("[UserRepository] Modelo Users no resuelto. Ubica user.model.js y actualiza el import.");
-  },
-  async findById() {
-    throw new Error("[UserRepository] Modelo Users no resuelto. Ubica user.model.js y actualiza el import.");
-  },
-  async updateLastLogin() {
-    throw new Error("[UserRepository] Modelo Users no resuelto. Ubica user.model.js y actualiza el import.");
-  },
-};
+const usersRepository = usersRepositoryMongo;
+
+export default usersRepository;
