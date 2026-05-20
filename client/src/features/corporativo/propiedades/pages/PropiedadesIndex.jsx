@@ -1,6 +1,6 @@
 // src/pages/Corporativo/Propiedades/Index.jsx
 import React, { useEffect, useMemo, useState } from "react";
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 import { useCorporativo } from "@/features/corporativo/propiedades/store/corporativoStore.js";
 import Datos from "./Detalles/DetallesLayout.jsx";
 import AddPropertyModal from "@/features/corporativo/negocios/components/PropertyFormModal.jsx";

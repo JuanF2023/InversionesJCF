@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 
 const cx = (...c) => c.filter(Boolean).join(" ");
 
@@ -10,14 +10,14 @@ export default function FilosofiaDeDar() {
   return (
     <section className="space-y-3">
       <div className={cx("p-5", isNeo ? "neo-card neo-card--deep neo-card--tinted" : "card")}>
-        <h3 className="text-lg font-semibold text-text">Filosof¨ªa de Dar</h3>
+        <h3 className="text-lg font-semibold text-text">Filosofï¿½ï¿½a de Dar</h3>
         <p className="text-sm subtle">
-          (Mock) Informaci¨®n basada en las ¨²ltimas dos p¨¢ginas del PDF ¡°Indicadores de Inversi¨®n JULIO 2025¡±.
+          (Mock) Informaciï¿½ï¿½n basada en las ï¿½ï¿½ltimas dos pï¿½ï¿½ginas del PDF ï¿½ï¿½Indicadores de Inversiï¿½ï¿½n JULIO 2025ï¿½ï¿½.
         </p>
         <ul className="mt-3 list-disc pl-5 text-sm space-y-1 text-text">
           <li>Principios y fundamentos</li>
           <li>Beneficios y compromisos</li>
-          <li>Ejemplos pr¨¢cticos de dar</li>
+          <li>Ejemplos prï¿½ï¿½cticos de dar</li>
         </ul>
       </div>
       <div className="text-xs subtle">

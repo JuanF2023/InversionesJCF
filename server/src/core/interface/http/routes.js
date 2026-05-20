@@ -1,13 +1,29 @@
-import usersRoutes from "#modules/corporativo/interface/http/routes/users.routes.js";
 // server/src/core/interface/http/routes.js
-import authRoutes from "#modules/auth/interface/http/routes/auth.routes.js";
-import sessionsRoutes from "#modules/auth/interface/http/routes/sessions.routes.js";
 
+/**
+ * HTTP Routes Mount Adapter
+ * -------------------------------------------------------
+ * Este archivo es el único responsable de conectar Express (app)
+ * con el router principal del sistema.
+ *
+ * ❗ No define rutas
+ * ❗ No contiene lógica de negocio
+ * ✔ Solo monta el router principal
+ */
+
+import mainRouter from "./routes/routes.js";
+
+/**
+ * Monta todas las rutas del sistema bajo /api
+ * @param {import("express").Express} app
+ */
 export function mountRoutes(app) {
-    app.use("/api/auth", authRoutes);
-    app.use("/api/sessions", sessionsRoutes);
-}
+    if (!app) {
+        throw new Error("[mountRoutes] app is required");
+    }
 
-app.use("/api/corporativo/users", usersRoutes);
+    // Base API path
+    app.use("/api", mainRouter);
+}
 
 export default mountRoutes;

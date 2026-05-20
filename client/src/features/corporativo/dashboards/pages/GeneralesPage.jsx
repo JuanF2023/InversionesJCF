@@ -2,7 +2,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus, Pencil, Trash2, X } from "lucide-react";
-import { useTheme } from "../../context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 import { useCorporativo } from "./store/corporativoStore.js";
 import { AddBusinessModal, ConfirmModal, IdeasModal } from "../../components/ui";
 import { formatFechaCortaISO, diffAniosMeses, humanizeYM } from "../../utils/format.js";
@@ -18,7 +18,7 @@ const money = (n) =>
 const etapaFromEstado = (estado) => {
   const s = String(estado || "").toLowerCase();
   if (s === "activo") return "Activo";
-  if (s.includes("constru")) return "En construcci¨®n";
+  if (s.includes("constru")) return "En construcciï¿½ï¿½n";
   if (s === "idea") return "En idea";
   return estado || "??;
 };
@@ -34,7 +34,7 @@ const EtapaBadge = ({ etapa }) => (
       "status-badge",
       etapa === "Activo"
         ? "text-emerald-700 dark:text-emerald-300"
-        : etapa === "En construcci¨®n"
+        : etapa === "En construcciï¿½ï¿½n"
           ? "text-amber-700 dark:text-amber-300"
           : "text-sky-700 dark:text-sky-300"
     )}
@@ -73,7 +73,7 @@ function Legend({ label, percent = 0, dot = "#10b981", bar = "#10b981" }) {
   );
 }
 
-/** Tarjeta KPI ??Producci¨®n mensual (redise?ada) */
+/** Tarjeta KPI ??Producciï¿½ï¿½n mensual (redise?ada) */
 function ProductionCard({ total, pctActivos = 0, pctConstruccion = 0, Donut, className }) {
   return (
     <section
@@ -86,7 +86,7 @@ function ProductionCard({ total, pctActivos = 0, pctConstruccion = 0, Donut, cla
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div className="min-w-0">
           <h3 id="kpi-produccion-title" className="text-sm font-semibold">
-            Producci¨®n mensual
+            Producciï¿½ï¿½n mensual
           </h3>
 
           <div className="mt-1 leading-none">
@@ -96,7 +96,7 @@ function ProductionCard({ total, pctActivos = 0, pctConstruccion = 0, Donut, cla
             <span className="ml-1 text-[11px] font-semibold subtle align-top">USD</span>
           </div>
 
-          <div className="text-xs subtle mt-1">¨²ltima actualizaci¨®n: hoy</div>
+          <div className="text-xs subtle mt-1">ï¿½ï¿½ltima actualizaciï¿½ï¿½n: hoy</div>
         </div>
 
         <div className="flex items-center justify-center md:justify-end">
@@ -108,13 +108,13 @@ function ProductionCard({ total, pctActivos = 0, pctConstruccion = 0, Donut, cla
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Legend label="Activos" percent={pctActivos} dot="#10b981" bar="#34d399" />
-        <Legend label="En construcci¨®n" percent={pctConstruccion} dot="#f59e0b" bar="#fbbf24" />
+        <Legend label="En construcciï¿½ï¿½n" percent={pctConstruccion} dot="#f59e0b" bar="#fbbf24" />
       </div>
     </section>
   );
 }
 
-/* ================== P¨¢gina ================== */
+/* ================== Pï¿½ï¿½gina ================== */
 export default function Generales() {
   const { theme } = useTheme();
   const isNeo = theme?.startsWith("neo");
@@ -206,7 +206,7 @@ export default function Generales() {
     [negocios]
   );
 
-  // === Producci¨®n total (segura) ===
+  // === Producciï¿½ï¿½n total (segura) ===
   const productionTotal = useMemo(() => {
     const baseVal = Number(base?.produccionMensual) || 0;
     if (baseVal > 0) return baseVal;
@@ -319,12 +319,12 @@ export default function Generales() {
       <div className="w-full space-y-6">
         <div>
           <h2 className="h-title">Panel General</h2>
-          <p className="text-sm subtle">Estado global de tus negocios y administraci¨®n.</p>
+          <p className="text-sm subtle">Estado global de tus negocios y administraciï¿½ï¿½n.</p>
         </div>
 
         {/* === LAYOUT PRINCIPAL === */}
         <div className="grid gap-6 lg:grid-cols-12 auto-rows-[minmax(140px,_auto)]">
-          {/* PRODUCCI¨®N */}
+          {/* PRODUCCIï¿½ï¿½N */}
           <div className="lg:col-span-4 xl:col-span-4 row-span-2">
             <ProductionCard
               total={productionTotal}
@@ -344,7 +344,7 @@ export default function Generales() {
                 <KPI label="Negocios totales" value={kpisNegocios?.total ?? negocios.length} />
                 <KPI label="Activos" value={kpisNegocios?.activos ?? activosCount} pct={base?.activosPct ?? 0} />
                 <KPI
-                  label="En construcci¨®n"
+                  label="En construcciï¿½ï¿½n"
                   value={kpisNegocios?.en_construccion ?? enConstruccionCount}
                   pct={base?.enConstruccionPct ?? 0}
                 />
@@ -431,7 +431,7 @@ export default function Generales() {
                             aria-label={`Ver todas las ${ideas.length} ideas`}
                             title={`Ver todas las ${ideas.length} ideas`}
                           >
-                            + {ideas.length - 1} m¨¢s
+                            + {ideas.length - 1} mï¿½ï¿½s
                           </button>
                         )}
                       </div>
@@ -459,7 +459,7 @@ export default function Generales() {
                     <div className="text-[11px] subtle">Banco con mayor saldo</div>
                     <div className="text-base font-semibold text-text truncate">
                       {topBank
-                        ? `${topBank.name || topBank.bankName || "??} ¡¤ ${money(topBank.currentBalance || topBank.saldo || 0)}`
+                        ? `${topBank.name || topBank.bankName || "??} ï¿½ï¿½ ${money(topBank.currentBalance || topBank.saldo || 0)}`
                         : "??}
                     </div>
                   </div>
@@ -482,7 +482,7 @@ export default function Generales() {
                       onClick={async () => {
                         const name = prompt("Nombre del banco:");
                         if (!name) return;
-                        const country = prompt("Pa¨ªs (ISO-2, ej. SV):", "SV") || "SV";
+                        const country = prompt("Paï¿½ï¿½s (ISO-2, ej. SV):", "SV") || "SV";
                         const balanceStr = prompt("Saldo inicial (USD):", "0") || "0";
                         const balance = Number(balanceStr.replace(/,/g, "")) || 0;
 
@@ -528,7 +528,7 @@ export default function Generales() {
               )}
 
               <div className="flex items-center justify-between text-[11px] subtle">
-                <span>Distribuci¨®n por banco</span>
+                <span>Distribuciï¿½ï¿½n por banco</span>
                 <span>Actualizado: hoy</span>
               </div>
             </div>
@@ -571,8 +571,8 @@ export default function Generales() {
                       <div className="font-medium truncate">{nombre}</div>
                       <div className="text-xs subtle truncate">
                         {tipo || "??}
-                        {cat ? ` ¡¤ ${cat}` : ""}
-                        {propName ? ` ¡¤ ${propName}` : ""}
+                        {cat ? ` ï¿½ï¿½ ${cat}` : ""}
+                        {propName ? ` ï¿½ï¿½ ${propName}` : ""}
                       </div>
                     </div>
                   </div>

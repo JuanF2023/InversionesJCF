@@ -1,0 +1,58 @@
+/* client/src/core/ui/tables/styles/tables.css */
+
+.data-table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .data-table {
+    min-width: 100%;
+    border-collapse: collapse;
+    color: var(--text);
+    font-size: 0.875rem;
+  }
+
+  .data-table thead tr {
+    text-align: left;
+  }
+
+  .data-table th {
+    padding: 0.75rem 0.5rem;
+    color: color-mix(in srgb, var(--text) 68%, transparent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 1rem 0.5rem;
+    vertical-align: middle;
+  }
+
+  .data-table tbody tr {
+    border-top: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  }
+
+  .data-table tbody tr:hover {
+    background: color-mix(in srgb, var(--chip) 28%, transparent);
+  }
+
+  .data-table-empty {
+    display: grid;
+    min-height: 10rem;
+    place-items: center;
+    gap: 0.25rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .data-table-empty__title {
+    font-weight: 800;
+  }
+
+  .data-table-empty__description {
+    color: color-mix(in srgb, var(--text) 64%, transparent);
+    font-size: 0.85rem;
+  }

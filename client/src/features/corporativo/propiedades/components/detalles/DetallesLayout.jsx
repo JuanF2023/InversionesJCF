@@ -1,6 +1,6 @@
 // client/src/features/corporativo/Propiedades/Detalles/DetallesLayout.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 import {
   Building2,
   CircleDollarSign,

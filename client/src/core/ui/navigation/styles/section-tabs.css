@@ -1,0 +1,44 @@
+/* client/src/core/ui/navigation/styles/section-tabs.css */
+.section-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--panel) 82%, transparent);
+    border-radius: 1.25rem;
+    padding: 0.35rem;
+}
+
+.section-tabs__item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.3rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 1rem;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 700;
+    opacity: 0.72;
+    transition: all 180ms ease;
+}
+
+.section-tabs__item:hover {
+    opacity: 1;
+    background: var(--chip);
+}
+
+.section-tabs__item--active {
+    opacity: 1;
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    background: color-mix(in srgb, var(--accent) 14%, var(--chip));
+    color: var(--accent);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.section-tabs__icon {
+    flex-shrink: 0;
+}

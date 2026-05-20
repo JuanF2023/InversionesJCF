@@ -1,6 +1,6 @@
 // client/src/features/corporativo/Propiedades/PropiedadesReportes.jsx
 import React, { useEffect, useMemo, useState } from "react";
-import { useTheme } from "@/context/ThemeContext.jsx";
+import { useTheme } from "@/core/theme/ThemeProvider.jsx";
 
 import { usePropertiesStore } from "@/features/corporativo/propiedades/store/properties.store.js";
 import { useUnitsStore } from "@/features/corporativo/propiedades/store/units.store.js";

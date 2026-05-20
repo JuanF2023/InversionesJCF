@@ -1,0 +1,139 @@
+/* client/src/core/ui/actions/styles/table-action-button.css */
+
+.table-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+
+  min-height: 2rem;
+  min-width: fit-content;
+
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+
+  padding: 0.45rem 0.75rem;
+
+  background: transparent;
+  color: var(--text);
+
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  backdrop-filter: blur(10px);
+
+  transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms ease,
+      box-shadow 160ms ease,
+      opacity 160ms ease;
+}
+
+.table-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.table-action-btn:active {
+  transform: translateY(0);
+}
+
+.table-action-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent);
+}
+
+.table-action-btn__icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+ Neutral / View / Edit
+ ========================================================================== */
+
+.table-action-btn--neutral,
+.table-action-btn--view,
+.table-action-btn--edit {
+  border-color: color-mix(in oklab, var(--border) 78%, var(--accent) 22%);
+  background: color-mix(in oklab, var(--chip) 78%, transparent);
+  color: color-mix(in oklab, var(--text) 86%, var(--muted) 14%);
+}
+
+.table-action-btn--neutral:hover,
+.table-action-btn--view:hover,
+.table-action-btn--edit:hover {
+  border-color: color-mix(in oklab, var(--accent) 36%, var(--border) 64%);
+  background: color-mix(in oklab, var(--chip-hover) 82%, var(--accent) 18%);
+  color: var(--text);
+  box-shadow: 0 6px 14px color-mix(in oklab, var(--accent) 10%, transparent);
+}
+
+/* ==========================================================================
+ Access - theme-aware
+ ========================================================================== */
+
+.table-action-btn--access {
+  border-color: color-mix(in oklab, var(--accent) 42%, var(--border) 58%);
+  background: color-mix(in oklab, var(--panel) 82%, var(--accent) 18%);
+  color: color-mix(in oklab, var(--accent) 58%, var(--text) 42%);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--accent) 8%, transparent);
+}
+
+.table-action-btn--access:hover {
+  border-color: color-mix(in oklab, var(--accent) 58%, var(--border) 42%);
+  background: color-mix(in oklab, var(--panel) 72%, var(--accent) 28%);
+  color: var(--text);
+  box-shadow: 0 8px 18px color-mix(in oklab, var(--accent) 16%, transparent);
+}
+
+/* ==========================================================================
+ Warning - theme-aware
+ ========================================================================== */
+
+.table-action-btn--warning {
+  border-color: color-mix(in oklab, var(--accent) 38%, var(--border) 62%);
+  background: color-mix(in oklab, var(--panel) 86%, var(--accent) 14%);
+  color: color-mix(in oklab, var(--accent) 62%, var(--text) 38%);
+}
+
+.table-action-btn--warning:hover {
+  border-color: color-mix(in oklab, var(--accent) 54%, var(--border) 46%);
+  background: color-mix(in oklab, var(--panel) 76%, var(--accent) 24%);
+  color: var(--text);
+  box-shadow: 0 8px 18px color-mix(in oklab, var(--accent) 14%, transparent);
+}
+
+/* ==========================================================================
+ Danger - tema primero, señal roja secundaria
+ ========================================================================== */
+
+.table-action-btn--danger {
+  border-color: color-mix(in oklab, var(--accent) 28%, var(--border) 72%);
+  background: color-mix(in oklab, var(--panel) 90%, var(--accent) 10%);
+  color: color-mix(in oklab, #b91c1c 54%, var(--text) 46%);
+}
+
+.table-action-btn--danger:hover {
+  border-color: color-mix(in oklab, #b91c1c 28%, var(--accent) 32%, var(--border) 40%);
+  background: color-mix(in oklab, var(--panel) 78%, var(--accent) 18%, #b91c1c 4%);
+  color: color-mix(in oklab, #b91c1c 62%, var(--text) 38%);
+  box-shadow: 0 8px 18px color-mix(in oklab, #b91c1c 10%, transparent);
+}
+
+/* ==========================================================================
+ Disabled
+ ========================================================================== */
+
+.table-action-btn:disabled,
+.table-action-btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+  box-shadow: none;
+}
