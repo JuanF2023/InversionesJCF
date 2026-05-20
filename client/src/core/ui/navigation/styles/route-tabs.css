@@ -1,0 +1,25 @@
+/* client/src/core/ui/navigation/styles/route-tabs.css */
+
+.jcf-route-tab::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 3px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: center;
+
+    transition:
+        transform 200ms ease,
+        opacity 200ms ease;
+}
+
+.jcf-route-tab--active::after {
+    transform: scaleX(1);
+    opacity: 1;
+}

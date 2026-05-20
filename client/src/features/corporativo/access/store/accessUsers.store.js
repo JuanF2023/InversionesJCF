@@ -4,6 +4,7 @@ import { create } from "zustand";
 import {
     listUsers,
     getUserById,
+    getUserActivity,
     createUser,
     updateUser,
     deleteUser,
@@ -228,6 +229,37 @@ function resolveAudit(item = {}) {
     };
 }
 
+function normalizeActivityEvent(item = {}) {
+    return {
+        id: safeString(item.id || item._id),
+        type: safeString(item.type || "SESSION"),
+        title: textFromUnknown(item.title, "Evento de actividad"),
+        status: safeString(item.status || "UNKNOWN"),
+        startedAt: item.startedAt || null,
+        lastActiveAt: item.lastActiveAt || null,
+        closedAt: item.closedAt || null,
+        expiresAt: item.expiresAt || null,
+        deviceLabel: textFromUnknown(item.deviceLabel, "web"),
+        ipAddress: safeString(item.ipAddress),
+        userAgent: safeString(item.userAgent),
+        closedReason: safeString(item.closedReason),
+        closeSource: safeString(item.closeSource),
+        tenantId: safeString(item.tenantId),
+        membershipId: safeString(item.membershipId),
+        createdAt: item.createdAt || null,
+        updatedAt: item.updatedAt || null,
+    };
+}
+
+function normalizeActivityHistory(response = {}) {
+    const payload = unwrapResponse(response);
+
+    return {
+        items: asArray(payload?.items).map(normalizeActivityEvent),
+        total: Number(payload?.total || 0),
+    };
+}
+
 function normalizeUser(item = {}) {
     const memberships = normalizeMemberships(item.memberships);
 
@@ -284,6 +316,11 @@ export const useAccessUsersStore = create((set, get) => ({
     error: null,
     loaded: false,
     currentItem: null,
+
+    activityHistory: [],
+    activityTotal: 0,
+    activityLoading: false,
+
     lastParams: {
         q: "",
         estado: "",
@@ -335,6 +372,9 @@ export const useAccessUsersStore = create((set, get) => ({
             loading: true,
             error: null,
             currentItem: null,
+            activityHistory: [],
+            activityTotal: 0,
+            activityLoading: false,
         });
 
         try {
@@ -358,9 +398,44 @@ export const useAccessUsersStore = create((set, get) => ({
         }
     },
 
+    async cargarActividadUsuario(id, params = {}) {
+        set({
+            activityLoading: true,
+            error: null,
+        });
+
+        try {
+            const response = await getUserActivity(id, {
+                limit: params.limit || 25,
+            });
+
+            const history = normalizeActivityHistory(response);
+
+            set({
+                activityHistory: history.items,
+                activityTotal: history.total,
+                activityLoading: false,
+            });
+
+            return history;
+        } catch (error) {
+            set({
+                activityHistory: [],
+                activityTotal: 0,
+                activityLoading: false,
+                error: error?.message || "Error cargando actividad del usuario",
+            });
+
+            throw error;
+        }
+    },
+
     limpiarActual() {
         set({
             currentItem: null,
+            activityHistory: [],
+            activityTotal: 0,
+            activityLoading: false,
         });
     },
 

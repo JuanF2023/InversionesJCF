@@ -40,6 +40,11 @@ export default function useCompleteAccessModal({
     const [tenantId, setTenantId] = useState("");
     const [roleId, setRoleId] = useState("");
     const [saving, setSaving] = useState(false);
+
+    const [addModal, setAddModal] = useState({
+        open: false,
+    });
+
     const [deleteModal, setDeleteModal] = useState({
         open: false,
         membership: null,
@@ -99,6 +104,11 @@ export default function useCompleteAccessModal({
         setTenantId("");
         setRoleId("");
         setSaving(false);
+
+        setAddModal({
+            open: false,
+        });
+
         setDeleteModal({
             open: false,
             membership: null,
@@ -147,23 +157,52 @@ export default function useCompleteAccessModal({
         setRoleId(event.target.value);
     }
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-
+    function validateNewAccess() {
         if (!hasAvailableTenants) {
             toast.error(
                 "Este usuario ya tiene acceso a todos los tenants disponibles."
             );
-            return;
+            return false;
         }
 
         if (!tenantId || !roleId) {
             toast.error("Debes seleccionar tenant y rol.");
-            return;
+            return false;
         }
 
         if (assignedTenantIds.has(tenantId)) {
             toast.error("Este usuario ya tiene acceso a ese tenant.");
+            return false;
+        }
+
+        return true;
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        if (!validateNewAccess()) {
+            return;
+        }
+
+        setAddModal({
+            open: true,
+        });
+    }
+
+    function closeAddModal() {
+        if (saving) {
+            return;
+        }
+
+        setAddModal({
+            open: false,
+        });
+    }
+
+    async function confirmAddAccess() {
+        if (!validateNewAccess()) {
+            closeAddModal();
             return;
         }
 
@@ -181,6 +220,7 @@ export default function useCompleteAccessModal({
 
             setTenantId("");
             setRoleId("");
+            closeAddModal();
 
             toast.success("Acceso agregado correctamente.");
         } catch (error) {
@@ -231,6 +271,7 @@ export default function useCompleteAccessModal({
         saving,
         disabled,
         canSubmit,
+        addModal,
         deleteModal,
         memberships,
         availableTenants,
@@ -242,6 +283,8 @@ export default function useCompleteAccessModal({
         handleTenantChange,
         handleRoleChange,
         handleSubmit,
+        closeAddModal,
+        confirmAddAccess,
         openDeleteModal,
         closeDeleteModal,
         confirmDeleteAccess,

@@ -15,6 +15,14 @@ import {
 
 import { EMPTY_VALUE } from "@/features/corporativo/access/components/access-modal/utils/accessModal.utils.js";
 
+function buildAddAccessMessage({ user, selectedTenant, selectedRole }) {
+    const userName = user?.nombre || "este usuario";
+    const tenantName = selectedTenant?.nombre || "Sin tenant";
+    const roleName = selectedRole?.nombre || "Sin rol";
+
+    return `Estás a punto de asignar el acceso "${tenantName} / ${roleName}" a ${userName}. ¿Deseas continuar?`;
+}
+
 export default function CompleteAccessModal({
     open,
     onClose,
@@ -146,6 +154,22 @@ export default function CompleteAccessModal({
                     </div>
                 </PanelSurface>
             </div>
+
+            <ConfirmModal
+                open={modal.addModal.open}
+                title="Confirmar nuevo acceso"
+                message={buildAddAccessMessage({
+                    user,
+                    selectedTenant: modal.selectedTenant,
+                    selectedRole: modal.selectedRole,
+                })}
+                confirmText="Sí, agregar acceso"
+                cancelText="Cancelar"
+                loading={modal.saving}
+                variant="warning"
+                onCancel={modal.closeAddModal}
+                onConfirm={modal.confirmAddAccess}
+            />
 
             <ConfirmModal
                 open={modal.deleteModal.open}
